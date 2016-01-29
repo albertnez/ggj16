@@ -1,10 +1,12 @@
 package com.mygdx.ritualggj16.Components;
 
 
+import com.badlogic.ashley.core.Component;
+
 /**
  * Created by anon on 1/29/16.
  */
-public class OwnerComponent {
+public class OwnerComponent implements Component {
 
     public enum Owner {
         None,

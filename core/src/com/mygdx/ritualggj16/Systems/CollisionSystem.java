@@ -8,6 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Mappers;
 
 
@@ -48,6 +49,10 @@ public class CollisionSystem extends IteratingSystem
                     col_other.sizeY);
 
             if (rect_me.overlaps(rect_other)) {
+                if (Mappers.type.has(entity) && Mappers.type.get(entity).type == TypeComponent.EntityType.Player &&
+                        Mappers.type.has(other) && Mappers.type.get(other).type == TypeComponent.EntityType.ControlPoint) {
+                    Mappers.owner.get(other).owner = Mappers.owner.get(entity).owner;
+                }
                 // Collision here.
             }
         }
