@@ -33,8 +33,8 @@ public class PlayScreen implements Screen {
         this.gaem = gaem;
 
         bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
-        bg_floor.setX(-Constants.RES_X);
-        bg_floor.setY(-Constants.RES_Y);
+        bg_floor.setX(-Constants.RES_X/2.0f);
+        bg_floor.setY(-Constants.RES_Y/2.0f);
 
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new RenderSystem(gaem.batch, gaem.cam));
@@ -81,10 +81,11 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         gaem.batch.begin();
-        gaem.batch.draw(bg_floor, 0, 0);
+        bg_floor.draw(gaem.batch);
         gaem.batch.end();
 
         updateInput(delta);
+
         gaem.engine.update(delta);
     }
 
