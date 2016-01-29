@@ -11,11 +11,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
+import com.mygdx.ritualggj16.Components.CollisionComponent;
+import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Systems.BulletSystem;
+import com.mygdx.ritualggj16.Systems.CollisionSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 
@@ -40,11 +44,12 @@ public class PlayScreen implements Screen {
         this.gaem = gaem;
 
         bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
-        bg_floor.setX(-Constants.RES_X/2.0f);
-        bg_floor.setY(-Constants.RES_Y/2.0f);
+        bg_floor.setX(-Constants.RES_X / 2.0f);
+        bg_floor.setY(-Constants.RES_Y / 2.0f);
 
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
+        gaem.engine.addSystem(new CollisionSystem(gaem.engine));
         gaem.engine.addSystem(new RenderSystem(gaem.batch, gaem.cam));
 
         BulletFactory.gaem = this.gaem;
@@ -56,10 +61,15 @@ public class PlayScreen implements Screen {
         player = gaem.engine.createEntity();
         player.add(new PositionComponent(0, 0));
         player.add(new VelocityComponent(0, 0));
+        player.add(new TypeComponent(TypeComponent.EntityType.Player));
+        player.add(new OwnerComponent(OwnerComponent.Owner.Player1));
         spr = new Sprite(TextureManager.getTexture("player.png"));
         player.add(new RenderComponent(spr));
         gaem.engine.addEntity(player);
 
+        // Dumb control points.
+        createControlPoint(100, 100);
+        createControlPoint(150, 200);
     }
 
     void updateInput(float dt)
@@ -113,12 +123,7 @@ public class PlayScreen implements Screen {
             {
                // BulletFactory.shootBullet(pos.x, pos.y, 0);
             }
-
-
         }
-
-
-
     }
 
     @Override
@@ -166,5 +171,18 @@ public class PlayScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    private void createControlPoint(float x, float y) {
+        Sprite sprite = new Sprite(TextureManager.getTexture("control_point.png"));
+        gaem.engine.addEntity(
+            gaem.engine.createEntity()
+                .add(new PositionComponent(x, y))
+                .add(new CollisionComponent(sprite.getWidth(), sprite.getHeight()))
+                .add(new VelocityComponent(0, 0))
+                .add(new TypeComponent(TypeComponent.EntityType.ControlPoint))
+                .add(new OwnerComponent())
+                .add(new RenderComponent(sprite))
+        );
     }
 }

@@ -53,7 +53,6 @@ public class CollisionSystem extends IteratingSystem
                         Mappers.type.has(other) && Mappers.type.get(other).type == TypeComponent.EntityType.ControlPoint) {
                     Mappers.owner.get(other).owner = Mappers.owner.get(entity).owner;
                 }
-                // Collision here.
             }
         }
     }
