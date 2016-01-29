@@ -12,12 +12,12 @@ public class PlayScreen implements Screen {
 
     Gaem gaem;
 
-    Texture img;
+    Texture bg_floor;
 
     public PlayScreen(Gaem gaem)
     {
         this.gaem = gaem;
-        img = new Texture("bg_floor.png");
+        bg_floor = new Texture("bg_floor.png");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class PlayScreen implements Screen {
 
 
         gaem.batch.begin();
-        gaem.batch.draw(img, 0, 0);
+        gaem.batch.draw(bg_floor, 0, 0);
         gaem.batch.end();
 
     }
