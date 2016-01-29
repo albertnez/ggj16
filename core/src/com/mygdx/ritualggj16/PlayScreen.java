@@ -24,6 +24,7 @@ import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Systems.BulletSystem;
 import com.mygdx.ritualggj16.Systems.CollisionSystem;
+import com.mygdx.ritualggj16.Systems.EnemySystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 
@@ -54,6 +55,7 @@ public class PlayScreen implements Screen {
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new CollisionSystem(gaem.engine));
         gaem.engine.addSystem(new RenderSystem(gaem));
+        gaem.engine.addSystem(new EnemySystem(gaem.engine));
 
         BulletFactory.gaem = this.gaem;
 
