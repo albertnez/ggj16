@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Gaem extends Game {
 	SpriteBatch batch;
-    PooledEngine engine;
+    public PooledEngine engine;
 
     public OrthographicCamera cam;
     public Viewport viewport;
