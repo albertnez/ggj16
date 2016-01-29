@@ -17,7 +17,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(Gaem gaem)
     {
         this.gaem = gaem;
-        img = new Texture("badlogic.jpg");
+        img = new Texture("bg_floor.png");
     }
 
     @Override
@@ -26,6 +26,8 @@ public class PlayScreen implements Screen {
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
         gaem.batch.begin();
         gaem.batch.draw(img, 0, 0);
         gaem.batch.end();
