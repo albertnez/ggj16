@@ -134,6 +134,8 @@ public class PlayScreen implements Screen {
         updateInput(delta);
 
         gaem.engine.update(delta);
+
+        Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
     }
 
 

@@ -10,7 +10,12 @@ public class DesktopLauncher {
 
         config.width = 1024;
         config.height = 768;
+        config.resizable = false;
+        config.vSyncEnabled = false;
+        config.foregroundFPS = 0;
+        config.backgroundFPS = 0;
 
+        config.fullscreen = false;
 
 		new LwjglApplication(new Gaem(), config);
 	}
