@@ -5,6 +5,7 @@ import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.EnemyFactory;
+import com.mygdx.ritualggj16.UltraManager;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 /**
@@ -20,6 +21,8 @@ public class SpawnSystem extends IntervalSystem
     @Override
     protected void updateInterval()
     {
+        if (!UltraManager.isGaemActive) return;
+
         float posX, posY;
         int numToSpawn = MathUtils.random(1, 5);
         int mult = (MathUtils.randomBoolean()) ? 1 : -1;

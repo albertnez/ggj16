@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -50,6 +51,11 @@ public class PlayScreen implements Screen {
     Sprite spr;
     Sprite bg_floor;
 
+    Sprite blackzor;
+
+    Sprite p1_faec;
+    Sprite p2_faec;
+
     Entity[] players;
 
     Entity altar;
@@ -86,10 +92,10 @@ public class PlayScreen implements Screen {
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new LifeComponent(10))
-                .add(new OwnerComponent(OwnerComponent.Owner.Player2))
+                .add(new OwnerComponent(OwnerComponent.Owner.Player1))
                 .add(new RenderComponent(spr, RenderComponent.Layer.Player))
                 .add(new CollisionComponent(10, 16))
-                .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player2)))
+                .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player1)))
                 .add(new InputComponent(controller));
         gaem.engine.addEntity(players[0]);
 
@@ -118,6 +124,19 @@ public class PlayScreen implements Screen {
         createAltarPoints();
 
         EnemyFactory.spawnWalker(120, 100);
+
+        blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
+        blackzor.setColor(Color.BLACK);
+        blackzor.setX(-Constants.RES_X/2);
+        blackzor.setY(-Constants.RES_Y/2);
+
+        p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
+        p1_faec.setX(-Constants.RES_X/2 + 100);
+        p1_faec.setY(-Constants.RES_Y/2 + 100);
+        p1_faec.scale(10);
+
+
+        p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
 
     }
 
@@ -148,6 +167,23 @@ public class PlayScreen implements Screen {
         UltraManager. lasthit_p1_spr.draw(gaem.batch);
         gaem.batch.end();
         */
+
+
+        gaem.batch.begin();
+
+        blackzor.setAlpha(0.5f);
+        blackzor.draw(gaem.batch);
+
+        UltraManager.textTimer += delta;
+
+        FontManager.dialog.draw(gaem.batch,
+                UltraManager.getText(),
+                -Constants.RES_X*0.3f,
+                -Constants.RES_Y*0.3f);
+
+        p1_faec.draw(gaem.batch);
+
+        gaem.batch.end();
 
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());

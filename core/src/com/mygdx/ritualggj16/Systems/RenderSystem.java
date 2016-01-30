@@ -68,9 +68,14 @@ public class RenderSystem extends SortedIteratingSystem
             if (Mappers.animation.has(e))
             {
                 AnimationComponent anim = Mappers.animation.get(e);
+                boolean isNormal = anim.animation.getPlayMode() == Animation.PlayMode.NORMAL;
+
+
                 anim.timer += deltaTime;
-                rc.spr.setRegion(anim.animation.getKeyFrame(anim.timer));
-                if (anim.animation.getPlayMode() == Animation.PlayMode.NORMAL
+                rc.spr.setRegion(anim.animation.getKeyFrame(
+                        anim.timer + (isNormal? 0:anim.variant )
+                ));
+                if (isNormal
                         && anim.timer > anim.animation.getAnimationDuration())
                 {
                     e.remove(AnimationComponent.class);

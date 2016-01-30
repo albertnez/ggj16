@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
@@ -22,10 +23,15 @@ public class Gaem extends Game {
     public OrthographicCamera cam;
     public Viewport viewport;
 
+    public ShapeRenderer shapeRenderer;
+
 	@Override
 	public void create ()
     {
 		batch = new SpriteBatch();
+
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setAutoShapeType(true);
 
         engine = new PooledEngine(1024, 1024*4, 1024, 1024*4);
 
