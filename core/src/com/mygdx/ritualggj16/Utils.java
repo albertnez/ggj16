@@ -9,7 +9,7 @@ public class Utils
 {
     static public Sprite dumbSprite(int w, int h)
     {
-        return new Sprite(null, w, h);
+        return new Sprite(TextureManager.getTexture("teh_pixel.png"), w, h);
     }
 
 }

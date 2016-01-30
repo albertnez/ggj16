@@ -22,6 +22,7 @@ import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
+import com.mygdx.ritualggj16.Factorys.EnemyFactory;
 import com.mygdx.ritualggj16.Systems.BulletSystem;
 import com.mygdx.ritualggj16.Systems.CollisionSystem;
 import com.mygdx.ritualggj16.Systems.EnemySystem;
@@ -58,6 +59,7 @@ public class PlayScreen implements Screen {
         gaem.engine.addSystem(new EnemySystem(gaem.engine));
 
         BulletFactory.gaem = this.gaem;
+        EnemyFactory.gaem = this.gaem;
 
         players = new Entity[numPlayers];
         controllers = new Controller[numPlayers];
@@ -91,6 +93,8 @@ public class PlayScreen implements Screen {
         // Dumb control points.
         createControlPoint(100, 100);
         createControlPoint(150, 200);
+
+        EnemyFactory.spawnWalker(120, 100);
     }
 
     void updateInput(float dt) {
