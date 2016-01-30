@@ -20,7 +20,6 @@ public class BulletFactory
 {
     public static Gaem gaem;
 
-
     public static void shootBullet(float x, float y, float angle)
     {
         Entity bullet = gaem.engine.createEntity();

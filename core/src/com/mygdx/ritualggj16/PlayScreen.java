@@ -77,16 +77,17 @@ public class PlayScreen implements Screen {
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new OwnerComponent(OwnerComponent.Owner.Player1))
                 .add(new RenderComponent(spr))
-                .add(new AnimationComponent(AnimationFactory.blob()));
+                .add(new AnimationComponent(AnimationFactory.playerLeft()));
         gaem.engine.addEntity(players[0]);
 
-        if (numPlayers > 1) {
+        if (numPlayers > 1)
+        {
             players[1] = gaem.engine.createEntity()
                     .add(new PositionComponent(100, 0))
                     .add(new VelocityComponent(0, 0))
                     .add(new TypeComponent(TypeComponent.EntityType.Player))
                     .add(new OwnerComponent(OwnerComponent.Owner.Player2))
-                    .add(new RenderComponent(spr));
+                    .add(new RenderComponent(new Sprite(TextureManager.getTexture("player.png"))));
             gaem.engine.addEntity(players[1]);
         }
 
@@ -97,8 +98,10 @@ public class PlayScreen implements Screen {
         EnemyFactory.spawnWalker(120, 100);
     }
 
-    void updateInput(float dt) {
-        for (int i = 0; i < numPlayers; ++i) {
+    void updateInput(float dt)
+    {
+        for (int i = 0; i < numPlayers; ++i)
+        {
 
             Entity player = players[i];
             Controller controller = controllers[i];
@@ -110,16 +113,16 @@ public class PlayScreen implements Screen {
             vel.y = 0.0f;
 
             if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-                vel.x -= Constants.RES_X * dt * 10.0f;
+                vel.x -= dt * Wikipedia.Speed(TypeComponent.EntityType.Player);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-                vel.x += Constants.RES_X * dt * 10.0f;
+                vel.x += dt * Wikipedia.Speed(TypeComponent.EntityType.Player);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-                vel.y -= Constants.RES_Y * dt * 10.0f;
+                vel.y -= dt * Wikipedia.Speed(TypeComponent.EntityType.Player);
             }
             if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-                vel.y += Constants.RES_Y * dt * 10.0f;
+                vel.y +=  dt * Wikipedia.Speed(TypeComponent.EntityType.Player);
             }
 
 
@@ -153,7 +156,8 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)
+    {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

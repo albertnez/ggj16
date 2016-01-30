@@ -12,6 +12,8 @@ public class RenderComponent implements Component
     public Sprite spr;
     public float rotation;
 
+    public boolean invert = false;
+
     public RenderComponent(Sprite spr)
     {
         this.spr = spr;

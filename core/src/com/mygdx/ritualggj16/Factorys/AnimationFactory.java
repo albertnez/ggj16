@@ -13,12 +13,27 @@ import javax.xml.soap.Text;
  */
 public class AnimationFactory
 {
+    public static Animation playerLeft()
+    {
+        Texture tex = TextureManager.getTexture("player_sheet.png");
+
+        Animation anim = new Animation(0.5f/3,
+                new TextureRegion(tex, 0,   0, 10 ,16),
+                new TextureRegion(tex, 0,  16, 10 ,16),
+                new TextureRegion(tex, 0,   0, 10 ,16),
+                new TextureRegion(tex, 0,  32, 10 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+    }
+
 
     public static Animation blob()
     {
         Texture tex = TextureManager.getTexture("blob.png");
 
-        Animation anim = new Animation(0.7f/4,
+        Animation anim = new Animation(1.5f/4,
                 new TextureRegion(tex, 0,  0, 10 ,8),
                 new TextureRegion(tex, 10, 0, 10 ,8),
                 new TextureRegion(tex, 0,  8, 10 ,8),

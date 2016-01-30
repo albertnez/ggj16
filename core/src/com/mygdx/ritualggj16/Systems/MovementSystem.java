@@ -30,6 +30,9 @@ public class MovementSystem extends IteratingSystem
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
 
+        pos.last_x = pos.x;
+        pos.last_y = pos.y;
+
         pos.x += vel.x*deltaTime;
         pos.y += vel.y*deltaTime;
     }

@@ -57,7 +57,6 @@ public class RenderSystem extends EntitySystem
     @Override
     public void update (float deltaTime)
     {
-
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
         for (int i = 0; i < entities.size(); ++i)
@@ -86,6 +85,9 @@ public class RenderSystem extends EntitySystem
             rc.spr.setCenterY(pos.y);
 
             rc.spr.setRotation(rc.rotation);
+
+            if (pos.last_x < pos.x) rc.spr.setScale(-1, 1);
+            if (pos.last_x > pos.x) rc.spr.setScale(1, 1);
 
             rc.spr.draw(batch);
 

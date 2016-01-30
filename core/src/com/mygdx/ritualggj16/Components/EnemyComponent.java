@@ -1,6 +1,7 @@
 package com.mygdx.ritualggj16.Components;
 
 import com.badlogic.ashley.core.Component;
+import com.mygdx.ritualggj16.Wikipedia;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +18,13 @@ public class EnemyComponent implements Component {
     public EnemyType type;
     public float speed;
 
-    public EnemyComponent(EnemyType type) {
+    public EnemyComponent(EnemyType type)
+    {
         this.type = type;
-        switch (type) {
+        switch (type)
+        {
             case Walker:
-                this.speed = 50.0f;
+                this.speed = Wikipedia.Speed(type);
         }
     }
 }
