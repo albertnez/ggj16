@@ -16,12 +16,14 @@ public class EnemyComponent implements Component {
 
     public EnemyType type;
     public float speed;
+    public int damage;
 
     public EnemyComponent(EnemyType type) {
         this.type = type;
         switch (type) {
             case Walker:
                 this.speed = 50.0f;
+                this.damage = 5;
         }
     }
 }
