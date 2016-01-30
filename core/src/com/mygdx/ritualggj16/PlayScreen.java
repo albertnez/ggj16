@@ -113,15 +113,7 @@ public class PlayScreen implements Screen {
         }
 
         //Altar
-        Sprite spr_altar = new Sprite(TextureManager.getTexture("altar.png"), 20, 32);
-        altar = gaem.engine.createEntity()
-                .add(new PositionComponent(0, 0))
-                .add(new VelocityComponent(0, 0))
-                .add(new TypeComponent(TypeComponent.EntityType.Altar))
-                .add(new RenderComponent(spr_altar, 2.0f))
-                .add(new CollisionComponent(10, 16));
-        gaem.engine.addEntity(altar);
-
+        altar = ItemFactory.spawnAltar();
         ItemFactory.spawnCandle(50, 50);
 
         // Dumb control points.
