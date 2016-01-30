@@ -135,11 +135,23 @@ public class AnimationFactory
     public static Animation altarGirl()
     {
         Texture tex = TextureManager.getTexture("altar.png");
-        Animation anim = new Animation(2.0f/4.0f,
+        Animation anim = new Animation(1.0f/4.0f,
                 new TextureRegion(tex, 0, 0, 20, 32),
                 new TextureRegion(tex, 20, 0, 20, 32),
                 new TextureRegion(tex, 0, 32, 20, 32),
                 new TextureRegion(tex, 20, 32, 20, 32)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
+
+    public static Animation bullet()
+    {
+        Texture tex = TextureManager.getTexture("bullets.png");
+        Animation anim = new Animation(0.25f/3.0f,
+                new TextureRegion(tex, 0, 0, 16, 16),
+                new TextureRegion(tex, 0, 16, 16, 16),
+                new TextureRegion(tex, 0, 32, 16, 16)
         );
         anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;

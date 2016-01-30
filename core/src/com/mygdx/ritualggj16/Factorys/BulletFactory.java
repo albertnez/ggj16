@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.LifeComponent;
@@ -31,6 +32,7 @@ public class BulletFactory
         Texture tex = TextureManager.getTexture("bullets.png");
         RenderComponent rc = new RenderComponent(new Sprite(new TextureRegion(tex, 0, 0, 16, 16)), RenderComponent.Layer.Bullet);
         rc.rotation = angle-90;
+        rc.scale = 2.0f;
         bullet.add(rc);
 
         bullet.add(new PositionComponent(x, y));
@@ -41,8 +43,10 @@ public class BulletFactory
         bullet.add(new LifeComponent(1));
         bullet.add(new CollisionComponent(8, 8));
         bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
-
         bullet.add(new OwnerComponent(owner));
+
+        bullet.add(new AnimationComponent(AnimationFactory.bullet()));
+
 
         BulletComponent bc = new BulletComponent();
         bc.lifeTime = 3.0f;
