@@ -8,12 +8,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.InputComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Constants;
+import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.Wikipedia;
 import com.mygdx.ritualggj16.XBox360Pad;
 
 /**
@@ -57,10 +61,43 @@ public class InputSystem extends IteratingSystem
         if (controller != null)
         {
             if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.4)
-                vel.x = controller.getAxis(XBox360Pad.AXIS_LEFT_X) * Constants.RES_X / 8 * 10.0f;
+                vel.x = controller.getAxis(XBox360Pad.AXIS_LEFT_X) *
+                        Wikipedia.Speed(TypeComponent.EntityType.Player);
 
             if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.4)
-                vel.y = -controller.getAxis(XBox360Pad.AXIS_LEFT_Y) * Constants.RES_Y / 8 * 10.0f;
+                vel.y = -controller.getAxis(XBox360Pad.AXIS_LEFT_Y) *
+                        Wikipedia.Speed(TypeComponent.EntityType.Player);
+
+
+            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.4 ||
+                    Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.4)
+            {
+                float ang = MathUtils.radDeg * MathUtils.atan2(
+                        -controller.getAxis(XBox360Pad.AXIS_LEFT_Y),
+                        controller.getAxis(XBox360Pad.AXIS_LEFT_X));
+
+                AnimationComponent animationComponent = Mappers.animation.get(entity);
+
+                if (ang < 45 && ang > -45)
+                {
+                    animationComponent.animation = AnimationFactory.playerRight();
+                }
+                else if (ang > 45 && ang < 45+90)
+                {
+                    animationComponent.animation = AnimationFactory.playerUp();
+                }
+                else if (ang < -45 && ang > -45-90)
+                {
+                    animationComponent.animation = AnimationFactory.playerDown();
+                }
+                else
+                {
+                    animationComponent.animation = AnimationFactory.playerLeft();
+                }
+
+            }
+
+
 
             if (Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_X)) > 0.4 ||
                 Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.4)

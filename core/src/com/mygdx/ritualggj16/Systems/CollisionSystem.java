@@ -70,6 +70,7 @@ public class CollisionSystem extends IteratingSystem
                     Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
                     engine.removeEntity(entity);
                     FXFactory.MakeHitText(pos.x, pos.y);
+                    return;
                 }
                 else if (et.type == TypeComponent.EntityType.Player &&
                         ot.type == TypeComponent.EntityType.AltarItem)
@@ -82,7 +83,8 @@ public class CollisionSystem extends IteratingSystem
         }
     }
 
-    private void enableAltarPoint() {
+    private void enableAltarPoint()
+    {
         ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(AltarPointComponent.class).get());
         for (Entity entity : entities)
         {

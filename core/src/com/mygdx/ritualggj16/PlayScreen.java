@@ -102,7 +102,7 @@ public class PlayScreen implements Screen {
                     .add(new TypeComponent(TypeComponent.EntityType.Player))
                     .add(new LifeComponent(10))
                     .add(new OwnerComponent(OwnerComponent.Owner.Player2))
-                    .add(new RenderComponent(new Sprite(TextureManager.getTexture("player.png"))))
+                    .add(new RenderComponent(Utils.dumbSprite(10*2, 16*2)))
                     .add(new CollisionComponent(10, 16))
                     .add(new InputComponent(controller));
 

@@ -24,7 +24,46 @@ public class AnimationFactory
                 new TextureRegion(tex, 0,  32, 10 ,16)
         );
         anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
+    public static Animation playerRight()
+    {
+        Texture tex = TextureManager.getTexture("player_sheet.png");
 
+        Animation anim = new Animation(0.5f/3,
+                new TextureRegion(tex, 10,   0, 10 ,16),
+                new TextureRegion(tex, 10,  16, 10 ,16),
+                new TextureRegion(tex, 10,   0, 10 ,16),
+                new TextureRegion(tex, 10,  32, 10 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
+    public static Animation playerDown()
+    {
+        Texture tex = TextureManager.getTexture("player_sheet.png");
+
+        Animation anim = new Animation(0.5f/3,
+                new TextureRegion(tex, 20,   0, 10 ,16),
+                new TextureRegion(tex, 20,  16, 10 ,16),
+                new TextureRegion(tex, 20,   0, 10 ,16),
+                new TextureRegion(tex, 20,  32, 10 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
+
+    public static Animation playerUp()
+    {
+        Texture tex = TextureManager.getTexture("player_sheet.png");
+
+        Animation anim = new Animation(0.5f/3,
+                new TextureRegion(tex, 30,   0, 10 ,16),
+                new TextureRegion(tex, 30,  16, 10 ,16),
+                new TextureRegion(tex, 30,   0, 10 ,16),
+                new TextureRegion(tex, 30,  32, 10 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;
     }
 

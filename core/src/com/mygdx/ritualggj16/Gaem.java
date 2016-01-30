@@ -30,7 +30,7 @@ public class Gaem extends Game {
         engine = new PooledEngine(1024, 1024*4, 1024, 1024*4);
 
         cam = new OrthographicCamera(Constants.RES_X, Constants.RES_Y);
-        viewport = new FitViewport(Constants.RES_X, Constants.RES_Y, cam);
+        viewport = new FitViewport(Constants.RES_X/2, Constants.RES_Y/2, cam);
 
         FontManager.generateAll();
 

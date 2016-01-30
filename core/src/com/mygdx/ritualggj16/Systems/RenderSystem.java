@@ -102,8 +102,8 @@ public class RenderSystem extends EntitySystem
 
             rc.spr.setRotation(rc.rotation);
 
-            if (pos.last_x < pos.x) rc.spr.setScale(-1, 1);
-            if (pos.last_x > pos.x) rc.spr.setScale(1, 1);
+            //if (pos.last_x < pos.x) rc.spr.setScale(-1, 1);
+            //if (pos.last_x > pos.x) rc.spr.setScale(1, 1);
 
             rc.spr.draw(batch);
 

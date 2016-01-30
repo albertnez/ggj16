@@ -11,7 +11,7 @@ public class Wikipedia
 
     public static float Speed(TypeComponent.EntityType type)
     {
-        return 45.0f;
+        return 200.0f;
     }
     public static float Speed(EnemyComponent.EnemyType type)
     {
