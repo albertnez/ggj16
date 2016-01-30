@@ -95,7 +95,7 @@ public class AnimationFactory
     {
         Texture tex = TextureManager.getTexture("blob.png");
 
-        Animation anim = new Animation(1.5f/4,
+        Animation anim = new Animation(0.1f/4,
                 new TextureRegion(tex, 20,  0, 10 ,8),
                 new TextureRegion(tex, 30, 0, 10 ,8),
                 new TextureRegion(tex, 20,  8, 10 ,8),

@@ -10,6 +10,7 @@ import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.ItemFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.UltraManager;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,8 @@ public class ItemSpawnSystem extends IntervalSystem
     @Override
     protected void updateInterval()
     {
+        if (!UltraManager.isGaemActive) return;
+
         if (altarItemActive) {
             return;
         }

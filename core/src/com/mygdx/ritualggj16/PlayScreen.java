@@ -2,6 +2,7 @@ package com.mygdx.ritualggj16;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
@@ -55,6 +56,8 @@ public class PlayScreen implements Screen {
 
     Sprite p1_faec;
     Sprite p2_faec;
+
+    Sprite pinxo;
 
     Entity[] players;
 
@@ -123,7 +126,7 @@ public class PlayScreen implements Screen {
         // Dumb control points.
         createAltarPoints();
 
-        EnemyFactory.spawnWalker(120, 100);
+        //EnemyFactory.spawnWalker(120, 100);
 
         blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
         blackzor.setColor(Color.BLACK);
@@ -137,7 +140,14 @@ public class PlayScreen implements Screen {
 
 
         p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
+        p2_faec.setX(-Constants.RES_X/2 + 100);
+        p2_faec.setY(-Constants.RES_Y/2 + 100);
+        p2_faec.scale(10);
 
+        pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
+        pinxo.setX(Constants.RES_X/2 - 100);
+        pinxo.setY(-Constants.RES_Y/2 + 100);
+        pinxo.scale(3);
     }
 
     float le_timer = 0.0f;
@@ -168,22 +178,53 @@ public class PlayScreen implements Screen {
         gaem.batch.end();
         */
 
+        if (!UltraManager.isGaemActive)
+        {
+            gaem.batch.begin();
 
-        gaem.batch.begin();
+            blackzor.setAlpha(0.5f);
+            blackzor.draw(gaem.batch);
 
-        blackzor.setAlpha(0.5f);
-        blackzor.draw(gaem.batch);
+            //Faec
+            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_1)
+                p1_faec.draw(gaem.batch);
 
-        UltraManager.textTimer += delta;
+            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_2)
+                p2_faec.draw(gaem.batch);
 
-        FontManager.dialog.draw(gaem.batch,
-                UltraManager.getText(),
-                -Constants.RES_X*0.3f,
-                -Constants.RES_Y*0.3f);
+            //Tecst
+            UltraManager.textTimer += delta;
+            FontManager.dialog.draw(gaem.batch,
+                    UltraManager.getText(),
+                    -Constants.RES_X*0.3f,
+                    -Constants.RES_Y*0.3f);
 
-        p1_faec.draw(gaem.batch);
+            //Pinxo?
+            if (UltraManager.isTextTimerFinished())
+            {
+                pinxo.draw(gaem.batch);
 
-        gaem.batch.end();
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+                {
+                    if (!UltraManager.nextText())
+                    {
+                        UltraManager.isGaemActive = true;
+                    }
+                }
+
+            }
+            else
+            {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+                {
+                    UltraManager.textTimer = UltraManager.textDuration;
+                }
+            }
+
+            gaem.batch.end();
+        }
+
+
 
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());

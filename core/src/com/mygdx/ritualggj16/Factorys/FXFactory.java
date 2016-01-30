@@ -58,7 +58,7 @@ public class FXFactory
             rc.invert = inver;
             enemy.add(rc);
             Animation anim = AnimationFactory.blobDie();
-            anim.setPlayMode(Animation.PlayMode.NORMAL);
+            anim.setPlayMode(Animation.PlayMode.LOOP);
             enemy.add(new AnimationComponent(anim));
         }
 
