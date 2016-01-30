@@ -36,6 +36,7 @@ import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 import com.mygdx.ritualggj16.Systems.SpawnSystem;
+import com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
@@ -64,6 +65,8 @@ public class PlayScreen implements Screen {
     Entity[] players;
 
     Entity altar;
+    Sprite altarLifeBack;
+    Sprite altarLifeFront;
 
     public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
@@ -123,6 +126,14 @@ public class PlayScreen implements Screen {
 
         //Altar
         altar = ItemFactory.spawnAltar();
+        altarLifeBack = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 0, 16, 5);
+        altarLifeFront = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 5, 16, 5);
+        altarLifeBack.setOrigin(0.0f, 0.0f);
+        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 20.0f);
+        altarLifeBack.setScale(20.0f, 3.0f);
+        altarLifeFront.setOrigin(0.0f, 0.0f);
+        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 20.0f);
+        altarLifeFront.setScale(20.0f, 3.0f);
 
         // Dumb control points.
         createAltarPoints();
@@ -132,17 +143,17 @@ public class PlayScreen implements Screen {
         blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
         blackzor.setColor(Color.BLACK);
         blackzor.setX(-Constants.RES_X/2);
-        blackzor.setY(-Constants.RES_Y/2);
+        blackzor.setY(-Constants.RES_Y / 2);
 
         p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
-        p1_faec.setX(-Constants.RES_X/2 + 100);
-        p1_faec.setY(-Constants.RES_Y/2 + 100);
+        p1_faec.setX(-Constants.RES_X / 2 + 100);
+        p1_faec.setY(-Constants.RES_Y / 2 + 100);
         p1_faec.scale(10);
 
 
         p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
-        p2_faec.setX(-Constants.RES_X/2 + 100);
-        p2_faec.setY(-Constants.RES_Y/2 + 100);
+        p2_faec.setX(-Constants.RES_X / 2 + 100);
+        p2_faec.setY(-Constants.RES_Y / 2 + 100);
         p2_faec.scale(10);
 
         p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
@@ -151,8 +162,8 @@ public class PlayScreen implements Screen {
         p3_faec.scale(10);
 
         pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
-        pinxo.setX(Constants.RES_X/2 - 100);
-        pinxo.setY(-Constants.RES_Y/2 + 100);
+        pinxo.setX(Constants.RES_X / 2 - 100);
+        pinxo.setY(-Constants.RES_Y / 2 + 100);
         pinxo.scale(3);
     }
 
@@ -175,6 +186,15 @@ public class PlayScreen implements Screen {
         gaem.batch.setProjectionMatrix(gaem.cam.combined);
         gaem.batch.begin();
         gaem.engine.update(delta);
+        gaem.batch.end();
+
+        // Draw Altar life
+        gaem.batch.begin();
+        altarLifeBack.draw(gaem.batch);
+        int width = Math.round(16 * (float)Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
+        altarLifeFront.setRegion(0, 5, width, 5);
+        altarLifeFront.setSize(width, 5);
+        altarLifeFront.draw(gaem.batch);
         gaem.batch.end();
 
         /*

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.ItemComponent;
+import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
@@ -28,6 +29,7 @@ public class ItemFactory
                 .add(new PositionComponent(0, 0))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Altar))
+                .add(new LifeComponent(10))
                 .add(new RenderComponent(spr_altar, RenderComponent.Layer.Player, 3.0f))
                 .add(new AnimationComponent(AnimationFactory.altarGirl()))
                 .add(new CollisionComponent(20.0f * 3.0f, 32.0f * 3.0f));
