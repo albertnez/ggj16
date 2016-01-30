@@ -49,7 +49,8 @@ public class CollisionSystem extends IteratingSystem
                 col_me.sizeX*0.9f,
                 col_me.sizeY*0.9f);
 
-        for (Entity other : entities) {
+        for (Entity other : entities)
+        {
             if (other == entity) continue;
 
             PositionComponent pos_other = Mappers.position.get(other);
@@ -58,23 +59,38 @@ public class CollisionSystem extends IteratingSystem
                     pos_other.x - col_other.sizeX * 0.45f,
                     pos_other.y - col_other.sizeY * 0.45f,
                     col_other.sizeX*0.9f,
-                    col_other.sizeY*0.9f);
+                    col_other.sizeY*0.9f
+            );
 
             if (rect_me.overlaps(rect_other))
             {
                 TypeComponent et = Mappers.type.get(entity);
                 TypeComponent ot = Mappers.type.get(other);
 
+                /*
+                //PLAYER vs ENEMY
+                if (et.type == TypeComponent.EntityType.Player &&
+                    ot.type == TypeComponent.EntityType.Enemy)
+                {
+                    Mappers.velocity.get(other).x += Mappers.velocity.get(entity).x;
+                    Mappers.velocity.get(other).y += Mappers.velocity.get(entity).y;
+                }
+
+                else if ((et.type == TypeComponent.EntityType.Enemy ||
+                        et.type == TypeComponent.EntityType.Player )
+                        && ot.type == TypeComponent.EntityType.Altar)
+                {
+                    Mappers.velocity.get(entity).x = 0;
+                    Mappers.velocity.get(entity).y = 0;
+                }*/
+
+
                 // Constrain move
-                if (isObstacle(et.type, ot.type)) {
+                if (isObstacle(et.type, ot.type))
+                {
                     if (!isFixed(ot.type))
                     {
-                        float distX = (col_me.sizeX + col_other.sizeX) * 0.5f;
-                        float distY = (col_me.sizeY + col_other.sizeY) * 0.5f;
-                        Mappers.collision.get(other).addForce(
-                                300.0f / (pos_other.x - pos_me.x),
-                                300.0f / (pos_other.y - pos_me.y)
-                        );
+
                     }
                     else
                     {
@@ -95,6 +111,7 @@ public class CollisionSystem extends IteratingSystem
                         }
                     }
                 }
+
 
                 //BULLET vs ENEMY
                 else if (Mappers.bullet.has(entity) &&

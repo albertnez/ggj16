@@ -57,6 +57,7 @@ public class PlayScreen implements Screen {
 
     Sprite p1_faec;
     Sprite p2_faec;
+    Sprite p3_faec;
 
     Sprite pinxo;
 
@@ -146,6 +147,11 @@ public class PlayScreen implements Screen {
         p2_faec.setY(-Constants.RES_Y/2 + 100);
         p2_faec.scale(10);
 
+        p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
+        p3_faec.setX(-Constants.RES_X/2 + 100);
+        p3_faec.setY(-Constants.RES_Y/2 + 100);
+        p3_faec.scale(10);
+
         pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
         pinxo.setX(Constants.RES_X/2 - 100);
         pinxo.setY(-Constants.RES_Y/2 + 100);
@@ -193,6 +199,9 @@ public class PlayScreen implements Screen {
 
             if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_2)
                 p2_faec.draw(gaem.batch);
+
+            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_3)
+                p3_faec.draw(gaem.batch);
 
             //Tecst
             UltraManager.textTimer += delta;
