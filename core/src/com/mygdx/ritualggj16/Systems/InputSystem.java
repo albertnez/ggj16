@@ -113,7 +113,8 @@ public class InputSystem extends IteratingSystem
                             MathUtils.radDeg * MathUtils.atan2(
                                     -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
                                     controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
-                            )
+                            ),
+                            Mappers.owner.get(entity).owner
                     );
                 }
 

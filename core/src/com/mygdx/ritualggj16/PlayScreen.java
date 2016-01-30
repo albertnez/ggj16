@@ -2,17 +2,13 @@ package com.mygdx.ritualggj16;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
@@ -122,11 +118,18 @@ public class PlayScreen implements Screen {
         createAltarPoints();
 
         EnemyFactory.spawnWalker(120, 100);
+
+        UltraManager.lasthit_p1_anim = AnimationFactory.blob();
+        UltraManager.lasthit_p1_spr = Utils.dumbSprite(75, 75);
     }
+
+    float le_timer = 0.0f;
 
     @Override
     public void render(float delta)
     {
+        le_timer += delta;
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -135,6 +138,14 @@ public class PlayScreen implements Screen {
         gaem.batch.end();
 
         gaem.engine.update(delta);
+
+        gaem.batch.begin();
+        UltraManager.lasthit_p1_spr.setRegion(UltraManager.lasthit_p1_anim.getKeyFrame(le_timer));
+        UltraManager.lasthit_p1_spr.setX(-Constants.RES_X/2 + Constants.RES_X*0.05f);
+        UltraManager.lasthit_p1_spr.setY((Constants.RES_Y/2) -(Constants.RES_Y/2)*0.25f );
+        UltraManager. lasthit_p1_spr.draw(gaem.batch);
+        gaem.batch.end();
+
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
     }

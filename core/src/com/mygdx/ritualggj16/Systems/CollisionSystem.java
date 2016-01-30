@@ -15,6 +15,7 @@ import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.TextureManager;
+import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 
 
@@ -58,10 +59,15 @@ public class CollisionSystem extends IteratingSystem
             {
                 TypeComponent et = Mappers.type.get(entity);
                 TypeComponent ot = Mappers.type.get(other);
-                if (et.type == TypeComponent.EntityType.Enemy && ot.type == TypeComponent.EntityType.Player)
+
+                //ENEMY vs PLAYER
+                if (et.type == TypeComponent.EntityType.Enemy &&
+                        ot.type == TypeComponent.EntityType.Player)
                 {
-                    Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
+                    //Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
                 }
+
+                //BULLET vs ENEMY
                 else if (Mappers.bullet.has(entity) &&
                         ot.type == TypeComponent.EntityType.Enemy &&
                         Mappers.life.get(other).life > 0)
@@ -71,8 +77,13 @@ public class CollisionSystem extends IteratingSystem
                     Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
                     engine.removeEntity(entity);
                     FXFactory.MakeHitText(pos.x, pos.y);
+
+                    UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;
+
                     return;
                 }
+
+                //PLAYER vs PICKABLE
                 else if (et.type == TypeComponent.EntityType.Player &&
                         ot.type == TypeComponent.EntityType.AltarItem)
                 {

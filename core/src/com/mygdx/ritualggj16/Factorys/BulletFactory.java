@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.LifeComponent;
+import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
@@ -23,7 +24,7 @@ public class BulletFactory
 {
     public static Gaem gaem;
 
-    public static void shootBullet(float x, float y, float angle)
+    public static void shootBullet(float x, float y, float angle, OwnerComponent.Owner owner)
     {
         Entity bullet = gaem.engine.createEntity();
 
@@ -41,8 +42,7 @@ public class BulletFactory
         bullet.add(new CollisionComponent(8, 8));
         bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
 
-        //bullet.add(new CollisionComponent(14, 16));
-        //bullet.add(new TypeComponent(TypeComponent.TypeEntity.BULLET));
+        bullet.add(new OwnerComponent(owner));
 
         BulletComponent bc = new BulletComponent();
         bc.lifeTime = 3.0f;
