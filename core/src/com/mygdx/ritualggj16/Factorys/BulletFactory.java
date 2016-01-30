@@ -34,8 +34,8 @@ public class BulletFactory
 
         bullet.add(new PositionComponent(x, y));
         bullet.add(new VelocityComponent(
-                        300* MathUtils.cosDeg(angle ),
-                        300* MathUtils.sinDeg(angle ))
+                        600* MathUtils.cosDeg(angle ),
+                        600* MathUtils.sinDeg(angle ))
         );
         bullet.add(new LifeComponent(1));
         bullet.add(new CollisionComponent(8, 8));
@@ -45,7 +45,7 @@ public class BulletFactory
         //bullet.add(new TypeComponent(TypeComponent.TypeEntity.BULLET));
 
         BulletComponent bc = new BulletComponent();
-        bc.lifeTime = 5.0f;
+        bc.lifeTime = 3.0f;
         bullet.add(bc);
 
         gaem.engine.addEntity(bullet);

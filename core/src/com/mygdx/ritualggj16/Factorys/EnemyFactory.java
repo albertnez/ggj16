@@ -28,8 +28,8 @@ public class EnemyFactory {
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
                 .add(new LifeComponent(2))
                 .add(new AnimationComponent(AnimationFactory.blob()))
-                .add(new CollisionComponent(10*2, 8*2))
-                .add(new RenderComponent(Utils.dumbSprite(10*2, 8*2)));
+                .add(new CollisionComponent(10*4, 8*4))
+                .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4)));
 
         gaem.engine.addEntity(enemy);
     }

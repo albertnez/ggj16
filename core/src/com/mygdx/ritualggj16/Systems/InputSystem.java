@@ -80,19 +80,19 @@ public class InputSystem extends IteratingSystem
 
                 if (ang < 45 && ang > -45)
                 {
-                    animationComponent.animation = AnimationFactory.playerRight();
+                    animationComponent.animation = AnimationFactory.playerRight(Mappers.owner.get(entity).owner);
                 }
                 else if (ang > 45 && ang < 45+90)
                 {
-                    animationComponent.animation = AnimationFactory.playerUp();
+                    animationComponent.animation = AnimationFactory.playerUp(Mappers.owner.get(entity).owner);
                 }
                 else if (ang < -45 && ang > -45-90)
                 {
-                    animationComponent.animation = AnimationFactory.playerDown();
+                    animationComponent.animation = AnimationFactory.playerDown(Mappers.owner.get(entity).owner);
                 }
                 else
                 {
-                    animationComponent.animation = AnimationFactory.playerLeft();
+                    animationComponent.animation = AnimationFactory.playerLeft(Mappers.owner.get(entity).owner);
                 }
 
             }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
+import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.TextureManager;
 
 import javax.xml.soap.Text;
@@ -13,9 +14,11 @@ import javax.xml.soap.Text;
  */
 public class AnimationFactory
 {
-    public static Animation playerLeft()
+    public static Animation playerLeft(OwnerComponent.Owner owner)
     {
-        Texture tex = TextureManager.getTexture("player_sheet.png");
+        Texture tex = TextureManager.getTexture(
+                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+        );
 
         Animation anim = new Animation(0.5f/3,
                 new TextureRegion(tex, 0,   0, 10 ,16),
@@ -26,9 +29,11 @@ public class AnimationFactory
         anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;
     }
-    public static Animation playerRight()
+    public static Animation playerRight(OwnerComponent.Owner owner)
     {
-        Texture tex = TextureManager.getTexture("player_sheet.png");
+        Texture tex = TextureManager.getTexture(
+                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+        );
 
         Animation anim = new Animation(0.5f/3,
                 new TextureRegion(tex, 10,   0, 10 ,16),
@@ -39,9 +44,11 @@ public class AnimationFactory
         anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;
     }
-    public static Animation playerDown()
+    public static Animation playerDown(OwnerComponent.Owner owner)
     {
-        Texture tex = TextureManager.getTexture("player_sheet.png");
+        Texture tex = TextureManager.getTexture(
+                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+        );
 
         Animation anim = new Animation(0.5f/3,
                 new TextureRegion(tex, 20,   0, 10 ,16),
@@ -53,9 +60,11 @@ public class AnimationFactory
         return anim;
     }
 
-    public static Animation playerUp()
+    public static Animation playerUp(OwnerComponent.Owner owner)
     {
-        Texture tex = TextureManager.getTexture("player_sheet.png");
+        Texture tex = TextureManager.getTexture(
+                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+        );
 
         Animation anim = new Animation(0.5f/3,
                 new TextureRegion(tex, 30,   0, 10 ,16),
