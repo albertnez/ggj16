@@ -16,6 +16,9 @@ import com.mygdx.ritualggj16.Mappers;
 public class EnemySystem extends IteratingSystem {
     Engine engine;
 
+    static private float centerOffsetX = 12.0f;
+    static private float centerOffsetY = 30.0f;
+
     public EnemySystem(Engine engine) {
         super(Family
                 .all(EnemyComponent.class, PositionComponent.class, VelocityComponent.class)
@@ -30,6 +33,31 @@ public class EnemySystem extends IteratingSystem {
             PositionComponent pos = Mappers.position.get(entity);
             VelocityComponent vel = Mappers.velocity.get(entity);
 
+            if (pos.x >= -centerOffsetX && pos.x <= centerOffsetX &&
+                pos.y >= -centerOffsetY && pos.y <= centerOffsetY)
+            {
+                if (vel.x != 0.0f && vel.y != 0.0)
+                {
+                    if (enemy.shakeY)
+                    {
+                        vel.x = 0.0f;
+                        vel.y = enemy.speed;
+                    }
+                    else
+                    {
+                        vel.y = 0.0f;
+                        vel.x = enemy.speed;
+                    }
+                }
+                enemy.shakeTime -= deltaTime;
+                if (enemy.shakeTime < -0.0f)
+                {
+                    enemy.shakeTime = enemy.shakePeriod;
+                    vel.x *= -1.0f;
+                    vel.y *= -1.0f;
+                }
+                return;
+            }
             float targetX = -pos.x;
             float targetY = -pos.y;
             float alpha = MathUtils.atan2(targetY, targetX);
