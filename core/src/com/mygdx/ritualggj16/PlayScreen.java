@@ -220,15 +220,4 @@ public class PlayScreen implements Screen {
             alpha += MathUtils.PI2 / 5.0f;
         }
     }
-
-    private void initCandles()
-    {
-        for (int i = 0; i < MathUtils.random(5, 10); ++i)
-        {
-            ItemFactory.spawnCandle(
-                    MathUtils.random(-Constants.RES_X/2.0f, Constants.RES_X/2.0f),
-                    MathUtils.random(-Constants.RES_Y/2.0f, Constants.RES_Y/2.0f)
-            );
-        }
-    }
 }
