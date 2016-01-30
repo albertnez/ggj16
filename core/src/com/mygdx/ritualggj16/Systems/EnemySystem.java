@@ -28,7 +28,8 @@ public class EnemySystem extends IteratingSystem {
 
     public void processEntity(Entity entity, float deltaTime) {
         EnemyComponent enemy = Mappers.enemy.get(entity);
-        if (enemy.type == EnemyComponent.EnemyType.Walker) {
+        if (enemy.type == EnemyComponent.EnemyType.Walker ||
+                enemy.type == EnemyComponent.EnemyType.Warrior) {
             // Walker enemy just goes to the center for now.
             PositionComponent pos = Mappers.position.get(entity);
             VelocityComponent vel = Mappers.velocity.get(entity);

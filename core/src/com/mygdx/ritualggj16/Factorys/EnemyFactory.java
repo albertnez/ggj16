@@ -32,4 +32,19 @@ public class EnemyFactory {
 
         gaem.engine.addEntity(enemy);
     }
+
+    public static void spawnWarrior(float x, float y)
+    {
+        Entity enemy = gaem.engine.createEntity()
+                .add(new PositionComponent(x, y))
+                .add(new VelocityComponent(0, 0))
+                .add(new EnemyComponent(EnemyComponent.EnemyType.Warrior))
+                .add(new TypeComponent(TypeComponent.EntityType.Enemy))
+                .add(new LifeComponent(1))
+                .add(new AnimationComponent(AnimationFactory.blobWarrior()))
+                .add(new CollisionComponent(10*4, 8*4))
+                .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player));
+
+        gaem.engine.addEntity(enemy);
+    }
 }

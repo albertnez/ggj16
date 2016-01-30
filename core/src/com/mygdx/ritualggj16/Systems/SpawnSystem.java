@@ -64,7 +64,7 @@ public class SpawnSystem extends IntervalSystem
         float alpha = MathUtils.random(0.0f, MathUtils.PI2);
         for (int i = 0; i < num; ++i)
         {
-            EnemyFactory.spawnWalker(
+            EnemyFactory.spawnWarrior(
                     MathUtils.cos(alpha) * dist,
                     MathUtils.sin(alpha) * dist
             );
@@ -79,9 +79,10 @@ public class SpawnSystem extends IntervalSystem
     {
         for (int i = 0; i < num; ++i)
         {
-            EnemyFactory.spawnWalker(
+            EnemyFactory.spawnWarrior(
                     x + MathUtils.random(-maxDist, maxDist),
-                    y + MathUtils.random(-maxDist, maxDist));
+                    y + MathUtils.random(-maxDist, maxDist)
+            );
         }
     }
     private void spawnNear(float x, float y, int num)

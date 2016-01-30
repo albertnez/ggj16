@@ -14,6 +14,7 @@ public class EnemyComponent implements Component {
 
     public enum EnemyType {
         Walker,
+        Warrior
     }
 
     public EnemyType type;

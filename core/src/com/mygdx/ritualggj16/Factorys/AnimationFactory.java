@@ -106,6 +106,35 @@ public class AnimationFactory
         return anim;
     }
 
+    public static Animation blobWarrior()
+    {
+        Texture tex = TextureManager.getTexture("blob_warrior.png");
+
+        Animation anim = new Animation(1.5f/4,
+                new TextureRegion(tex, 0,  0, 10 ,8),
+                new TextureRegion(tex, 10, 0, 10 ,8),
+                new TextureRegion(tex, 0,  8, 10 ,8),
+                new TextureRegion(tex, 10, 8, 10 ,8)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+    }
+    public static Animation blobWarriorDie()
+    {
+        Texture tex = TextureManager.getTexture("blob_warrior.png");
+
+        Animation anim = new Animation(1.5f/4,
+                new TextureRegion(tex, 0,  0, 10 ,8),
+                new TextureRegion(tex, 10, 0, 10 ,8),
+                new TextureRegion(tex, 0,  8, 10 ,8),
+                new TextureRegion(tex, 10, 8, 10 ,8)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+    }
+
     public static Animation candle()
     {
         Texture tex = TextureManager.getTexture("items.png");

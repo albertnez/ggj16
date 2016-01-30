@@ -68,7 +68,7 @@ public class UltraManager
 
             "PERO...",
 
-                "MIRA CALLATE YA\nQUE ME ESTOY CALENTANDO",
+                "MERLUZO CALLATE YA\nQUE ME ESTOY CALENTANDO",
 
                 "VAMOS A EMPEZAR",
 
@@ -128,8 +128,6 @@ public class UltraManager
     {
         String txt = dialogs[textIndex];
 
-
-
         String sub = txt.substring(0,
             Math.min(
                 (int)((textTimer/textDuration)*txt.length()),
@@ -137,12 +135,10 @@ public class UltraManager
             )
         );
 
-
         if (sub.lastIndexOf("[") > sub.lastIndexOf("]"))
         {
             sub = sub.substring(0, sub.lastIndexOf("[")-1);
         }
-
 
         return sub;
     }
