@@ -65,8 +65,10 @@ public class CollisionSystem extends IteratingSystem
 
                 // Constrain move
                 if (isObstacle(et.type, ot.type)) {
-                    Rectangle fixedX = rect_me.setX(pos_me.last_x - col_me.sizeX * 0.5f);
-                    Rectangle fixedY = rect_me.setY(pos_me.last_y - col_me.sizeY * 0.5f);
+                    Rectangle fixedX = new Rectangle(rect_me);
+                    Rectangle fixedY = new Rectangle(rect_me);
+                    fixedX.setX(pos_me.last_x - col_me.sizeX * 0.5f);
+                    fixedY.setY(pos_me.last_y - col_me.sizeY * 0.5f);
                     if (!fixedX.overlaps(rect_other))
                     {
                         pos_me.x = pos_me.last_x;
