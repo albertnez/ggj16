@@ -17,8 +17,10 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.Utils;
 import com.mygdx.ritualggj16.Wikipedia;
 import com.mygdx.ritualggj16.XBox360Pad;
+import com.sun.org.apache.xerces.internal.impl.xs.models.XSCMBinOp;
 
 /**
  * Created by anon on 1/30/16.
@@ -105,15 +107,17 @@ public class InputSystem extends IteratingSystem
 
                 if (input.bulletCooldown < 0)
                 {
+                    float alpha = Utils.angleTo8Dir(MathUtils.atan2(
+                            controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
+                            controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
+                    ));
+
                     input.bulletCooldown = input.bulletDelay;
 
                     BulletFactory.shootBullet(
                             pos.x,
                             pos.y,
-                            MathUtils.radDeg * MathUtils.atan2(
-                                    -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
-                                    controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
-                            ),
+                            MathUtils.radDeg * alpha,
                             Mappers.owner.get(entity).owner
                     );
                 }
