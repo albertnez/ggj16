@@ -13,7 +13,9 @@ public class RenderComponent implements Component
         Background,
         Ground,
         Items,
+        Explosion,
         Enemy,
+
         Bullet,
         Player,
         Text,

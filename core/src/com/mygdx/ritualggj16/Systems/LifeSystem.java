@@ -9,6 +9,8 @@ import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Mappers;
 
+import java.util.Map;
+
 /**
  * Created by anon on 1/30/16.
  */
@@ -29,7 +31,10 @@ public class LifeSystem extends IteratingSystem
         {
             PositionComponent pos = Mappers.position.get(entity);
             engine.removeEntity(entity);
-            FXFactory.makeDissapearEnemy(pos.x, pos.y, Mappers.enemy.get(entity), 0.4f);
+            FXFactory.makeDissapearEnemy(
+                    pos.x, pos.y,
+                    Mappers.enemy.get(entity),
+                    Mappers.render_comp.get(entity).invert);
         }
     }
 }

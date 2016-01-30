@@ -91,6 +91,20 @@ public class AnimationFactory
 
         return anim;
     }
+    public static Animation blobDie()
+    {
+        Texture tex = TextureManager.getTexture("blob.png");
+
+        Animation anim = new Animation(1.5f/4,
+                new TextureRegion(tex, 20,  0, 10 ,8),
+                new TextureRegion(tex, 30, 0, 10 ,8),
+                new TextureRegion(tex, 20,  8, 10 ,8),
+                new TextureRegion(tex, 30, 8, 10 ,8)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+    }
 
     public static Animation candle()
     {

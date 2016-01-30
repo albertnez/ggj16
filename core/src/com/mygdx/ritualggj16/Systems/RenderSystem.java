@@ -78,6 +78,7 @@ public class RenderSystem extends SortedIteratingSystem
             }
 
 
+            //rc.scale = 1.0f;
             if (Mappers.render_effect.has(e))
             {
                 RenderEffectComponent effect = Mappers.render_effect.get(e);
@@ -86,7 +87,7 @@ public class RenderSystem extends SortedIteratingSystem
                 float sc = Interpolation.linear.apply(
                         effect.scale_start, effect.scale_end,
                         effect.timer / effect.timer_total);
-                rc.spr.setScale(sc, sc);
+                rc.scale = sc;
 
                 float a = Interpolation.linear.apply(
                         effect.alpha_start, effect.alpha_end,

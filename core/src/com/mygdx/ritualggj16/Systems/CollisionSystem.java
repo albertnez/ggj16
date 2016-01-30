@@ -76,6 +76,7 @@ public class CollisionSystem extends IteratingSystem
 
                     Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
                     FXFactory.MakeHitText(pos.x, pos.y);
+                    FXFactory.makeExplosion(pos.x, pos.y);
                     engine.removeEntity(entity);
 
                     UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;

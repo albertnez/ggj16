@@ -49,20 +49,48 @@ public class FXFactory
 
 
 
-    public static void makeDissapearEnemy(float x, float y, EnemyComponent monster, float duration)
+    public static void makeDissapearEnemy(float x, float y, EnemyComponent monster, boolean inver)
     {
         Entity enemy = gaem.engine.createEntity();
         if (monster.type == EnemyComponent.EnemyType.Walker)
         {
-            enemy.add(new RenderComponent(Utils.dumbSprite(10*4, 8*4)));
-            Animation anim = AnimationFactory.blob();
+            RenderComponent rc = new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Enemy);
+            rc.invert = inver;
+            enemy.add(rc);
+            Animation anim = AnimationFactory.blobDie();
             anim.setPlayMode(Animation.PlayMode.NORMAL);
             enemy.add(new AnimationComponent(anim));
         }
 
         enemy.add(new PositionComponent(x, y));
-        enemy.add(new RenderEffectComponent(duration, 4.0f, 8.0f, 1, 0.25f, true));
+        enemy.add(new RenderEffectComponent(0.25f, 1.0f, 4.0f, 0.9f, 0.0f, true));
         gaem.engine.addEntity(enemy);
+
+    }
+
+    public static void makeExplosion(float x, float y)
+    {
+
+        Texture tex = TextureManager.getTexture("explosions.png");
+        Animation anim = new Animation(0.3f/6,
+                new TextureRegion(tex, 640, 58, 16 ,16),
+                new TextureRegion(tex, 660, 58, 16 ,16),
+                new TextureRegion(tex, 680, 58, 16 ,16),
+                new TextureRegion(tex, 700, 58, 16 ,16),
+                new TextureRegion(tex, 720, 58, 16 ,16),
+                new TextureRegion(tex, 740, 58, 16 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.NORMAL);
+
+        Entity entity = gaem.engine.createEntity();
+        entity.add(new PositionComponent(x, y));
+        entity.add(new AnimationComponent(anim));
+        entity.add(new RenderComponent(
+                new Sprite(new TextureRegion(tex, 640, 58, 16 ,16)),
+                RenderComponent.Layer.Explosion,
+                1.0f));
+        entity.add(new RenderEffectComponent(0.25f, 1.0f, 1.0f, 1.0f, 0.25f, false));
+        gaem.engine.addEntity(entity);
 
     }
 
