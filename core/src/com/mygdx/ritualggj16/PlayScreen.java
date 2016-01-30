@@ -202,15 +202,15 @@ public class PlayScreen implements Screen {
 
     private void createAltarPoints()
     {
-        float alpha = 0;
+        float alpha = MathUtils.PI / 2.0f;
         for (int i = 0; i < numAltarPoints; ++i)
         {
             float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
             float posY = MathUtils.sin(alpha) * altarPointDistToCenter;
             createAltarPoint(posX, posY, i);
             ItemFactory.spawnCandle(
-                    MathUtils.cos(alpha) * altarPointDistToCenter * 0.2f,
-                    MathUtils.sin(alpha) * altarPointDistToCenter * 0.2f
+                    MathUtils.cos(alpha) * altarPointDistToCenter * 0.3f,
+                    MathUtils.sin(alpha) * altarPointDistToCenter * 0.3f
             );
             float calpha = alpha + MathUtils.PI2 / 10.0f;
             ItemFactory.spawnCandle(
