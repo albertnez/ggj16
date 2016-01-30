@@ -11,6 +11,8 @@ public class RenderTextComponent implements Component
     public BitmapFont font;
     public String text;
 
+    public float lifetime = 0.0f;
+
     public RenderTextComponent(BitmapFont font, String text)
     {
         this.font = font;

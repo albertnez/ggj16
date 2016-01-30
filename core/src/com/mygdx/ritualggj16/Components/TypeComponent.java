@@ -13,6 +13,7 @@ public class TypeComponent implements Component {
         Bullet,
         AltarPoint,
         AltarItem,
+        Altar,
     }
 
     public EntityType type;

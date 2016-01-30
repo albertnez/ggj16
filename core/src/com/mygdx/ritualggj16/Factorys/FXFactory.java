@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.RenderTextComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Constants;
@@ -30,7 +31,11 @@ public class FXFactory
 
         text.add(new RenderTextComponent(FontManager.damage, "1"))
             .add(new PositionComponent(x, y))
-            .add(new VelocityComponent(MathUtils.random(-30, 30), Constants.RES_Y / 6));
+            .add(new VelocityComponent(
+                    MathUtils.random(-30, 30),
+                    Constants.RES_Y / 6*MathUtils.random(0.75f, 1.25f)))
+            .add(new RenderEffectComponent(1.0f, 0.5f, 1.0f, 1.0f, 0.0f, false))
+        ;
 
         gaem.engine.addEntity(text);
     }

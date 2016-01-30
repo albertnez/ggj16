@@ -10,12 +10,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class RenderComponent implements Component
 {
     public Sprite spr;
-    public float rotation;
+    public float rotation = 0.0f;
+    public float scale = 1.0f;
 
     public boolean invert = false;
 
     public RenderComponent(Sprite spr)
     {
         this.spr = spr;
+    }
+
+    public RenderComponent(Sprite spr, float scale)
+    {
+        this.spr = spr;
+        this.scale = scale;
     }
 }

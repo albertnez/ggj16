@@ -53,6 +53,8 @@ public class PlayScreen implements Screen {
 
     Entity[] players;
 
+    Entity altar;
+
     public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
 
@@ -77,11 +79,11 @@ public class PlayScreen implements Screen {
 
         players = new Entity[numPlayers];
 
-        spr = new Sprite(Utils.dumbSprite(10*2, 16*2));
+        spr = new Sprite(Utils.dumbSprite(10*4, 16*4));
         Controller controller = (Controllers.getControllers().size > 0) ?
                 Controllers.getControllers().get(0) : null;
         players[0] = gaem.engine.createEntity()
-                .add(new PositionComponent(0, 0))
+                .add(new PositionComponent(-400, 0))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new LifeComponent(10))
@@ -104,10 +106,22 @@ public class PlayScreen implements Screen {
                     .add(new OwnerComponent(OwnerComponent.Owner.Player2))
                     .add(new RenderComponent(Utils.dumbSprite(10*2, 16*2)))
                     .add(new CollisionComponent(10, 16))
+                    .add(new AnimationComponent(AnimationFactory.playerLeft()))
                     .add(new InputComponent(controller));
 
             gaem.engine.addEntity(players[1]);
         }
+
+        //Altar
+        Sprite spr_altar = new Sprite(TextureManager.getTexture("altar.png"), 20, 32);
+
+        altar = gaem.engine.createEntity()
+                .add(new PositionComponent(0, 0))
+                .add(new VelocityComponent(0, 0))
+                .add(new TypeComponent(TypeComponent.EntityType.Altar))
+                .add(new RenderComponent(spr_altar, 2.0f))
+                .add(new CollisionComponent(10, 16));
+        gaem.engine.addEntity(altar);
 
         // Dumb control points.
         createAltarPoint(100, 100);

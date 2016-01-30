@@ -11,6 +11,7 @@ import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.RenderTextComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
@@ -32,6 +33,8 @@ public class Mappers
     public static ComponentMapper<PositionComponent> position = ComponentMapper.getFor(PositionComponent.class);
 
     public static ComponentMapper<RenderComponent> render_comp = ComponentMapper.getFor(RenderComponent.class);
+
+    public static ComponentMapper<RenderEffectComponent> render_effect = ComponentMapper.getFor(RenderEffectComponent.class);
 
     public static ComponentMapper<RenderTextComponent> renderText = ComponentMapper.getFor(RenderTextComponent.class);
 

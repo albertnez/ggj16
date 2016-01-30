@@ -35,6 +35,8 @@ public class EnemySystem extends IteratingSystem {
             float alpha = MathUtils.atan2(targetY, targetX);
             vel.x = enemy.speed * MathUtils.cos(alpha);
             vel.y = enemy.speed * MathUtils.sin(alpha);
+
+            Mappers.render_comp.get(entity).invert = (vel.x < 0)? true : false;
         }
     }
 }

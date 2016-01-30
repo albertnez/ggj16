@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.RenderTextComponent;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
@@ -97,13 +98,40 @@ public class RenderSystem extends EntitySystem
                 }
             }
 
+
+            if (Mappers.render_effect.has(e))
+            {
+                RenderEffectComponent effect = Mappers.render_effect.get(e);
+                effect.timer += deltaTime;
+
+                float sc = Interpolation.linear.apply(
+                        effect.scale_start, effect.scale_end,
+                        effect.timer / effect.timer_total);
+                rc.spr.setScale(sc, sc);
+
+                float a = Interpolation.linear.apply(
+                        effect.alpha_start, effect.alpha_end,
+                        effect.timer / effect.timer_total
+                );
+                rc.spr.setAlpha(a);
+
+                if (effect.timer > effect.timer_total)
+                {
+                    e.remove(RenderEffectComponent.class);
+                    if (effect.single_use)
+                    {
+                        gaem.engine.removeEntity(e);
+                    }
+
+                }
+            }
+
             rc.spr.setCenterX(pos.x);
             rc.spr.setCenterY(pos.y);
 
             rc.spr.setRotation(rc.rotation);
 
-            //if (pos.last_x < pos.x) rc.spr.setScale(-1, 1);
-            //if (pos.last_x > pos.x) rc.spr.setScale(1, 1);
+            rc.spr.setScale((rc.invert?-rc.scale:rc.scale), rc.scale);
 
             rc.spr.draw(batch);
 
@@ -117,7 +145,11 @@ public class RenderSystem extends EntitySystem
             RenderTextComponent rt = Mappers.renderText.get(e);
             PositionComponent pos = Mappers.position.get(e);
 
+            rt.lifetime += deltaTime;
+
             rt.font.draw(gaem.batch, rt.text, pos.x, pos.y);
+
+            if (rt.lifetime > 0.8f) gaem.engine.removeEntity(e);
 
         }
 
