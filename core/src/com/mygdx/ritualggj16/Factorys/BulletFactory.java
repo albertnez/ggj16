@@ -28,7 +28,7 @@ public class BulletFactory
         Entity bullet = gaem.engine.createEntity();
 
         Texture tex = TextureManager.getTexture("bullets.png");
-        RenderComponent rc = new RenderComponent(new Sprite(new TextureRegion(tex, 0, 0, 16, 16)));
+        RenderComponent rc = new RenderComponent(new Sprite(new TextureRegion(tex, 0, 0, 16, 16)), RenderComponent.Layer.Bullet);
         rc.rotation = angle-90;
         bullet.add(rc);
 

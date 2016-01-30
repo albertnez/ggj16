@@ -90,7 +90,7 @@ public class PlayScreen implements Screen {
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new LifeComponent(10))
                 .add(new OwnerComponent(OwnerComponent.Owner.Player1))
-                .add(new RenderComponent(spr))
+                .add(new RenderComponent(spr, RenderComponent.Layer.Player))
                 .add(new CollisionComponent(10, 16))
                 .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player1)))
                 .add(new InputComponent(controller));
@@ -106,7 +106,7 @@ public class PlayScreen implements Screen {
                     .add(new TypeComponent(TypeComponent.EntityType.Player))
                     .add(new LifeComponent(10))
                     .add(new OwnerComponent(OwnerComponent.Owner.Player2))
-                    .add(new RenderComponent(Utils.dumbSprite(10*4, 16*4)))
+                    .add(new RenderComponent(Utils.dumbSprite(10*4, 16*4), RenderComponent.Layer.Player))
                     .add(new CollisionComponent(10, 16))
                     .add(new AnimationComponent(AnimationFactory.playerLeft(OwnerComponent.Owner.Player2)))
                     .add(new InputComponent(controller));
@@ -134,7 +134,10 @@ public class PlayScreen implements Screen {
         bg_floor.draw(gaem.batch);
         gaem.batch.end();
 
+        gaem.batch.setProjectionMatrix(gaem.cam.combined);
+        gaem.batch.begin();
         gaem.engine.update(delta);
+        gaem.batch.end();
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
     }
@@ -181,7 +184,7 @@ public class PlayScreen implements Screen {
                         .add(new VelocityComponent(0, 0))
                         .add(new TypeComponent(TypeComponent.EntityType.AltarPoint))
                         .add(new OwnerComponent())
-                        .add(new RenderComponent(sprite, 4.0f))
+                        .add(new RenderComponent(sprite, RenderComponent.Layer.Ground, 4.0f))
                         .add(new AltarPointComponent(id))
         );
     }
