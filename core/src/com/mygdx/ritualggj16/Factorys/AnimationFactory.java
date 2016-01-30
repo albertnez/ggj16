@@ -131,4 +131,17 @@ public class AnimationFactory
         anim.setPlayMode(Animation.PlayMode.LOOP);
         return anim;
     }
+
+    public static Animation altarGirl()
+    {
+        Texture tex = TextureManager.getTexture("altar.png");
+        Animation anim = new Animation(2.0f/4.0f,
+                new TextureRegion(tex, 0, 0, 20, 32),
+                new TextureRegion(tex, 20, 0, 20, 32),
+                new TextureRegion(tex, 0, 32, 20, 32),
+                new TextureRegion(tex, 20, 32, 20, 32)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
 }

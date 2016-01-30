@@ -8,7 +8,5 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class UltraManager {
 
-    public static Animation lasthit_p1_anim;
-    public static Sprite lasthit_p1_spr;
 
 }

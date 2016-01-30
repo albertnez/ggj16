@@ -27,8 +27,9 @@ public class ItemFactory
                 .add(new PositionComponent(0, 0))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Altar))
-                .add(new RenderComponent(spr_altar, RenderComponent.Layer.Ground, 2.0f))
-                .add(new CollisionComponent(10, 16));
+                .add(new RenderComponent(spr_altar, RenderComponent.Layer.Ground, 3.0f))
+                .add(new CollisionComponent(10, 16))
+                .add(new AnimationComponent(AnimationFactory.altarGirl()));
         gaem.engine.addEntity(altar);
 
         return altar;

@@ -79,7 +79,7 @@ public class CollisionSystem extends IteratingSystem
                     FXFactory.makeExplosion(pos.x, pos.y);
                     engine.removeEntity(entity);
 
-                    UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;
+                    //UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;
 
                     return;
                 }

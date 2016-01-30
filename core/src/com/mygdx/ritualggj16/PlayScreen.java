@@ -119,8 +119,6 @@ public class PlayScreen implements Screen {
 
         EnemyFactory.spawnWalker(120, 100);
 
-        UltraManager.lasthit_p1_anim = AnimationFactory.blob();
-        UltraManager.lasthit_p1_spr = Utils.dumbSprite(75, 75);
     }
 
     float le_timer = 0.0f;
@@ -142,12 +140,14 @@ public class PlayScreen implements Screen {
         gaem.engine.update(delta);
         gaem.batch.end();
 
+        /*
         gaem.batch.begin();
         UltraManager.lasthit_p1_spr.setRegion(UltraManager.lasthit_p1_anim.getKeyFrame(le_timer));
         UltraManager.lasthit_p1_spr.setX(-Constants.RES_X/2 + Constants.RES_X*0.05f);
         UltraManager.lasthit_p1_spr.setY((Constants.RES_Y/2) -(Constants.RES_Y/2)*0.25f );
         UltraManager. lasthit_p1_spr.draw(gaem.batch);
         gaem.batch.end();
+        */
 
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
