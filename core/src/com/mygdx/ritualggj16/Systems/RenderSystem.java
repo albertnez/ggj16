@@ -10,8 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
+import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
 
 /**
@@ -24,10 +26,14 @@ public class RenderSystem extends EntitySystem
     Camera cam;
     Sprite spr;
 
-    public RenderSystem(SpriteBatch batch, Camera cam)
+    Gaem gaem;
+
+    public RenderSystem(Gaem gaem)
     {
-        this.batch = batch;
-        this.cam = cam;
+        this.gaem = gaem;
+
+        this.batch = gaem.batch;
+        this.cam = gaem.cam;
         this.spr = new Sprite();
     }
 
@@ -54,7 +60,8 @@ public class RenderSystem extends EntitySystem
 
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
-        for (int i = 0; i < entities.size(); ++i) {
+        for (int i = 0; i < entities.size(); ++i)
+        {
             Entity e = entities.get(i);
 
             RenderComponent rc = Mappers.render_comp.get(e);
@@ -62,7 +69,6 @@ public class RenderSystem extends EntitySystem
 
             rc.spr.setAlpha(1.0f);
 
-            /*
             if (Mappers.animation.has(e))
             {
                 AnimationComponent anim = Mappers.animation.get(e);
@@ -71,12 +77,11 @@ public class RenderSystem extends EntitySystem
                 if (anim.animation.getPlayMode() == Animation.PlayMode.NORMAL
                         && anim.timer > anim.animation.getAnimationDuration())
                 {
-                    //Todo:Make a TimeOutSystem and TimeOutComponent and get rid of this shit
                     e.remove(AnimationComponent.class);
-                    Gaem.engine.removeEntity(e);
+                    gaem.engine.removeEntity(e);
                 }
             }
-*/
+
             rc.spr.setCenterX(pos.x);
             rc.spr.setCenterY(pos.y);
 

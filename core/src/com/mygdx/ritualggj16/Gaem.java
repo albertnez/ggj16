@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class Gaem extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
     public PooledEngine engine;
 
     public OrthographicCamera cam;
@@ -30,7 +30,6 @@ public class Gaem extends Game {
 
         cam = new OrthographicCamera(Constants.RES_X, Constants.RES_Y);
         viewport = new FitViewport(Constants.RES_X, Constants.RES_Y, cam);
-
 
         Gdx.graphics.setContinuousRendering(true);
         setScreen(new PlayScreen(this));

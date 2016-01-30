@@ -1,6 +1,7 @@
 package com.mygdx.ritualggj16;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
@@ -15,6 +16,8 @@ import com.mygdx.ritualggj16.Components.VelocityComponent;
 
 public class Mappers
 {
+    public static ComponentMapper<AnimationComponent> animation = ComponentMapper.getFor(AnimationComponent.class);
+
     public static ComponentMapper<BulletComponent> bullet = ComponentMapper.getFor(BulletComponent.class);
 
     public static ComponentMapper<CollisionComponent> collision = ComponentMapper.getFor(CollisionComponent.class);
