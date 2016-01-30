@@ -3,9 +3,12 @@ package com.mygdx.ritualggj16.Factorys;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
+import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
+import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Utils;
@@ -21,8 +24,11 @@ public class EnemyFactory {
                 .add(new PositionComponent(x, y))
                 .add(new VelocityComponent(0, 0))
                 .add(new EnemyComponent(EnemyComponent.EnemyType.Walker))
+                .add(new TypeComponent(TypeComponent.EntityType.Enemy))
+                .add(new LifeComponent(2))
                 .add(new AnimationComponent(AnimationFactory.blob()))
-                .add(new RenderComponent(Utils.dumbSprite(20, 20)));
+                .add(new CollisionComponent(10, 8))
+                .add(new RenderComponent(Utils.dumbSprite(10, 8)));
 
         gaem.engine.addEntity(enemy);
     }

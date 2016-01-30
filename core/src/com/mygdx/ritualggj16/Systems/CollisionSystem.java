@@ -56,6 +56,11 @@ public class CollisionSystem extends IteratingSystem
                 {
                     Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
                 }
+                else if (Mappers.bullet.has(entity) && ot.type == TypeComponent.EntityType.Enemy)
+                {
+                    Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
+                    Mappers.life.get(entity).life = 0;  // Remove bullet.
+                }
             }
         }
     }

@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Components.BulletComponent;
+import com.mygdx.ritualggj16.Components.CollisionComponent;
+import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.TextureManager;
@@ -34,6 +37,9 @@ public class BulletFactory
                         300* MathUtils.cosDeg(angle ),
                         300* MathUtils.sinDeg(angle ))
         );
+        bullet.add(new LifeComponent(1));
+        bullet.add(new CollisionComponent(8, 8));
+        bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
 
         //bullet.add(new CollisionComponent(14, 16));
         //bullet.add(new TypeComponent(TypeComponent.TypeEntity.BULLET));
