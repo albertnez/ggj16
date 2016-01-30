@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class Utils
 {
-    public Sprite dumbSprite(int w, int h)
+    static public Sprite dumbSprite(int w, int h)
     {
         return new Sprite(null, w, h);
     }
