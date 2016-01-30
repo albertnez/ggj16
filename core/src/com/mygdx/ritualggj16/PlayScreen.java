@@ -33,6 +33,7 @@ import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 import com.mygdx.ritualggj16.Systems.SpawnSystem;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
 /**
@@ -112,7 +113,6 @@ public class PlayScreen implements Screen {
 
         //Altar
         altar = ItemFactory.spawnAltar();
-        ItemFactory.spawnCandle(50, 50);
 
         // Dumb control points.
         createAltarPoints();
@@ -208,7 +208,27 @@ public class PlayScreen implements Screen {
             float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
             float posY = MathUtils.sin(alpha) * altarPointDistToCenter;
             createAltarPoint(posX, posY, i);
+            ItemFactory.spawnCandle(
+                    MathUtils.cos(alpha) * altarPointDistToCenter * 0.2f,
+                    MathUtils.sin(alpha) * altarPointDistToCenter * 0.2f
+            );
+            float calpha = alpha + MathUtils.PI2 / 10.0f;
+            ItemFactory.spawnCandle(
+                    MathUtils.cos(calpha) * altarPointDistToCenter,
+                    MathUtils.sin(calpha) * altarPointDistToCenter
+            );
             alpha += MathUtils.PI2 / 5.0f;
+        }
+    }
+
+    private void initCandles()
+    {
+        for (int i = 0; i < MathUtils.random(5, 10); ++i)
+        {
+            ItemFactory.spawnCandle(
+                    MathUtils.random(-Constants.RES_X/2.0f, Constants.RES_X/2.0f),
+                    MathUtils.random(-Constants.RES_Y/2.0f, Constants.RES_Y/2.0f)
+            );
         }
     }
 }
