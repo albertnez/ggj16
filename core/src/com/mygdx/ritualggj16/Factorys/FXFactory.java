@@ -2,10 +2,13 @@ package com.mygdx.ritualggj16.Factorys;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
+import com.mygdx.ritualggj16.Components.EnemyComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
 import com.mygdx.ritualggj16.Components.RenderEffectComponent;
@@ -15,8 +18,11 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.TextureManager;
+import com.mygdx.ritualggj16.Utils;
 
 import java.util.Random;
+
+import javax.rmi.CORBA.Util;
 
 /**
  * Created by ThrepwooD on 30/01/2016.
@@ -38,6 +44,25 @@ public class FXFactory
         ;
 
         gaem.engine.addEntity(text);
+    }
+
+
+
+    public static void makeDissapearEnemy(float x, float y, EnemyComponent monster, float duration)
+    {
+        Entity enemy = gaem.engine.createEntity();
+        if (monster.type == EnemyComponent.EnemyType.Walker)
+        {
+            enemy.add(new RenderComponent(Utils.dumbSprite(10*4, 8*4)));
+            Animation anim = AnimationFactory.blob();
+            anim.setPlayMode(Animation.PlayMode.NORMAL);
+            enemy.add(new AnimationComponent(anim));
+        }
+
+        enemy.add(new PositionComponent(x, y));
+        enemy.add(new RenderEffectComponent(duration, 4.0f, 8.0f, 1, 0.25f, true));
+        gaem.engine.addEntity(enemy);
+
     }
 
 }

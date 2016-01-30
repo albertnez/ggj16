@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.mygdx.ritualggj16.Components.LifeComponent;
+import com.mygdx.ritualggj16.Components.PositionComponent;
+import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Mappers;
 
 /**
@@ -25,7 +27,9 @@ public class LifeSystem extends IteratingSystem
     {
         if (Mappers.life.get(entity).life <= 0)
         {
+            PositionComponent pos = Mappers.position.get(entity);
             engine.removeEntity(entity);
+            FXFactory.makeDissapearEnemy(pos.x, pos.y, Mappers.enemy.get(entity), 0.4f);
         }
     }
 }
