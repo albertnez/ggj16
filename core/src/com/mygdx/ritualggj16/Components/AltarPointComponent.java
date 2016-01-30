@@ -12,14 +12,16 @@ public class AltarPointComponent implements Component
         Active,
     }
 
+    public int id;
     public State state;
 
-    public AltarPointComponent(State state)
+    public AltarPointComponent(int id, State state)
     {
+        this.id = id;
         this.state = state;
     }
-    public AltarPointComponent()
+    public AltarPointComponent(int id)
     {
-        this(State.Inactive);
+        this(id, State.Inactive);
     }
 }
