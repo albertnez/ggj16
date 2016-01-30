@@ -45,6 +45,8 @@ import com.mygdx.ritualggj16.Systems.SpawnSystem;
 public class PlayScreen implements Screen {
 
     private static int numPlayers = 2;
+    private static int numAltarPoints = 5;
+    private static float altarPointDistToCenter = 350.0f;
 
     Gaem gaem;
 
@@ -117,8 +119,7 @@ public class PlayScreen implements Screen {
         ItemFactory.spawnCandle(50, 50);
 
         // Dumb control points.
-        createAltarPoint(100, 100);
-        createAltarPoint(150, 200);
+        createAltarPoints();
 
         EnemyFactory.spawnWalker(120, 100);
     }
@@ -170,7 +171,7 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void createAltarPoint(float x, float y)
+    private void createAltarPoint(float x, float y, int id)
     {
         Sprite sprite = new Sprite(TextureManager.getTexture("altar_point.png"));
         gaem.engine.addEntity(
@@ -181,7 +182,19 @@ public class PlayScreen implements Screen {
                         .add(new TypeComponent(TypeComponent.EntityType.AltarPoint))
                         .add(new OwnerComponent())
                         .add(new RenderComponent(sprite))
-                        .add(new AltarPointComponent())
+                        .add(new AltarPointComponent(id))
         );
+    }
+
+    private void createAltarPoints()
+    {
+        float alpha = MathUtils.random(0.0f, MathUtils.PI2);
+        for (int i = 0; i < numAltarPoints; ++i)
+        {
+            float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
+            float posY = MathUtils.sin(alpha) * altarPointDistToCenter;
+            createAltarPoint(posX, posY, i);
+            alpha += MathUtils.PI2 / 5.0f;
+        }
     }
 }

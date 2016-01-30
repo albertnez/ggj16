@@ -75,7 +75,7 @@ public class CollisionSystem extends IteratingSystem
                 else if (et.type == TypeComponent.EntityType.Player &&
                         ot.type == TypeComponent.EntityType.AltarItem)
                 {
-                    enableAltarPoint();
+                    enableAltarPoint(Mappers.item.get(other).value);
                     engine.removeEntity(other);
                     ItemSpawnSystem.altarItemActive = false;
                 }
@@ -83,12 +83,12 @@ public class CollisionSystem extends IteratingSystem
         }
     }
 
-    private void enableAltarPoint()
+    private void enableAltarPoint(int id)
     {
         ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(AltarPointComponent.class).get());
         for (Entity entity : entities)
         {
-            if (Mappers.altarPoint.get(entity).state == AltarPointComponent.State.Inactive)
+            if (Mappers.altarPoint.get(entity).id == id)
             {
                 Mappers.altarPoint.get(entity).state = AltarPointComponent.State.Active;
                 // TODO(albertnez): Update sprite for the activated one.
