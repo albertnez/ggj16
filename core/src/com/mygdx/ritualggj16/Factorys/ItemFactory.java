@@ -40,8 +40,9 @@ public class ItemFactory
         gaem.engine.addEntity(gaem.engine.createEntity()
                 .add(new PositionComponent(x, y))
                 .add(new TypeComponent(TypeComponent.EntityType.AltarItem))
-                .add(new CollisionComponent(10, 10))
-                .add(new RenderComponent(Utils.dumbSprite(10 * 2, 10 * 2)))
+                .add(new CollisionComponent(16*2, 16*2))
+                .add(new RenderComponent(Utils.dumbSprite(16 * 4, 16 * 4)))
+                .add(new AnimationComponent(AnimationFactory.altarItem(id)))
                 .add(new ItemComponent(id))
         );
     }
