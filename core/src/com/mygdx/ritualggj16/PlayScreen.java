@@ -72,8 +72,8 @@ public class PlayScreen implements Screen {
         bg_floor.setY(-Constants.RES_Y / 2.0f);
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
-        gaem.engine.addSystem(new SpawnSystem(5.0f, gaem.engine));
-        gaem.engine.addSystem(new ItemSpawnSystem(5.0f, gaem.engine));
+        gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
+        gaem.engine.addSystem(new ItemSpawnSystem(25.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new EnemySystem(gaem.engine));

@@ -17,31 +17,68 @@ public class SpawnSystem extends IntervalSystem
     public SpawnSystem (float interval, Engine engine){
         super(interval);
     }
+    private float currentProbability = 0.5f;
+    private final float initProbability = 0.1f;
+    public static boolean spawnInCircle = true;
 
     @Override
     protected void updateInterval()
     {
         if (!UltraManager.isGaemActive) return;
 
-        float posX, posY;
-        int numToSpawn = MathUtils.random(1, 5);
-        int mult = (MathUtils.randomBoolean()) ? 1 : -1;
-
-        if (MathUtils.randomBoolean())
+        if (!MathUtils.randomBoolean(currentProbability))
         {
-            posY = mult * (Constants.RES_Y + MathUtils.random(100, 500));
-            posX = MathUtils.random(-Constants.RES_X, Constants.RES_Y);
+            currentProbability *= 1.2f;
+            return;
         }
-        else {
-            posY = MathUtils.random(-Constants.RES_Y, Constants.RES_Y);
-            posX = mult * (Constants.RES_X + MathUtils.random(100, 500));
+        else
+        {
+            currentProbability = initProbability;
         }
-        spawnNear(posX, posY, numToSpawn);
+
+        int numToSpawn = MathUtils.random(1, 5);
+        if (spawnInCircle)
+        {
+            spawnInCircle(numToSpawn);
+        }
+        else
+        {
+            float posX, posY;
+            int mult = (MathUtils.randomBoolean()) ? 1 : -1;
+
+            if (MathUtils.randomBoolean())
+            {
+                posY = mult * (Constants.RES_Y + MathUtils.random(100, 500));
+                posX = MathUtils.random(-Constants.RES_X, Constants.RES_Y);
+            } else
+            {
+                posY = MathUtils.random(-Constants.RES_Y, Constants.RES_Y);
+                posX = mult * (Constants.RES_X + MathUtils.random(100, 500));
+            }
+            spawnNear(posX, posY, numToSpawn);
+        }
     }
 
+    private void spawnInCircle(int num, float dist)
+    {
+        float alpha = MathUtils.random(0.0f, MathUtils.PI2);
+        for (int i = 0; i < num; ++i)
+        {
+            EnemyFactory.spawnWalker(
+                    MathUtils.cos(alpha) * dist,
+                    MathUtils.sin(alpha) * dist
+            );
+            alpha += MathUtils.PI2 / (float)num;
+        }
+    }
+    private void spawnInCircle(int num)
+    {
+        spawnInCircle(num, Constants.RES_X);
+    }
     private void spawnNear(float x, float y, int num, float maxDist)
     {
-        for (int i = 0; i < num; ++i) {
+        for (int i = 0; i < num; ++i)
+        {
             EnemyFactory.spawnWalker(
                     x + MathUtils.random(-maxDist, maxDist),
                     y + MathUtils.random(-maxDist, maxDist));
