@@ -23,23 +23,27 @@ public class EnemyComponent implements Component {
     public float shakePeriod;
     public float shakeTime;
     public boolean shakeY;
+    public float attackPeriod;
+    public float attackCooldown;
 
     public EnemyComponent(EnemyType type)
     {
         this.type = type;
         this.shakeTime = 0.0f;
         this.shakeY = MathUtils.randomBoolean();
+        this.attackCooldown = 0.0f;
         switch (type)
         {
             case Walker:
                 this.speed = Wikipedia.Speed(type);
                 this.damage = 5;
                 this.shakePeriod = 0.2f;
-
+                this.attackPeriod = 3.0f;
             case Warrior:
                 this.speed = Wikipedia.Speed(type);
                 this.damage = 5;
                 this.shakePeriod = 0.2f;
+                this.attackPeriod = 2.0f;
         }
     }
 }
