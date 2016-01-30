@@ -54,7 +54,7 @@ public class FXFactory
         Entity enemy = gaem.engine.createEntity();
         if (monster.type == EnemyComponent.EnemyType.Walker)
         {
-            RenderComponent rc = new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Enemy);
+            RenderComponent rc = new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player);
             rc.invert = inver;
             enemy.add(rc);
             Animation anim = AnimationFactory.blobDie();
