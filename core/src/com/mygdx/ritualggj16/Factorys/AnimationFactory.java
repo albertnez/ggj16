@@ -24,7 +24,7 @@ public class AnimationFactory
                 new TextureRegion(tex, 0,  8, 10 ,8),
                 new TextureRegion(tex, 10, 8, 10 ,8)
         );
-        anim.setPlayMode(Animation.PlayMode.NORMAL);
+        anim.setPlayMode(Animation.PlayMode.LOOP);
 
         return anim;
     }
