@@ -2,6 +2,7 @@ package com.mygdx.ritualggj16.Factorys;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.ItemComponent;
@@ -29,7 +30,7 @@ public class ItemFactory
                 .add(new TypeComponent(TypeComponent.EntityType.Altar))
                 .add(new RenderComponent(spr_altar, RenderComponent.Layer.Ground, 3.0f))
                 .add(new AnimationComponent(AnimationFactory.altarGirl()))
-                .add(new CollisionComponent(20.0f*3.0f, 32.0f*3.0f));
+                .add(new CollisionComponent(20.0f * 3.0f, 32.0f * 3.0f));
         gaem.engine.addEntity(altar);
 
         return altar;
@@ -49,10 +50,14 @@ public class ItemFactory
 
     public static void spawnCandle(float x, float y)
     {
+        RenderComponent renderComponent = new RenderComponent(Utils.dumbSprite(16, 32), RenderComponent.Layer.Ground);
+
+        renderComponent.invert = MathUtils.randomBoolean();
+
         gaem.engine.addEntity(gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.Decoration))
-                        .add(new RenderComponent(Utils.dumbSprite(16, 32), RenderComponent.Layer.Ground))
+                        .add(renderComponent)
                         .add(new AnimationComponent(AnimationFactory.candle()))
         );
 

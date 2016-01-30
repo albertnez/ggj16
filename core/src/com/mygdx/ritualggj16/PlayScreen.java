@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
@@ -202,7 +203,9 @@ public class PlayScreen implements Screen {
             //Pinxo?
             if (UltraManager.isTextTimerFinished())
             {
-                pinxo.draw(gaem.batch);
+
+                if (TimeUtils.millis()%500  < 250)
+                    pinxo.draw(gaem.batch);
 
                 if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
                 {

@@ -42,10 +42,12 @@ public class CollisionSystem extends IteratingSystem
 
         PositionComponent pos_me = Mappers.position.get(entity);
         CollisionComponent col_me = Mappers.collision.get(entity);
-        Rectangle rect_me = new Rectangle(pos_me.x - col_me.sizeX * 0.5f,
-                pos_me.y - col_me.sizeY * 0.5f,
-                col_me.sizeX,
-                col_me.sizeY);
+
+        Rectangle rect_me = new Rectangle(
+                pos_me.x - col_me.sizeX * 0.45f,
+                pos_me.y - col_me.sizeY * 0.45f,
+                col_me.sizeX*0.9f,
+                col_me.sizeY*0.9f);
 
         for (Entity other : entities) {
             if (other == entity) continue;
@@ -53,10 +55,10 @@ public class CollisionSystem extends IteratingSystem
             PositionComponent pos_other = Mappers.position.get(other);
             CollisionComponent col_other = Mappers.collision.get(other);
             Rectangle rect_other = new Rectangle(
-                    pos_other.x - col_other.sizeX * 0.5f,
-                    pos_other.y - col_other.sizeY * 0.5f,
-                    col_other.sizeX,
-                    col_other.sizeY);
+                    pos_other.x - col_other.sizeX * 0.45f,
+                    pos_other.y - col_other.sizeY * 0.45f,
+                    col_other.sizeX*0.9f,
+                    col_other.sizeY*0.9f);
 
             if (rect_me.overlaps(rect_other))
             {
@@ -64,7 +66,8 @@ public class CollisionSystem extends IteratingSystem
                 TypeComponent ot = Mappers.type.get(other);
 
                 // Constrain move
-                if (isObstacle(et.type, ot.type)) {
+                if (isObstacle(et.type, ot.type))
+                {
                     Rectangle fixedX = new Rectangle(rect_me);
                     Rectangle fixedY = new Rectangle(rect_me);
                     fixedX.setX(pos_me.last_x - col_me.sizeX * 0.5f);
