@@ -158,11 +158,11 @@ public class CollisionSystem extends IteratingSystem
         }
     }
 
-    private boolean isFixed(TypeComponent.EntityType type)
+    private static boolean isFixed(TypeComponent.EntityType type)
     {
         return type == TypeComponent.EntityType.Altar;
     }
-    private boolean isObstacle(TypeComponent.EntityType from, TypeComponent.EntityType to)
+    private static boolean isObstacle(TypeComponent.EntityType from, TypeComponent.EntityType to)
     {
         // No collision between players.
         if (from == TypeComponent.EntityType.Player && to == TypeComponent.EntityType.Player)
