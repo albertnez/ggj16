@@ -158,8 +158,7 @@ public class RenderSystem extends SortedIteratingSystem
         {
             return false;
         }
-        TypeComponent.EntityType type = Mappers.type.get(entity).type;
-        return type == TypeComponent.EntityType.Enemy || type == TypeComponent.EntityType.Player;
+        return Mappers.type.get(entity).type == TypeComponent.EntityType.Enemy;
     }
     private static class LayerComparator implements Comparator<Entity> {
         @Override
