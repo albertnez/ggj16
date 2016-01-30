@@ -48,10 +48,13 @@ public class CollisionSystem extends IteratingSystem
                     col_other.sizeX,
                     col_other.sizeY);
 
-            if (rect_me.overlaps(rect_other)) {
-                if (Mappers.type.has(entity) && Mappers.type.get(entity).type == TypeComponent.EntityType.Player &&
-                        Mappers.type.has(other) && Mappers.type.get(other).type == TypeComponent.EntityType.ControlPoint) {
-                    Mappers.owner.get(other).owner = Mappers.owner.get(entity).owner;
+            if (rect_me.overlaps(rect_other))
+            {
+                TypeComponent et = Mappers.type.get(entity);
+                TypeComponent ot = Mappers.type.get(other);
+                if (et.type == TypeComponent.EntityType.Enemy && ot.type == TypeComponent.EntityType.Player)
+                {
+                    Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
                 }
             }
         }

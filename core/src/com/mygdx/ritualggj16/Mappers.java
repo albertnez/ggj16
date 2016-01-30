@@ -5,9 +5,11 @@ import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
+import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderTextComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 
@@ -29,10 +31,14 @@ public class Mappers
 
     public static ComponentMapper<RenderComponent> render_comp = ComponentMapper.getFor(RenderComponent.class);
 
+    public static ComponentMapper<RenderTextComponent> renderText = ComponentMapper.getFor(RenderTextComponent.class);
+
     public static ComponentMapper<TypeComponent> type = ComponentMapper.getFor(TypeComponent.class);
 
     public static ComponentMapper<VelocityComponent> velocity = ComponentMapper.getFor(VelocityComponent.class);
 
     public static ComponentMapper<EnemyComponent> enemy = ComponentMapper.getFor(EnemyComponent.class);
+
+    public static ComponentMapper<LifeComponent> life = ComponentMapper.getFor(LifeComponent.class);
 }
 

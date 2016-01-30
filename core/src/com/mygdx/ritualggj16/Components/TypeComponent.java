@@ -10,6 +10,7 @@ public class TypeComponent implements Component {
     public enum EntityType {
         Player,
         ControlPoint,
+        Enemy,
     }
 
     public EntityType type;

@@ -23,9 +23,11 @@ import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Factorys.EnemyFactory;
+import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Systems.BulletSystem;
 import com.mygdx.ritualggj16.Systems.CollisionSystem;
 import com.mygdx.ritualggj16.Systems.EnemySystem;
+import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 
@@ -54,12 +56,14 @@ public class PlayScreen implements Screen {
 
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
+        gaem.engine.addSystem(new EnemySystem(gaem.engine));
+        gaem.engine.addSystem(new LifeSystem(gaem.engine));
         gaem.engine.addSystem(new CollisionSystem(gaem.engine));
         gaem.engine.addSystem(new RenderSystem(gaem));
-        gaem.engine.addSystem(new EnemySystem(gaem.engine));
 
         BulletFactory.gaem = this.gaem;
         EnemyFactory.gaem = this.gaem;
+        FXFactory.gaem = this.gaem;
 
         players = new Entity[numPlayers];
         controllers = new Controller[numPlayers];
@@ -90,6 +94,9 @@ public class PlayScreen implements Screen {
                     .add(new RenderComponent(new Sprite(TextureManager.getTexture("player.png"))));
             gaem.engine.addEntity(players[1]);
         }
+
+
+        FXFactory.MakeHitText(0, 0);
 
         // Dumb control points.
         createControlPoint(100, 100);

@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.ritualggj16.Factorys.FXFactory;
 
 public class Gaem extends Game {
 	public SpriteBatch batch;
@@ -30,6 +31,8 @@ public class Gaem extends Game {
 
         cam = new OrthographicCamera(Constants.RES_X, Constants.RES_Y);
         viewport = new FitViewport(Constants.RES_X, Constants.RES_Y, cam);
+
+        FontManager.generateAll();
 
         Gdx.graphics.setContinuousRendering(true);
         setScreen(new PlayScreen(this));

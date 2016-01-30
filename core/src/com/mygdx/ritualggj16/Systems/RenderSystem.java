@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderTextComponent;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
 
@@ -22,6 +23,7 @@ import com.mygdx.ritualggj16.Mappers;
 public class RenderSystem extends EntitySystem
 {
     private ImmutableArray<Entity> entities;
+    private ImmutableArray<Entity> texts;
     SpriteBatch batch;
     Camera cam;
     Sprite spr;
@@ -38,19 +40,31 @@ public class RenderSystem extends EntitySystem
     }
 
     @Override
-    public void addedToEngine (Engine engine) {
+    public void addedToEngine (Engine engine)
+    {
         entities = engine.getEntitiesFor(Family.all(
                 PositionComponent.class,
                 RenderComponent.class
         ).get());
 
+        texts = engine.getEntitiesFor(Family.all(
+                PositionComponent.class,
+                RenderTextComponent.class
+        ).get());
+
     }
 
     @Override
-    public void removedFromEngine (Engine engine) {
+    public void removedFromEngine (Engine engine)
+    {
         entities = engine.getEntitiesFor(Family.all(
                 PositionComponent.class,
                 RenderComponent.class
+        ).get());
+
+        texts = engine.getEntitiesFor(Family.all(
+                PositionComponent.class,
+                RenderTextComponent.class
         ).get());
     }
 
@@ -59,6 +73,8 @@ public class RenderSystem extends EntitySystem
     {
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
+
+        //Draw Entities Normales
         for (int i = 0; i < entities.size(); ++i)
         {
             Entity e = entities.get(i);
@@ -92,6 +108,20 @@ public class RenderSystem extends EntitySystem
             rc.spr.draw(batch);
 
         }
+
+        //Draw los Texts
+        for (int i = 0; i < texts.size(); ++i)
+        {
+            Entity e = texts.get(i);
+
+            RenderTextComponent rt = Mappers.renderText.get(e);
+            PositionComponent pos = Mappers.position.get(e);
+
+            rt.font.draw(gaem.batch, rt.text, pos.x, pos.y);
+
+        }
+
+
         batch.end();
     }
 }

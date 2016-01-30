@@ -17,6 +17,7 @@ public class EnemyComponent implements Component {
 
     public EnemyType type;
     public float speed;
+    public int damage;
 
     public EnemyComponent(EnemyType type)
     {
@@ -25,6 +26,7 @@ public class EnemyComponent implements Component {
         {
             case Walker:
                 this.speed = Wikipedia.Speed(type);
+                this.damage = 5;
         }
     }
 }
