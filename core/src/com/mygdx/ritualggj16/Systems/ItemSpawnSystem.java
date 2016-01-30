@@ -41,6 +41,10 @@ public class ItemSpawnSystem extends IntervalSystem
                 ids.add(Mappers.altarPoint.get(entity).id);
             }
         }
+        if (ids.isEmpty())
+        {
+            return;
+        }
         float offset = 20.0f;
         float posX = MathUtils.random(-Constants.RES_X*0.5f + offset, Constants.RES_X *0.5f- offset);
         float posY = MathUtils.random(-Constants.RES_Y*0.5f + offset, Constants.RES_Y *0.5f- offset);
