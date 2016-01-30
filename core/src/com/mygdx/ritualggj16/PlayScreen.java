@@ -173,7 +173,7 @@ public class PlayScreen implements Screen {
 
     private void createAltarPoint(float x, float y, int id)
     {
-        Sprite sprite = new Sprite(TextureManager.getTexture("altar_point.png"));
+        Sprite sprite = new Sprite(TextureManager.getTexture("losetas.png"), 0, 16*id, 16, 16);
         gaem.engine.addEntity(
                 gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
@@ -181,7 +181,7 @@ public class PlayScreen implements Screen {
                         .add(new VelocityComponent(0, 0))
                         .add(new TypeComponent(TypeComponent.EntityType.AltarPoint))
                         .add(new OwnerComponent())
-                        .add(new RenderComponent(sprite))
+                        .add(new RenderComponent(sprite, 4.0f))
                         .add(new AltarPointComponent(id))
         );
     }

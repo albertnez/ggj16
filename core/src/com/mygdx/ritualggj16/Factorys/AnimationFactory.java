@@ -105,9 +105,16 @@ public class AnimationFactory
         anim.setPlayMode(Animation.PlayMode.LOOP);
 
         return anim;
-
-
     }
 
-
+    public static Animation altarItem(int id)
+    {
+        Texture tex = TextureManager.getTexture("losetas.png");
+        Animation anim = new Animation(0.5f/2.0f,
+                new TextureRegion(tex, 32, 16*id, 16, 16),
+                new TextureRegion(tex, 48, 16*id, 16, 16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+        return anim;
+    }
 }

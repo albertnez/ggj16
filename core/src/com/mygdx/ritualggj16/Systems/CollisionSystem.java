@@ -14,6 +14,7 @@ import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.TextureManager;
 import com.mygdx.ritualggj16.Utils;
 
 
@@ -91,8 +92,9 @@ public class CollisionSystem extends IteratingSystem
             if (Mappers.altarPoint.get(entity).id == id)
             {
                 Mappers.altarPoint.get(entity).state = AltarPointComponent.State.Active;
-                // TODO(albertnez): Update sprite for the activated one.
-                Mappers.render_comp.get(entity).spr = new Sprite(Utils.dumbSprite(15, 15));
+                // TODO: Maybe replace this by some animation.
+                Sprite spr = new Sprite(TextureManager.getTexture("losetas.png"), 16, 16*id, 16, 16);
+                Mappers.render_comp.get(entity).spr = spr;
                 return;
             }
         }

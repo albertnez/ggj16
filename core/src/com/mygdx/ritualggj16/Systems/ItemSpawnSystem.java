@@ -44,7 +44,7 @@ public class ItemSpawnSystem extends IntervalSystem
         float offset = 20.0f;
         float posX = MathUtils.random(-Constants.RES_X*0.5f + offset, Constants.RES_X *0.5f- offset);
         float posY = MathUtils.random(-Constants.RES_Y*0.5f + offset, Constants.RES_Y *0.5f- offset);
-        ItemFactory.spawnAltarEnabler(posX, posY, ids.get(MathUtils.random(ids.size())));
+        ItemFactory.spawnAltarEnabler(posX, posY, ids.get(MathUtils.random(ids.size()-1)));
         altarItemActive = true;
     }
 }
