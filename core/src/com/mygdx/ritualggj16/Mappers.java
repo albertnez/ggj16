@@ -1,6 +1,7 @@
 package com.mygdx.ritualggj16;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
@@ -43,5 +44,8 @@ public class Mappers
     public static ComponentMapper<LifeComponent> life = ComponentMapper.getFor(LifeComponent.class);
 
     public static ComponentMapper<InputComponent> input = ComponentMapper.getFor(InputComponent.class);
+
+    public static ComponentMapper<AltarPointComponent> altarPoint = ComponentMapper.getFor(AltarPointComponent.class);
+
 }
 

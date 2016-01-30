@@ -9,9 +9,10 @@ public class TypeComponent implements Component {
 
     public enum EntityType {
         Player,
-        ControlPoint,
         Enemy,
         Bullet,
+        AltarPoint,
+        AltarItem,
     }
 
     public EntityType type;

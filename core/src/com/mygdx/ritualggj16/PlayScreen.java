@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector;
+import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.InputComponent;
@@ -26,10 +27,12 @@ import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Factorys.EnemyFactory;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
+import com.mygdx.ritualggj16.Factorys.ItemFactory;
 import com.mygdx.ritualggj16.Systems.BulletSystem;
 import com.mygdx.ritualggj16.Systems.CollisionSystem;
 import com.mygdx.ritualggj16.Systems.EnemySystem;
 import com.mygdx.ritualggj16.Systems.InputSystem;
+import com.mygdx.ritualggj16.Systems.ItemSpawnSystem;
 import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
@@ -59,6 +62,7 @@ public class PlayScreen implements Screen {
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
         gaem.engine.addSystem(new SpawnSystem(5.0f, gaem.engine));
+        gaem.engine.addSystem(new ItemSpawnSystem(5.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new EnemySystem(gaem.engine));
@@ -69,6 +73,7 @@ public class PlayScreen implements Screen {
         BulletFactory.gaem = this.gaem;
         EnemyFactory.gaem = this.gaem;
         FXFactory.gaem = this.gaem;
+        ItemFactory.gaem = this.gaem;
 
         players = new Entity[numPlayers];
 
@@ -105,8 +110,8 @@ public class PlayScreen implements Screen {
         }
 
         // Dumb control points.
-        createControlPoint(100, 100);
-        createControlPoint(150, 200);
+        createAltarPoint(100, 100);
+        createAltarPoint(150, 200);
 
         EnemyFactory.spawnWalker(120, 100);
     }
@@ -158,17 +163,18 @@ public class PlayScreen implements Screen {
 
     }
 
-    private void createControlPoint(float x, float y)
+    private void createAltarPoint(float x, float y)
     {
-        Sprite sprite = new Sprite(TextureManager.getTexture("control_point.png"));
+        Sprite sprite = new Sprite(TextureManager.getTexture("altar_point.png"));
         gaem.engine.addEntity(
                 gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
                         .add(new CollisionComponent(sprite.getWidth(), sprite.getHeight()))
                         .add(new VelocityComponent(0, 0))
-                        .add(new TypeComponent(TypeComponent.EntityType.ControlPoint))
+                        .add(new TypeComponent(TypeComponent.EntityType.AltarPoint))
                         .add(new OwnerComponent())
                         .add(new RenderComponent(sprite))
+                        .add(new AltarPointComponent())
         );
     }
 }

@@ -5,13 +5,16 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.Utils;
 
 
 /**
@@ -68,6 +71,27 @@ public class CollisionSystem extends IteratingSystem
                     engine.removeEntity(entity);
                     FXFactory.MakeHitText(pos.x, pos.y);
                 }
+                else if (et.type == TypeComponent.EntityType.Player &&
+                        ot.type == TypeComponent.EntityType.AltarItem)
+                {
+                    enableAltarPoint();
+                    engine.removeEntity(other);
+                    ItemSpawnSystem.altarItemActive = false;
+                }
+            }
+        }
+    }
+
+    private void enableAltarPoint() {
+        ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(AltarPointComponent.class).get());
+        for (Entity entity : entities)
+        {
+            if (Mappers.altarPoint.get(entity).state == AltarPointComponent.State.Inactive)
+            {
+                Mappers.altarPoint.get(entity).state = AltarPointComponent.State.Active;
+                // TODO(albertnez): Update sprite for the activated one.
+                Mappers.render_comp.get(entity).spr = new Sprite(Utils.dumbSprite(15, 15));
+                return;
             }
         }
     }
