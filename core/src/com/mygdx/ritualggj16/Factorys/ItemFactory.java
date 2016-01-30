@@ -29,7 +29,7 @@ public class ItemFactory
                 .add(new TypeComponent(TypeComponent.EntityType.Altar))
                 .add(new RenderComponent(spr_altar, RenderComponent.Layer.Ground, 3.0f))
                 .add(new AnimationComponent(AnimationFactory.altarGirl()))
-                .add(new CollisionComponent(20*4, 32*4));
+                .add(new CollisionComponent(20.0f*3.0f, 32.0f*3.0f));
         gaem.engine.addEntity(altar);
 
         return altar;
@@ -40,7 +40,7 @@ public class ItemFactory
         gaem.engine.addEntity(gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.AltarItem))
-                        .add(new CollisionComponent(16 * 2, 16 * 2))
+                        .add(new CollisionComponent(16 * 4, 16 * 4))
                         .add(new RenderComponent(Utils.dumbSprite(16 * 4, 16 * 4), RenderComponent.Layer.Ground))
                         .add(new AnimationComponent(AnimationFactory.altarItem(id)))
                         .add(new ItemComponent(id))

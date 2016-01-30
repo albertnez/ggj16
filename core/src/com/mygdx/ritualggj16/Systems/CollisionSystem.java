@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
+import com.mygdx.ritualggj16.Components.EnemyComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
@@ -17,6 +18,8 @@ import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.TextureManager;
 import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
+
+import java.lang.reflect.Type;
 
 
 /**
@@ -60,11 +63,23 @@ public class CollisionSystem extends IteratingSystem
                 TypeComponent et = Mappers.type.get(entity);
                 TypeComponent ot = Mappers.type.get(other);
 
-                //ENEMY vs PLAYER
-                if (et.type == TypeComponent.EntityType.Enemy &&
-                        ot.type == TypeComponent.EntityType.Player)
-                {
-                    //Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
+                // Constrain move
+                if (isObstacle(et.type, ot.type)) {
+                    Rectangle fixedX = rect_me.setX(pos_me.last_x - col_me.sizeX * 0.5f);
+                    Rectangle fixedY = rect_me.setY(pos_me.last_y - col_me.sizeY * 0.5f);
+                    if (!fixedX.overlaps(rect_other))
+                    {
+                        pos_me.x = pos_me.last_x;
+                    }
+                    else if (!fixedY.overlaps(rect_other))
+                    {
+                        pos_me.y = pos_me.last_y;
+                    }
+                    else
+                    {
+                        pos_me.x = pos_me.last_x;
+                        pos_me.y = pos_me.last_y;
+                    }
                 }
 
                 //BULLET vs ENEMY
@@ -92,14 +107,6 @@ public class CollisionSystem extends IteratingSystem
                     engine.removeEntity(other);
                     ItemSpawnSystem.altarItemActive = false;
                 }
-
-                // PLAYER vs ALTAR
-                if (et.type == TypeComponent.EntityType.Player &&
-                        ot.type == TypeComponent.EntityType.Altar)
-                {
-                    pos_me.x = pos_me.last_x;
-                    pos_me.y = pos_me.last_y;
-                }
             }
         }
     }
@@ -118,5 +125,15 @@ public class CollisionSystem extends IteratingSystem
                 return;
             }
         }
+    }
+
+    private boolean isObstacle(TypeComponent.EntityType from, TypeComponent.EntityType to)
+    {
+        if (from == TypeComponent.EntityType.Player || from == TypeComponent.EntityType.Enemy)
+        {
+            return to == TypeComponent.EntityType.Player || to == TypeComponent.EntityType.Enemy ||
+                    to == TypeComponent.EntityType.Altar;
+        };
+        return false;
     }
 }
