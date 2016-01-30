@@ -23,24 +23,23 @@ import com.mygdx.ritualggj16.Systems.CollisionSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 
-import java.util.Map;
 
 /**
  * Created by ThrepwooD on 29/01/2016.
  */
 public class PlayScreen implements Screen {
 
+    private static int numPlayers = 2;
+
     Gaem gaem;
 
     Sprite spr;
     Sprite bg_floor;
 
-    Entity player;
+    Entity[] players;
+    Controller[] controllers;
 
-    Controller controller;
-
-    public PlayScreen(Gaem gaem)
-    {
+    public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
 
         bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
@@ -54,81 +53,94 @@ public class PlayScreen implements Screen {
 
         BulletFactory.gaem = this.gaem;
 
+        players = new Entity[numPlayers];
+        controllers = new Controller[numPlayers];
 
-        controller = (Controllers.getControllers().size > 0) ?
-                Controllers.getControllers().first() : null;
+        for (int i = 0; i < numPlayers; ++i) {
+            controllers[i] = (i < Controllers.getControllers().size) ?
+                    Controllers.getControllers().get(i) : null;
+        }
 
-        player = gaem.engine.createEntity();
-        player.add(new PositionComponent(0, 0));
-        player.add(new VelocityComponent(0, 0));
-        player.add(new TypeComponent(TypeComponent.EntityType.Player));
-        player.add(new OwnerComponent(OwnerComponent.Owner.Player1));
         spr = new Sprite(TextureManager.getTexture("player.png"));
-        player.add(new RenderComponent(spr));
-        gaem.engine.addEntity(player);
+        players[0] = gaem.engine.createEntity()
+                .add(new PositionComponent(0, 0))
+                .add(new VelocityComponent(0, 0))
+                .add(new TypeComponent(TypeComponent.EntityType.Player))
+                .add(new OwnerComponent(OwnerComponent.Owner.Player1))
+                .add(new RenderComponent(spr));
+        gaem.engine.addEntity(players[0]);
+
+        if (numPlayers > 1) {
+            players[1] = gaem.engine.createEntity()
+                    .add(new PositionComponent(100, 0))
+                    .add(new VelocityComponent(0, 0))
+                    .add(new TypeComponent(TypeComponent.EntityType.Player))
+                    .add(new OwnerComponent(OwnerComponent.Owner.Player2))
+                    .add(new RenderComponent(spr));
+            gaem.engine.addEntity(players[1]);
+        }
 
         // Dumb control points.
         createControlPoint(100, 100);
         createControlPoint(150, 200);
     }
 
-    void updateInput(float dt)
-    {
-        PositionComponent pos = Mappers.position.get(player);
-        VelocityComponent vel = Mappers.velocity.get(player);
+    void updateInput(float dt) {
+        for (int i = 0; i < numPlayers; ++i) {
 
-        vel.x = 0.0f;
-        vel.y = 0.0f;
+            Entity player = players[i];
+            Controller controller = controllers[i];
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A))
-        {
-            vel.x -= Constants.RES_X*dt*10.0f;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D))
-        {
-            vel.x += Constants.RES_X*dt*10.0f;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S))
-        {
-            vel.y -= Constants.RES_Y*dt*10.0f;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.W))
-        {
-            vel.y += Constants.RES_Y*dt*10.0f;
-        }
+            PositionComponent pos = Mappers.position.get(player);
+            VelocityComponent vel = Mappers.velocity.get(player);
 
+            vel.x = 0.0f;
+            vel.y = 0.0f;
 
-
-        if (controller != null)
-        {
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.2)
-                vel.x = controller.getAxis(XBox360Pad.AXIS_LEFT_X)* Constants.RES_X/8 * 10.0f;
-
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.2)
-                vel.y = -controller.getAxis(XBox360Pad.AXIS_LEFT_Y)* Constants.RES_Y/8 * 10.0f;
-
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_X)) > 0.2 ||
-                Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.2)
-            {
-
-                BulletFactory.shootBullet(pos.x, pos.y,
-                        MathUtils.radDeg*
-                        MathUtils.atan2(
-                        -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
-                        controller.getAxis(XBox360Pad.AXIS_RIGHT_X)));
-
+            if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+                vel.x -= Constants.RES_X * dt * 10.0f;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+                vel.x += Constants.RES_X * dt * 10.0f;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+                vel.y -= Constants.RES_Y * dt * 10.0f;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+                vel.y += Constants.RES_Y * dt * 10.0f;
             }
 
-            if (controller.getAxis(XBox360Pad.AXIS_RIGHT_TRIGGER) < -0.75f)
-            {
-               // BulletFactory.shootBullet(pos.x, pos.y, 0);
+
+            if (controller != null) {
+                if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.2)
+                    vel.x = controller.getAxis(XBox360Pad.AXIS_LEFT_X) * Constants.RES_X / 8 * 10.0f;
+
+                if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.2)
+                    vel.y = -controller.getAxis(XBox360Pad.AXIS_LEFT_Y) * Constants.RES_Y / 8 * 10.0f;
+
+                if (Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_X)) > 0.2 ||
+                        Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.2) {
+
+                    BulletFactory.shootBullet(
+                            pos.x,
+                            pos.y,
+                            MathUtils.radDeg * MathUtils.atan2(
+                                    -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
+                                    controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
+                            )
+                    );
+
+                }
+
+                if (controller.getAxis(XBox360Pad.AXIS_RIGHT_TRIGGER) < -0.75f) {
+                    // BulletFactory.shootBullet(pos.x, pos.y, 0);
+                }
             }
         }
     }
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -178,13 +190,13 @@ public class PlayScreen implements Screen {
     private void createControlPoint(float x, float y) {
         Sprite sprite = new Sprite(TextureManager.getTexture("control_point.png"));
         gaem.engine.addEntity(
-            gaem.engine.createEntity()
-                .add(new PositionComponent(x, y))
-                .add(new CollisionComponent(sprite.getWidth(), sprite.getHeight()))
-                .add(new VelocityComponent(0, 0))
-                .add(new TypeComponent(TypeComponent.EntityType.ControlPoint))
-                .add(new OwnerComponent())
-                .add(new RenderComponent(sprite))
+                gaem.engine.createEntity()
+                        .add(new PositionComponent(x, y))
+                        .add(new CollisionComponent(sprite.getWidth(), sprite.getHeight()))
+                        .add(new VelocityComponent(0, 0))
+                        .add(new TypeComponent(TypeComponent.EntityType.ControlPoint))
+                        .add(new OwnerComponent())
+                        .add(new RenderComponent(sprite))
         );
     }
 }
