@@ -33,6 +33,7 @@ import com.mygdx.ritualggj16.Systems.InputSystem;
 import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
+import com.mygdx.ritualggj16.Systems.SpawnSystem;
 
 
 /**
@@ -57,6 +58,7 @@ public class PlayScreen implements Screen {
         bg_floor.setY(-Constants.RES_Y / 2.0f);
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
+        gaem.engine.addSystem(new SpawnSystem(5.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new EnemySystem(gaem.engine));
