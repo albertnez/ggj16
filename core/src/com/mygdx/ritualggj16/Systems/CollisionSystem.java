@@ -146,7 +146,7 @@ public class CollisionSystem extends IteratingSystem
                     EnemyComponent ec = Mappers.enemy.get(entity);
                     if (ec.attackCooldown <= 0.0f)
                     {
-                        ec.attackCooldown += ec.attackPeriod;
+                        ec.attackCooldown = ec.attackPeriod;
                         Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
                     }
                 }
