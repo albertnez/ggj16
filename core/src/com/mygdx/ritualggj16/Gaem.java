@@ -22,7 +22,8 @@ public class Gaem extends Game {
     public Viewport viewport;
 
 	@Override
-	public void create () {
+	public void create ()
+    {
 		batch = new SpriteBatch();
 
         engine = new PooledEngine(1024, 1024*4, 1024, 1024*4);
