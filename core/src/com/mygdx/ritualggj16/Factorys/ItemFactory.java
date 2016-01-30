@@ -34,7 +34,6 @@ public class ItemFactory
         return altar;
     }
 
-
     public static void spawnAltarEnabler(float x, float y, int id)
     {
         gaem.engine.addEntity(gaem.engine.createEntity()

@@ -89,10 +89,10 @@ public class PlayScreen implements Screen {
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new LifeComponent(10))
-                .add(new OwnerComponent(OwnerComponent.Owner.Player2))
+                .add(new OwnerComponent(OwnerComponent.Owner.Player1))
                 .add(new RenderComponent(spr))
                 .add(new CollisionComponent(10, 16))
-                .add(new AnimationComponent(AnimationFactory.playerLeft(OwnerComponent.Owner.Player2)))
+                .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player1)))
                 .add(new InputComponent(controller));
         gaem.engine.addEntity(players[0]);
 
