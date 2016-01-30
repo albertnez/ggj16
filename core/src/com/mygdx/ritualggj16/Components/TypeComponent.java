@@ -11,6 +11,7 @@ public class TypeComponent implements Component {
         Player,
         ControlPoint,
         Enemy,
+        Bullet,
     }
 
     public EntityType type;
