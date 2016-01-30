@@ -10,10 +10,18 @@ public class CollisionComponent implements Component
 
     public float sizeX = 1.0f;
     public float sizeY = 1.0f;
+    public float forceX = 0.0f;
+    public float forceY = 0.0f;
 
     public CollisionComponent(float sizeX, float sizeY)
     {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+    }
+
+    public void addForce(float x, float y)
+    {
+        this.forceX = x;
+        this.forceY = y;
     }
 }

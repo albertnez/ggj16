@@ -66,24 +66,33 @@ public class CollisionSystem extends IteratingSystem
                 TypeComponent ot = Mappers.type.get(other);
 
                 // Constrain move
-                if (isObstacle(et.type, ot.type))
-                {
-                    Rectangle fixedX = new Rectangle(rect_me);
-                    Rectangle fixedY = new Rectangle(rect_me);
-                    fixedX.setX(pos_me.last_x - col_me.sizeX * 0.5f);
-                    fixedY.setY(pos_me.last_y - col_me.sizeY * 0.5f);
-                    if (!fixedX.overlaps(rect_other))
+                if (isObstacle(et.type, ot.type)) {
+                    if (!isFixed(ot.type))
                     {
-                        pos_me.x = pos_me.last_x;
-                    }
-                    else if (!fixedY.overlaps(rect_other))
-                    {
-                        pos_me.y = pos_me.last_y;
+                        float distX = (col_me.sizeX + col_other.sizeX) * 0.5f;
+                        float distY = (col_me.sizeY + col_other.sizeY) * 0.5f;
+                        Mappers.collision.get(other).addForce(
+                                300.0f / (pos_other.x - pos_me.x),
+                                300.0f / (pos_other.y - pos_me.y)
+                        );
                     }
                     else
                     {
-                        pos_me.x = pos_me.last_x;
-                        pos_me.y = pos_me.last_y;
+                        Rectangle fixedX = new Rectangle(rect_me);
+                        Rectangle fixedY = new Rectangle(rect_me);
+                        fixedX.setX(pos_me.last_x - col_me.sizeX * 0.5f);
+                        fixedY.setY(pos_me.last_y - col_me.sizeY * 0.5f);
+                        if (!fixedX.overlaps(rect_other))
+                        {
+                            pos_me.x = pos_me.last_x;
+                        } else if (!fixedY.overlaps(rect_other))
+                        {
+                            pos_me.y = pos_me.last_y;
+                        } else
+                        {
+                            pos_me.x = pos_me.last_x;
+                            pos_me.y = pos_me.last_y;
+                        }
                     }
                 }
 
@@ -132,8 +141,17 @@ public class CollisionSystem extends IteratingSystem
         }
     }
 
+    private boolean isFixed(TypeComponent.EntityType type)
+    {
+        return type == TypeComponent.EntityType.Altar;
+    }
     private boolean isObstacle(TypeComponent.EntityType from, TypeComponent.EntityType to)
     {
+        // No collision between players.
+        if (from == TypeComponent.EntityType.Player && to == TypeComponent.EntityType.Player)
+        {
+            return false;
+        }
         if (from == TypeComponent.EntityType.Player || from == TypeComponent.EntityType.Enemy)
         {
             return to == TypeComponent.EntityType.Player || to == TypeComponent.EntityType.Enemy ||
