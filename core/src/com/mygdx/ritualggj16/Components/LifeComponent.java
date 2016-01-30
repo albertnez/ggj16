@@ -8,10 +8,12 @@ import com.badlogic.ashley.core.Component;
 public class LifeComponent implements Component
 {
     public int life;
+    public int maxLife;
 
 
     public LifeComponent(int life)
     {
         this.life = life;
+        this.maxLife = life;
     }
 }

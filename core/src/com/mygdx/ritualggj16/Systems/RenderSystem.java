@@ -17,9 +17,13 @@ import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
 import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.RenderTextComponent;
+import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.TextureManager;
+import com.mygdx.ritualggj16.Utils;
 
+import java.awt.Color;
 import java.util.Comparator;
 
 
@@ -112,6 +116,11 @@ public class RenderSystem extends SortedIteratingSystem
                 }
             }
 
+            if (hasLifeBar(e))
+            {
+                drawLife(e);
+            }
+
             rc.spr.setCenterX(pos.x);
             rc.spr.setCenterY(pos.y);
 
@@ -123,6 +132,35 @@ public class RenderSystem extends SortedIteratingSystem
         }
     }
 
+    private void drawLife(Entity entity)
+    {
+        Sprite background = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 0, 16, 5);
+        background.setOrigin(0.0f, 0.0f);
+        background.scale(3.0f);
+        background.setPosition(
+                Mappers.position.get(entity).x - 34,
+                Mappers.position.get(entity).y + Mappers.collision.get(entity).sizeY + 4
+        );
+        int width = Math.round(16 * (float)Mappers.life.get(entity).life/Mappers.life.get(entity).maxLife);
+        Sprite foreground = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 5, width, 5);
+        foreground.setOrigin(0.0f, 0.0f);
+        foreground.scale(3.0f);
+        foreground.setPosition(
+                Mappers.position.get(entity).x - 34,
+                Mappers.position.get(entity).y + Mappers.collision.get(entity).sizeY + 4
+        );
+        background.draw(batch);
+        foreground.draw(batch);
+    }
+    private static boolean hasLifeBar(Entity entity)
+    {
+        if (!Mappers.type.has(entity))
+        {
+            return false;
+        }
+        TypeComponent.EntityType type = Mappers.type.get(entity).type;
+        return type == TypeComponent.EntityType.Enemy || type == TypeComponent.EntityType.Player;
+    }
     private static class LayerComparator implements Comparator<Entity> {
         @Override
         public int compare(Entity e1, Entity e2) {

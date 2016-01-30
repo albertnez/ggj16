@@ -25,7 +25,7 @@ public class EnemyFactory {
                 .add(new VelocityComponent(0, 0))
                 .add(new EnemyComponent(EnemyComponent.EnemyType.Walker))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
-                .add(new LifeComponent(1))
+                .add(new LifeComponent(2))
                 .add(new AnimationComponent(AnimationFactory.blob()))
                 .add(new CollisionComponent(10*4, 8*4))
                 .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player));
