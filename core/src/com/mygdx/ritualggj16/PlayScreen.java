@@ -94,7 +94,7 @@ public class PlayScreen implements Screen {
         Controller controller = (Controllers.getControllers().size > 0) ?
                 Controllers.getControllers().get(0) : null;
         players[0] = gaem.engine.createEntity()
-                .add(new PositionComponent(-400, 0))
+                .add(new PositionComponent(-200, 0))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new LifeComponent(10))
@@ -110,7 +110,7 @@ public class PlayScreen implements Screen {
                     Controllers.getControllers().get(1) : null;
 
             players[1] = gaem.engine.createEntity()
-                    .add(new PositionComponent(100, 0))
+                    .add(new PositionComponent(200, 0))
                     .add(new VelocityComponent(0, 0))
                     .add(new TypeComponent(TypeComponent.EntityType.Player))
                     .add(new LifeComponent(10))
@@ -203,15 +203,17 @@ public class PlayScreen implements Screen {
             gaem.batch.begin();
 
 
-            if (timer_saltar_dialogs > 1.0f)
+            if (timer_saltar_dialogs > 0.75f)
             {
-                FontManager.dialog.draw(
-                        gaem.batch,
-                        "SIGUE PULSANDO PARA SALTAR LA INTRODUCCION",
-                        -Constants.RES_X*0.45f,
-                        Constants.RES_Y*0.45f);
+                {
+                    FontManager.dialog.draw(
+                            gaem.batch,
+                            "[RED]SIGUE PULSANDO PARA SALTAR LA INTRODUCCION[]",
+                            -Constants.RES_X*0.45f,
+                            Constants.RES_Y*0.45f);
+                }
             }
-            if (timer_saltar_dialogs > 4.0f)
+            if (timer_saltar_dialogs > 3.0f)
             {
                 UltraManager.isGaemActive = true;
             }

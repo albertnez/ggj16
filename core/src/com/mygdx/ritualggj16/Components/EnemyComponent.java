@@ -35,6 +35,11 @@ public class EnemyComponent implements Component {
                 this.speed = Wikipedia.Speed(type);
                 this.damage = 5;
                 this.shakePeriod = 0.2f;
+
+            case Warrior:
+                this.speed = Wikipedia.Speed(type);
+                this.damage = 5;
+                this.shakePeriod = 0.2f;
         }
     }
 }

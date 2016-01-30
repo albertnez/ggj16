@@ -17,6 +17,7 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 import com.mygdx.ritualggj16.Wikipedia;
 import com.mygdx.ritualggj16.XBox360Pad;
@@ -35,7 +36,10 @@ public class InputSystem extends IteratingSystem
         this.engine = engine;
     }
 
-    public void processEntity(Entity entity, float deltaTime) {
+    public void processEntity(Entity entity, float deltaTime)
+    {
+        if (!UltraManager.isGaemActive) return;
+
         InputComponent input = Mappers.input.get(entity);
         Controller controller = Mappers.input.get(entity).controller;
         PositionComponent pos = Mappers.position.get(entity);

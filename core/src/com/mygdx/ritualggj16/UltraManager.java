@@ -22,29 +22,25 @@ public class UltraManager
 
     public static String dialogs[] = {
         "EEHHEHEHEHEHEEHEHE",
-        "SEMOS UNOS SATANICOS DEL COPON",
+        "SEMOS UNOS SATANICOS\nDEL FOQUIN COPONAZO",
             "SI, ESTOY MUY DE ACUERDO\nQUERIDO ASOCIADO",
-        "ENGA.. AMOS A REPASAR\nLO CABIA CASER",
-            "PUES VENIAMOS A LO DEL [RED]SACRIFICIO[]\nSI MAL NO RECUERDO",
-
-
+        "ENGA.. AMOS A REPASAR\nLO CABIA KE ASER",
+            "PUES SI MAL NO RECUERDO\nVENIAMOS POR EL TEMA\nDEL [RED]RITUAL[]",
 
         "AH SI, ER [RED]SACRIFISIO[]",
-            "EN REALIDAD [RED]RITUAL[]",
+            "EL [RED]RITUAL[]",
         "KE?",
             "POR MOTIVOS DE INDOLE SUPERIOR\nLA NOMENCLATURA ADECUADA \n" +
                     "PARA EL PROCESO ES [RED]RITUAL[]",
         "ENTONSES NO NOS \nEMPETAMOS A LA CHURRI?",
 
-
-
             "EL SACRIFICIO DE UN EJEMPLAR\nHUMANOIDE DE GENERO FEMENINO\n" +
                     "ES NECESARIO PARA EL PROCESO",
         "OTIA FALE\nPOH ME LA SACO YA",
             "NO TAN RAPIDO!",
-            "ANTES DE PROCEDER AL [RED]SACRIFICIO[]\n" +
+            "RECUERDA QUE \n ANTES DE PROCEDER AL [RED]SACRIFICIO[]\n" +
             "TENEMOS QUE ACTIVAR \nTODAS LAS [ORANGE]RUNAS[]",
-        "A SI!!1\nPIYAMOS LOS [ORANGE]SIMBOLACOS[]\n" +
+        "A SIIIII!!!!!!1111\nEMOS DE PIYAR LOS [ORANGE]SIMBOLACOS[]\n" +
                 "KE ACTIVAN LOS PIEDROLOS",
 
             "EN EFECTO... PERO RECUERDA QUE \nEL [BLACK]GRAN DIOS OSCURO[]\n" +
@@ -55,25 +51,28 @@ public class UltraManager
 
                             "SOIS UNOS [RED]PUTOS GILIPOLLAS[]",
 
-            "PERO PERO TIO... AMO A PENSAR...\n",
+            "PERO PERO TIO...\n AMOS HA BER UNA KOSIYA...\n",
             "LESTAMOS REGALANDO AL \n[BLACK]GRAN DIOS OSCURO[]\n" +
             "UNA JAMELGA DEL GRATIX\n",
 
                 "CORRECTO",
 
-            "Y EL COLEGA COMO RECOMPENSA\nNOS KIERE PELAR",
+            "TOPE DEL BUENRIS",
+
+                "EXACTO",
+
+            "Y EL JIPI COLEGA A CAMNBVIO\nNOS KIERE PELAR PERO BIEN",
 
                 "LAS INTENCIONES DEL\n[BLACK]GRAN DIOS OSCURO[]\n" +
-                        "NO ESTAN AL ALCANCE DE\nNUESTRA COMPRENSION",
+                        "NO ESTAN AL ALCANCE\nDE NUESTRA COMPRENSION",
 
             "PERO...",
 
-                "MERLUZO CALLATE YA\nQUE ME ESTOY CALENTANDO",
+                "SILENCIO MERLUZO\nA CALLAR YA, COJONES\nQUE ME ESTOY CALENTANDO",
 
-                "VAMOS A EMPEZAR",
+                "VAMOS A EMPEZAR EL [RED]RITUAL[]",
 
-
-
+            "RECUERDA USAR EL STICK DERECHO\nPARA CONTROLAR TU [PURPLE]PODER[]"
     };
     public static DialogOwner dialog_owner[] =
     {
@@ -104,9 +103,12 @@ public class UltraManager
             DialogOwner.PLAYER_1,
             DialogOwner.PLAYER_2,
             DialogOwner.PLAYER_1,
+            DialogOwner.PLAYER_2,
+            DialogOwner.PLAYER_1,
 
             DialogOwner.PLAYER_2,
             DialogOwner.PLAYER_1,
+            DialogOwner.PLAYER_2,
             DialogOwner.PLAYER_2,
             DialogOwner.PLAYER_2,
 
