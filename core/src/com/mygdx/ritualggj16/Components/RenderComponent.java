@@ -10,13 +10,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class RenderComponent implements Component
 {
     public enum Layer {
-        Background,
         Ground,
-        Items,
         Explosion,
-        Enemy,
-        Bullet,
         Player,
+        Bullet,
         Text,
     }
     public Sprite spr;

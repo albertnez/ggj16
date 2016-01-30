@@ -42,10 +42,11 @@ public class RenderSystem extends SortedIteratingSystem
         this.batch = gaem.batch;
         this.spr = new Sprite();
     }
-
+    
     @Override
     public void processEntity(Entity e, float deltaTime)
     {
+        forceSort();
         if (Mappers.renderText.has(e))
         {
             RenderTextComponent rt = Mappers.renderText.get(e);
