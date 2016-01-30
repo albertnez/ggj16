@@ -37,9 +37,10 @@ public class FXFactory
 
         text.add(new RenderTextComponent(FontManager.damage, "1"))
             .add(new PositionComponent(x, y))
+            .add(new RenderComponent(Utils.dumbSprite(0, 0), RenderComponent.Layer.Text))
             .add(new VelocityComponent(
                     MathUtils.random(-30, 30),
-                    Constants.RES_Y / 6*MathUtils.random(0.75f, 1.25f)))
+                    Constants.RES_Y / 6 * MathUtils.random(0.75f, 1.25f)))
             .add(new RenderEffectComponent(1.0f, 0.5f, 1.0f, 1.0f, 0.0f, false))
         ;
 

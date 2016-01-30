@@ -27,7 +27,7 @@ public class ItemFactory
                 .add(new PositionComponent(0, 0))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Altar))
-                .add(new RenderComponent(spr_altar, 2.0f))
+                .add(new RenderComponent(spr_altar, RenderComponent.Layer.Ground, 2.0f))
                 .add(new CollisionComponent(10, 16));
         gaem.engine.addEntity(altar);
 
@@ -37,12 +37,12 @@ public class ItemFactory
     public static void spawnAltarEnabler(float x, float y, int id)
     {
         gaem.engine.addEntity(gaem.engine.createEntity()
-                .add(new PositionComponent(x, y))
-                .add(new TypeComponent(TypeComponent.EntityType.AltarItem))
-                .add(new CollisionComponent(16*2, 16*2))
-                .add(new RenderComponent(Utils.dumbSprite(16 * 4, 16 * 4)))
-                .add(new AnimationComponent(AnimationFactory.altarItem(id)))
-                .add(new ItemComponent(id))
+                        .add(new PositionComponent(x, y))
+                        .add(new TypeComponent(TypeComponent.EntityType.AltarItem))
+                        .add(new CollisionComponent(16 * 2, 16 * 2))
+                        .add(new RenderComponent(Utils.dumbSprite(16 * 4, 16 * 4), RenderComponent.Layer.Ground))
+                        .add(new AnimationComponent(AnimationFactory.altarItem(id)))
+                        .add(new ItemComponent(id))
         );
     }
 
@@ -51,7 +51,7 @@ public class ItemFactory
         gaem.engine.addEntity(gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.Decoration))
-                        .add(new RenderComponent(Utils.dumbSprite(16, 32)))
+                        .add(new RenderComponent(Utils.dumbSprite(16, 32), RenderComponent.Layer.Ground))
                         .add(new AnimationComponent(AnimationFactory.candle()))
         );
 
