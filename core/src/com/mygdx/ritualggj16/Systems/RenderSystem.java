@@ -43,7 +43,6 @@ public class RenderSystem extends SortedIteratingSystem
         this.spr = new Sprite();
     }
 
-
     @Override
     public void processEntity(Entity e, float deltaTime)
     {

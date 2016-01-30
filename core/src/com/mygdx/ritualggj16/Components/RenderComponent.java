@@ -15,7 +15,6 @@ public class RenderComponent implements Component
         Items,
         Explosion,
         Enemy,
-
         Bullet,
         Player,
         Text,
