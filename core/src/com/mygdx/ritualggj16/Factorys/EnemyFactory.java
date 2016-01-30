@@ -1,7 +1,6 @@
 package com.mygdx.ritualggj16.Factorys;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
@@ -29,7 +28,7 @@ public class EnemyFactory {
                 .add(new LifeComponent(1))
                 .add(new AnimationComponent(AnimationFactory.blob()))
                 .add(new CollisionComponent(10*4, 8*4))
-                .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4)));
+                .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Enemy));
 
         gaem.engine.addEntity(enemy);
     }
