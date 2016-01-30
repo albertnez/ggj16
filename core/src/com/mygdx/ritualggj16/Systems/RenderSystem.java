@@ -121,7 +121,16 @@ public class RenderSystem extends SortedIteratingSystem
     private static class LayerComparator implements Comparator<Entity> {
         @Override
         public int compare(Entity e1, Entity e2) {
-            return (int)Math.signum(Mappers.render_comp.get(e1).layer - Mappers.render_comp.get(e2).layer);
+            int l1 = Mappers.render_comp.get(e1).layer;
+            int l2 = Mappers.render_comp.get(e2).layer;
+            if (l1 == l2)
+            {
+                if (Mappers.position.has(e1) && Mappers.position.has(e2))
+                {
+                    return (int)Math.signum(Mappers.position.get(e2).y - Mappers.position.get(e1).y);
+                }
+            }
+            return l1 - l2;
         }
     }
 }
