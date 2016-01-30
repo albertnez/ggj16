@@ -70,7 +70,7 @@ public class PlayScreen implements Screen {
 
         players = new Entity[numPlayers];
 
-        spr = new Sprite(TextureManager.getTexture("player.png"));
+        spr = new Sprite(Utils.dumbSprite(10*2, 16*2));
         Controller controller = (Controllers.getControllers().size > 0) ?
                 Controllers.getControllers().get(0) : null;
         players[0] = gaem.engine.createEntity()
@@ -101,9 +101,6 @@ public class PlayScreen implements Screen {
 
             gaem.engine.addEntity(players[1]);
         }
-
-
-        FXFactory.MakeHitText(0, 0);
 
         // Dumb control points.
         createControlPoint(100, 100);

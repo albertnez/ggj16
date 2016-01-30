@@ -30,9 +30,12 @@ public class InputSystem extends IteratingSystem
     }
 
     public void processEntity(Entity entity, float deltaTime) {
+        InputComponent input = Mappers.input.get(entity);
         Controller controller = Mappers.input.get(entity).controller;
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
+
+        input.bulletCooldown -= deltaTime;
 
         vel.x = 0.0f;
         vel.y = 0.0f;
@@ -53,23 +56,31 @@ public class InputSystem extends IteratingSystem
 
         if (controller != null)
         {
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.2)
+            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_X)) > 0.4)
                 vel.x = controller.getAxis(XBox360Pad.AXIS_LEFT_X) * Constants.RES_X / 8 * 10.0f;
 
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.2)
+            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_LEFT_Y)) > 0.4)
                 vel.y = -controller.getAxis(XBox360Pad.AXIS_LEFT_Y) * Constants.RES_Y / 8 * 10.0f;
 
-            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_X)) > 0.2 ||
-                    Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.2) {
+            if (Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_X)) > 0.4 ||
+                Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.4)
+            {
 
-                BulletFactory.shootBullet(
-                        pos.x,
-                        pos.y,
-                        MathUtils.radDeg * MathUtils.atan2(
-                                -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
-                                controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
-                        )
-                );
+                if (input.bulletCooldown < 0)
+                {
+                    input.bulletCooldown = input.bulletDelay;
+
+                    BulletFactory.shootBullet(
+                            pos.x,
+                            pos.y,
+                            MathUtils.radDeg * MathUtils.atan2(
+                                    -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),
+                                    controller.getAxis(XBox360Pad.AXIS_RIGHT_X)
+                            )
+                    );
+                }
+
+
 
             }
 

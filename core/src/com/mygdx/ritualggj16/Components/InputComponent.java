@@ -9,6 +9,8 @@ import com.badlogic.gdx.controllers.Controller;
 public class InputComponent implements Component
 {
     public Controller controller;
+    public float bulletCooldown = -1.0f;
+    public float bulletDelay = 0.5f;
 
     public InputComponent(Controller controller)
     {

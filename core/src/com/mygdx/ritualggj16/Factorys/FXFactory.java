@@ -15,6 +15,8 @@ import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.TextureManager;
 
+import java.util.Random;
+
 /**
  * Created by ThrepwooD on 30/01/2016.
  */
@@ -26,9 +28,9 @@ public class FXFactory
     {
         Entity text = gaem.engine.createEntity();
 
-        text.add(new RenderTextComponent(FontManager.damage, "5"))
+        text.add(new RenderTextComponent(FontManager.damage, "1"))
             .add(new PositionComponent(x, y))
-            .add(new VelocityComponent(0, Constants.RES_Y/6));
+            .add(new VelocityComponent(MathUtils.random(-30, 30), Constants.RES_Y / 6));
 
         gaem.engine.addEntity(text);
     }

@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
+import com.mygdx.ritualggj16.Factorys.FXFactory;
+import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
 
 
@@ -56,10 +58,15 @@ public class CollisionSystem extends IteratingSystem
                 {
                     Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
                 }
-                else if (Mappers.bullet.has(entity) && ot.type == TypeComponent.EntityType.Enemy)
+                else if (Mappers.bullet.has(entity) &&
+                        ot.type == TypeComponent.EntityType.Enemy &&
+                        Mappers.life.get(other).life > 0)
                 {
+                    PositionComponent pos = Mappers.position.get(entity);
+
                     Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
-                    Mappers.life.get(entity).life = 0;  // Remove bullet.
+                    engine.removeEntity(entity);
+                    FXFactory.MakeHitText(pos.x, pos.y);
                 }
             }
         }

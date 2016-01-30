@@ -18,7 +18,7 @@ public class FontManager
         damage = new BitmapFont();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("bitDarling.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 16;
         parameter.color = Color.RED;
         parameter.borderWidth = 2;
         parameter.borderColor = Color.BLACK;

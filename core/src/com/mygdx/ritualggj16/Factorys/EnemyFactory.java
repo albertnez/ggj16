@@ -19,7 +19,8 @@ import com.mygdx.ritualggj16.Utils;
 public class EnemyFactory {
     public static Gaem gaem;
 
-    public static void spawnWalker(float x, float y) {
+    public static void spawnWalker(float x, float y)
+    {
         Entity enemy = gaem.engine.createEntity()
                 .add(new PositionComponent(x, y))
                 .add(new VelocityComponent(0, 0))
@@ -27,8 +28,8 @@ public class EnemyFactory {
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
                 .add(new LifeComponent(2))
                 .add(new AnimationComponent(AnimationFactory.blob()))
-                .add(new CollisionComponent(10, 8))
-                .add(new RenderComponent(Utils.dumbSprite(10, 8)));
+                .add(new CollisionComponent(10*2, 8*2))
+                .add(new RenderComponent(Utils.dumbSprite(10*2, 8*2)));
 
         gaem.engine.addEntity(enemy);
     }
