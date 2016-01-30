@@ -83,5 +83,22 @@ public class AnimationFactory
         return anim;
     }
 
+    public static Animation candle()
+    {
+        Texture tex = TextureManager.getTexture("items.png");
+
+        Animation anim = new Animation(0.5f/4,
+                new TextureRegion(tex, 0,  0, 8 ,16),
+                new TextureRegion(tex, 8,  0, 8 ,16),
+                new TextureRegion(tex, 16,  0, 8 ,16),
+                new TextureRegion(tex, 24,  0, 8 ,16)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+
+
+    }
+
 
 }

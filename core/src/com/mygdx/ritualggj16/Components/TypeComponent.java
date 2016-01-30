@@ -14,6 +14,7 @@ public class TypeComponent implements Component {
         AltarPoint,
         AltarItem,
         Altar,
+        Decoration
     }
 
     public EntityType type;
