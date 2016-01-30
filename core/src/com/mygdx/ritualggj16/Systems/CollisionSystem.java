@@ -92,6 +92,14 @@ public class CollisionSystem extends IteratingSystem
                     engine.removeEntity(other);
                     ItemSpawnSystem.altarItemActive = false;
                 }
+
+                // PLAYER vs ALTAR
+                if (et.type == TypeComponent.EntityType.Player &&
+                        ot.type == TypeComponent.EntityType.Altar)
+                {
+                    pos_me.x = pos_me.last_x;
+                    pos_me.y = pos_me.last_y;
+                }
             }
         }
     }
