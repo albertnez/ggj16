@@ -160,6 +160,8 @@ public class PlayScreen implements Screen {
 
     float le_timer = 0.0f;
 
+    float timer_saltar_dialogs = 0.0f;
+
     @Override
     public void render(float delta)
     {
@@ -188,7 +190,31 @@ public class PlayScreen implements Screen {
 
         if (!UltraManager.isGaemActive)
         {
+            if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
+            {
+                timer_saltar_dialogs += delta;
+            }
+            else
+            {
+                timer_saltar_dialogs = 0.0f;
+            }
+
+
             gaem.batch.begin();
+
+
+            if (timer_saltar_dialogs > 1.0f)
+            {
+                FontManager.dialog.draw(
+                        gaem.batch,
+                        "SIGUE PULSANDO PARA SALTAR LA INTRODUCCION",
+                        -Constants.RES_X*0.45f,
+                        Constants.RES_Y*0.45f);
+            }
+            if (timer_saltar_dialogs > 4.0f)
+            {
+                UltraManager.isGaemActive = true;
+            }
 
             blackzor.setAlpha(0.5f);
             blackzor.draw(gaem.batch);
