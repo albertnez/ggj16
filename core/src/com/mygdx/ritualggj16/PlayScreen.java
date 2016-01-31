@@ -8,7 +8,6 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -16,7 +15,6 @@ import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.InputComponent;
-import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
@@ -36,8 +34,6 @@ import com.mygdx.ritualggj16.Systems.LifeSystem;
 import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 import com.mygdx.ritualggj16.Systems.SpawnSystem;
-import com.sun.org.apache.bcel.internal.classfile.ConstantNameAndType;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
 /**
@@ -74,8 +70,8 @@ public class PlayScreen implements Screen {
         this.gaem = gaem;
 
         bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
-        bg_floor.setX(-Constants.RES_X / 2.0f);
-        bg_floor.setY(-Constants.RES_Y / 2.0f);
+        bg_floor.setX(-Constants.RES_X / 2.0f - 20.0f);
+        bg_floor.setY(-Constants.RES_Y / 2.0f - 20.0f);
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
         gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
@@ -91,6 +87,7 @@ public class PlayScreen implements Screen {
         EnemyFactory.gaem = this.gaem;
         FXFactory.gaem = this.gaem;
         ItemFactory.gaem = this.gaem;
+        CameraManager.cam = this.gaem.cam;
 
         players = new Entity[numPlayers];
         float bboxX = 0.9f;
@@ -183,6 +180,7 @@ public class PlayScreen implements Screen {
     public void render(float delta)
     {
         le_timer += delta;
+        CameraManager.update(delta);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
