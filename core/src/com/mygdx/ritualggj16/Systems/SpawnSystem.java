@@ -14,39 +14,105 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 public class SpawnSystem extends IntervalSystem
 {
     public Engine engine;
+    private static float interval;
     public SpawnSystem (float interval, Engine engine){
         super(interval);
+        this.interval = interval;
     }
+    private static final float incrInitProbPeriod = 5.0f;  // Time for a single initial probability incremental.
+    private static float incrInitProbTime = 5.0f;
     private float currentProbability = 0.5f;
-    private final float initProbability = 0.1f;
     public static boolean spawnInCircle = true;
+    public static int currRound = 0;
+    public static float accumInitProb = 0.0f;
+
+    private static class RoundStats {
+        public float initChance;  // The initial chance.
+        public float failedChanceMultiplier;  // The chance multiplier when there was no spawn.
+        public float chanceIncremental;  // How much the initChance is incremented during the round.
+        public int minNumEnemies;
+        public int maxNumEnemies;
+        public RoundStats(float initChance, float failedChanceMultiplier, float chanceIncremental, int minNumEnemies, int maxNumEnemies)
+        {
+            this.initChance = initChance;
+            this.failedChanceMultiplier = failedChanceMultiplier;
+            this.chanceIncremental = chanceIncremental;
+            this.minNumEnemies = minNumEnemies;
+            this.maxNumEnemies = maxNumEnemies;
+        }
+    }
+
+    public static RoundStats[] roundStats = new RoundStats[] {
+            new RoundStats(0.10f, 1.1f, 0.05f, 1, 2),
+            new RoundStats(0.15f, 1.5f, 0.10f, 1, 3),
+            new RoundStats(0.20f, 1.1f, 0.10f, 2, 4),
+            new RoundStats(0.25f, 1.1f, 0.10f, 2, 7),
+            new RoundStats(0.30f, 1.1f, 0.10f, 3, 10),
+            new RoundStats(0.60f, 1.5f, 0.10f, 5, 15),
+    };
+
+    private static float currProb()
+    {
+        return roundStats[ItemSpawnSystem.numAltarPointsActivated].initChance;
+    }
+    private static float initProb()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].initChance;
+    }
+    private static float failedMult()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].failedChanceMultiplier;
+    }
+    private static float incrProb()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].chanceIncremental;
+    }
+    private static int minEnemies()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].minNumEnemies;
+    }
+    private static int maxEnemies()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].maxNumEnemies;
+    }
 
     @Override
     protected void updateInterval()
     {
         if (!UltraManager.isGaemActive) return;
+        if (currRound != ItemSpawnSystem.numRound())
+        {
+            incrInitProbTime = incrInitProbPeriod;
+            currRound = ItemSpawnSystem.numRound();
+            currentProbability = initProb();
+            accumInitProb = 0.0f;
+        }
 
-
-
-
-
+        // START
+        incrInitProbTime -= interval;
+        if (incrInitProbTime <= 0)
+        {
+            incrInitProbTime = incrInitProbTime;
+            accumInitProb += incrProb();
+        }
         if (!MathUtils.randomBoolean(currentProbability))
         {
-            currentProbability *= 1.1f;
+            currentProbability *= failedMult();
             return;
         }
         else
         {
-            currentProbability = initProbability;
+            currentProbability = initProb() + accumInitProb;
         }
 
-        int numToSpawn = MathUtils.random(1, 3);
+        int numToSpawn = MathUtils.random(minEnemies(), maxEnemies());
         if (spawnInCircle)
         {
             spawnInCircle(numToSpawn);
         }
         else
         {
+            // TODO: Not used anymore?
             float posX, posY;
             int mult = (MathUtils.randomBoolean()) ? 1 : -1;
 

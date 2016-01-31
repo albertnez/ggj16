@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class ItemSpawnSystem extends IntervalSystem
 {
     public static boolean altarItemActive = false;
+    public static int numAltarPointsActivated = 0;
     public Engine engine;
     public ItemSpawnSystem(float interval, Engine engine)
     {
@@ -53,5 +54,15 @@ public class ItemSpawnSystem extends IntervalSystem
         float posY = MathUtils.random(-Constants.RES_Y*0.5f + offset, Constants.RES_Y *0.5f- offset);
         ItemFactory.spawnAltarEnabler(posX, posY, ids.get(MathUtils.random(ids.size()-1)));
         altarItemActive = true;
+    }
+
+    public static void altarPointEnabled()
+    {
+        numAltarPointsActivated++;
+    }
+
+    public static int numRound()
+    {
+        return numAltarPointsActivated;
     }
 }

@@ -139,6 +139,7 @@ public class CollisionSystem extends IteratingSystem
                     enableAltarPoint(Mappers.item.get(other).value);
                     engine.removeEntity(other);
                     ItemSpawnSystem.altarItemActive = false;
+                    ItemSpawnSystem.altarPointEnabled();
                 }
 
                 // ENEMY vs ALTAR
