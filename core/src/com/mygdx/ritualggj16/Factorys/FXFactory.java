@@ -21,6 +21,7 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.TextureManager;
+import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 
 import java.awt.Font;
@@ -85,7 +86,14 @@ public class FXFactory
             anim.setPlayMode(Animation.PlayMode.LOOP);
             enemy.add(new AnimationComponent(anim));
             enemy.add(new RenderEffectComponent(0.3f, 3.0f, 6.0f, 0.9f, 0.1f, true));
-            EnemyFactory.spawnWalker(x, y);
+
+            for (int i = 0; i < UltraManager.losetas; ++i)
+            {
+                EnemyFactory.spawnWalker(x + MathUtils.random(-30, 30),
+                        y + MathUtils.random(-30, 30));
+            }
+
+
         }
 
         enemy.add(new PositionComponent(x, y));

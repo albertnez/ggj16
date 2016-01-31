@@ -147,6 +147,9 @@ public class CollisionSystem extends IteratingSystem
                         ot.type == TypeComponent.EntityType.Enemy &&
                         Mappers.life.get(other).life > 0)
                 {
+                    int dmgRoll = Mappers.bullet.get(entity).damage +
+                            MathUtils.random(0, UltraManager.losetas);
+
                     PositionComponent pos = Mappers.position.get(entity);
 
                     if (pos.x < -Constants.RES_X * 0.5f || pos.x > Constants.RES_X * 0.5f ||
@@ -155,7 +158,7 @@ public class CollisionSystem extends IteratingSystem
                         return;
                     }
                     AudioManager.hit.play();
-                    Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
+                    Mappers.life.get(other).damage(dmgRoll);
                     FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage, 1);
                     FXFactory.makeExplosion(pos.x, pos.y,
                             (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2) ?

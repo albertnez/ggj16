@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
         this.gaem = gaem;
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
-        gaem.engine.addSystem(new SpawnSystem(5.0f, gaem.engine));
+        gaem.engine.addSystem(new SpawnSystem(4.5f, gaem.engine));
         ItemSpawnSystem.engine = gaem.engine;
         //gaem.engine.addSystem(new ItemSpawnSystem(10.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
