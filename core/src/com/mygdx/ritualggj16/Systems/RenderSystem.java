@@ -181,8 +181,8 @@ public class RenderSystem extends SortedIteratingSystem
                 if (Mappers.position.has(e1) && Mappers.position.has(e2) &&
                         Mappers.collision.has(e1) && Mappers.collision.has(e2))
                 {
-                    return (int)Math.signum((Mappers.position.get(e2).y - Mappers.collision.get(e2).sizeY) -
-                                            (Mappers.position.get(e1).y - Mappers.collision.get(e1).sizeY));
+                    return (int)Math.signum((Mappers.position.get(e2).y - Mappers.collision.get(e2).sizeY*0.5f) -
+                                            (Mappers.position.get(e1).y - Mappers.collision.get(e1).sizeY*0.5f));
                 }
             }
 
