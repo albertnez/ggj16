@@ -221,16 +221,10 @@ public class PlayScreen implements Screen {
             }
         }
 
-
-
-
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
         XBox360Pad.update();
 
-
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.F12)) drawDebug = !drawDebug;
-
         if (drawDebug)
         {
             Family debug_family = Family.all(CollisionComponent.class, PositionComponent.class, RenderComponent.class).get();
@@ -325,7 +319,7 @@ public class PlayScreen implements Screen {
     private void reset()
     {
         AudioManager.stopAll();
-        AudioManager.game.play();
+
         // CLEAR ENTITIES
         gaem.engine.removeAllEntities();
         gaem.engine.clearPools();
@@ -379,10 +373,10 @@ public class PlayScreen implements Screen {
         altarLifeBack.setOrigin(0.0f, 32.0f);
         altarLifeBack.setScale(1.5f, 1.2f);
 //        altarLifeBack.scale(1.1f)?;
-        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
+        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 50.0f, Constants.RES_Y * 0.5f - 40.0f);
         altarLifeFront.setOrigin(0.0f, 32.0f);
         altarLifeFront.setScale(1.5f, 1.2f);
-        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
+        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 50.0f, Constants.RES_Y * 0.5f - 40.0f);
 
         // Dumb control points.
         createAltarPoints();

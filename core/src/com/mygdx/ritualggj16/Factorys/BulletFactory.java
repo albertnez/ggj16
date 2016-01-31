@@ -32,7 +32,7 @@ public class BulletFactory
 
         Texture tex = TextureManager.getTexture(
                 owner == OwnerComponent.Owner.Player1 ?
-                "images/bullets.png":"bones.png"
+                "images/bullets.png":"images/bones.png"
         );
         RenderComponent rc = new RenderComponent(
                 new Sprite(new TextureRegion(tex, 0, 0, 16, 16)),

@@ -172,6 +172,7 @@ public class UltraManager
         else   // Game
         {
             isGaemActive = true;
+            AudioManager.game.play();
         }
     }
     public static State gotoNextState()

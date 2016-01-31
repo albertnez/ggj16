@@ -47,17 +47,15 @@ public class MenuScreen implements Screen
         menu_font = new BitmapFont();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("BitDarling.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 40;
+        parameter.size = 35;
         parameter.color = Color.WHITE;
         parameter.borderWidth = 2;
         parameter.borderColor = Color.BLACK;
         menu_font = generator.generateFont(parameter);
         menu_font.getData().markupEnabled = true;
 
-
-
         FreeTypeFontGenerator.FreeTypeFontParameter parameter_big_title = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter_big_title.size = 90;
+        parameter_big_title.size = 80;
         parameter_big_title.color = Color.WHITE;
         parameter_big_title.borderWidth = 2;
         parameter_big_title.borderColor = Color.BLACK;
@@ -75,11 +73,11 @@ public class MenuScreen implements Screen
         }
 
         Label.LabelStyle style_intro = new Label.LabelStyle(menu_font, Color.WHITE);
-        Label label_intro = new Label("PRESS [YELLOW]START[] OR [GREEN]A[] TO PLAY", style_intro);
+        Label label_intro = new Label("PRESS [YELLOW]START[] AND/OR [GREEN]A[] TO FUN", style_intro);
         label_intro.setAlignment(Align.left);
         label_intro.setAlignment(Align.left, Align.left);
-        label_intro.setX(100.0f);
-        label_intro.setY(Constants.RES_Y / 2);
+        label_intro.setX(150.0f);
+        label_intro.setY(Constants.RES_Y * 0.25f);
         stage.addActor(label_intro);
     }
 

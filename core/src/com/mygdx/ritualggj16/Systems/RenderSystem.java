@@ -191,8 +191,6 @@ public class RenderSystem extends SortedIteratingSystem
                 return (int)Math.signum(pos2 - pos1);
             }
 
-            System.out.println(l1 +" --" +l2);
-
             return l1 - l2;
         }
     }

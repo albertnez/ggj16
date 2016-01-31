@@ -15,6 +15,7 @@ import com.mygdx.ritualggj16.Components.EnemyComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
+import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Mappers;
@@ -155,6 +156,8 @@ public class CollisionSystem extends IteratingSystem
                         if (ec.attackCooldown <= 0.0f)
                         {
                             ec.attackCooldown = ec.attackPeriod;
+
+                            entity.add(new RenderEffectComponent(0.3f, 2.0f, 1.0f, 1.0f, 1.0f, false));
 
                             AudioManager.scream.play();
                             Mappers.life.get(other).damage(Mappers.enemy.get(entity).damage);
