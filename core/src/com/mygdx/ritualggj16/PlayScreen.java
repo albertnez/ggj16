@@ -54,6 +54,7 @@ public class PlayScreen implements Screen {
     Gaem gaem;
 
     Music music;
+    public static Sound player1shoot;
 
     Sprite spr;
     Sprite bg_floor;
@@ -423,7 +424,10 @@ public class PlayScreen implements Screen {
         gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
         gameOverFade.setCenter(0.0f, 0.0f);
 
-
+        if (player1shoot == null)
+        {
+            player1shoot = Gdx.audio.newSound(Gdx.files.internal("audio/player1shoot.mp3"));
+        }
         if (music == null)
         {
             music = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));

@@ -17,6 +17,7 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.PlayScreen;
 import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 import com.mygdx.ritualggj16.Wikipedia;
@@ -124,6 +125,7 @@ public class InputSystem extends IteratingSystem
                             MathUtils.radDeg * alpha,
                             Mappers.owner.get(entity).owner
                     );
+                    PlayScreen.player1shoot.play();
                 }
 
 
