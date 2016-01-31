@@ -45,9 +45,9 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
  */
 public class PlayScreen implements Screen {
 
-    private static int numPlayers = 2;
-    private static int numAltarPoints = 5;
-    private static float altarPointDistToCenter = 350.0f;
+    private int numPlayers = 2;
+    private int numAltarPoints = 5;
+    private float altarPointDistToCenter = 350.0f;
 
     Gaem gaem;
 
@@ -79,7 +79,7 @@ public class PlayScreen implements Screen {
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
         gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
-        gaem.engine.addSystem(new ItemSpawnSystem(25.0f, gaem.engine));
+        gaem.engine.addSystem(new ItemSpawnSystem(70.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new EnemySystem(gaem.engine));
@@ -217,6 +217,8 @@ public class PlayScreen implements Screen {
         if (!UltraManager.isGaemActive)
         {
 
+
+
             if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) ||
                     XBox360Pad.anyControllerButtonDown(XBox360Pad.BUTTON_START))
             {
@@ -228,7 +230,6 @@ public class PlayScreen implements Screen {
             }
 
             gaem.batch.begin();
-
             if (timer_saltar_dialogs > 0.1f)
             {
                 {
@@ -243,7 +244,6 @@ public class PlayScreen implements Screen {
             {
                 UltraManager.setState(UltraManager.State.Game);
             }
-
             if (UltraManager.getState() == UltraManager.State.GameOverDialog)
             {
                 gameOverFade.draw(gaem.batch);

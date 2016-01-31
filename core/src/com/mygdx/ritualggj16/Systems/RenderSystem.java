@@ -185,6 +185,9 @@ public class RenderSystem extends SortedIteratingSystem
                                             (Mappers.position.get(e1).y - Mappers.collision.get(e1).sizeY));
                 }
             }
+
+            System.out.println(l1 +" --" +l2);
+
             return l1 - l2;
         }
     }

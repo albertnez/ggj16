@@ -82,7 +82,6 @@ public class CollisionSystem extends IteratingSystem
                     Mappers.velocity.get(entity).y = 0;
                 }*/
 
-
                 // Constrain move
                 if (isObstacle(et.type, ot.type))
                 {
@@ -109,7 +108,6 @@ public class CollisionSystem extends IteratingSystem
                         }
                     }
                 }
-
 
                 //BULLET vs ENEMY
                 else if (Mappers.bullet.has(entity) &&

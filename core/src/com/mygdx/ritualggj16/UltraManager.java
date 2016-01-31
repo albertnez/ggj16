@@ -11,9 +11,11 @@ import java.awt.Dialog;
  */
 public class UltraManager
 {
+    public static int runes = 0;
+
+
     public static boolean isGaemActive = false;
     public static State currentState = State.IntroDialog;
-
 
 
     public enum State {
