@@ -9,6 +9,7 @@ import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.UltraManager;
 
 /**
  * Created by threpwood on 20/12/2015.
@@ -28,6 +29,10 @@ public class MovementSystem extends IteratingSystem
 
     public void processEntity(Entity entity, float deltaTime)
     {
+        if (!UltraManager.isGameActive())
+        {
+            return;
+        }
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
 

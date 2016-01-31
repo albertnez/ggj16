@@ -9,6 +9,7 @@ import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.Mappers;
+import com.mygdx.ritualggj16.UltraManager;
 
 import java.util.Map;
 
@@ -28,10 +29,14 @@ public class LifeSystem extends IteratingSystem
     // Kill if dead
     public void processEntity(Entity entity, float deltaTime)
     {
-        if (Mappers.life.get(entity).life <= 0)
+        if (Mappers.life.get(entity).justDied)
         {
+            System.out.println("entity just died!");
+            Mappers.life.get(entity).updateJustDied();
             if (Mappers.type.get(entity).type == TypeComponent.EntityType.Altar)
             {
+                System.out.println("Setting game over dialog");
+                UltraManager.setState(UltraManager.State.GameOverDialog);
                 return;
             }
             PositionComponent pos = Mappers.position.get(entity);

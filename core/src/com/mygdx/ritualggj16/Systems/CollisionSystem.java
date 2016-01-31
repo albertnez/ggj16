@@ -11,16 +11,13 @@ import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
+import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
-import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.TextureManager;
-import com.mygdx.ritualggj16.UltraManager;
-import com.mygdx.ritualggj16.Utils;
 
-import java.lang.reflect.Type;
 
 
 /**
@@ -148,11 +145,16 @@ public class CollisionSystem extends IteratingSystem
                 if (et.type == TypeComponent.EntityType.Enemy &&
                         ot.type == TypeComponent.EntityType.Altar)
                 {
-                    EnemyComponent ec = Mappers.enemy.get(entity);
-                    if (ec.attackCooldown <= 0.0f)
+                    LifeComponent lc = Mappers.life.get(other);
+                    if (Mappers.life.get(other).life > 0)
                     {
-                        ec.attackCooldown += ec.attackPeriod;
-                        Mappers.life.get(other).life -= Mappers.enemy.get(entity).damage;
+                        EnemyComponent ec = Mappers.enemy.get(entity);
+                        if (ec.attackCooldown <= 0.0f)
+                        {
+                            ec.attackCooldown = ec.attackPeriod;
+
+                            Mappers.life.get(other).damage(Mappers.enemy.get(entity).damage);
+                        }
                     }
                 }
             }

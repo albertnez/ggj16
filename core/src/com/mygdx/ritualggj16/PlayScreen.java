@@ -68,6 +68,8 @@ public class PlayScreen implements Screen {
     Sprite altarLifeBack;
     Sprite altarLifeFront;
 
+    Sprite gameOverFade;
+
     public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
 
@@ -142,7 +144,7 @@ public class PlayScreen implements Screen {
 
         blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
         blackzor.setColor(Color.BLACK);
-        blackzor.setX(-Constants.RES_X/2);
+        blackzor.setX(-Constants.RES_X / 2);
         blackzor.setY(-Constants.RES_Y / 2);
 
         p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
@@ -157,14 +159,20 @@ public class PlayScreen implements Screen {
         p2_faec.scale(10);
 
         p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
-        p3_faec.setX(-Constants.RES_X/2 + 100);
-        p3_faec.setY(-Constants.RES_Y/2 + 100);
+        p3_faec.setX(-Constants.RES_X / 2 + 100);
+        p3_faec.setY(-Constants.RES_Y / 2 + 100);
         p3_faec.scale(10);
 
         pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
         pinxo.setX(Constants.RES_X / 2 - 100);
         pinxo.setY(-Constants.RES_Y / 2 + 100);
         pinxo.scale(3);
+
+        UltraManager.setState(UltraManager.State.IntroDialog);
+
+        gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
+        gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
+        gameOverFade.setCenter(0.0f, 0.0f);
     }
 
     float le_timer = 0.0f;
@@ -191,7 +199,7 @@ public class PlayScreen implements Screen {
         // Draw Altar life
         gaem.batch.begin();
         altarLifeBack.draw(gaem.batch);
-        int width = Math.round(16 * (float)Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
+        int width = Math.round(16 * (float) Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
         altarLifeFront.setRegion(0, 5, width, 5);
         altarLifeFront.setSize(width, 5);
         altarLifeFront.draw(gaem.batch);
@@ -226,27 +234,32 @@ public class PlayScreen implements Screen {
                 {
                     FontManager.dialog.draw(
                             gaem.batch,
-                            "[RED]SIGUE PULSANDO PARA SALTAR LA INTRODUCCION[]",
+                            "[RED]SIGUE PULSANDO PARA SALTAR EL DIALOGO[]",
                             -Constants.RES_X*0.45f,
                             Constants.RES_Y*0.45f);
                 }
             }
             if (timer_saltar_dialogs > 3.0f)
             {
-                UltraManager.isGaemActive = true;
+                UltraManager.setState(UltraManager.State.Game);
+            }
+
+            if (UltraManager.getState() == UltraManager.State.GameOverDialog)
+            {
+                gameOverFade.draw(gaem.batch);
             }
 
             blackzor.setAlpha(0.5f);
             blackzor.draw(gaem.batch);
 
             //Faec
-            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_1)
+            if (UltraManager.currentOwner() == UltraManager.DialogOwner.PLAYER_1)
                 p1_faec.draw(gaem.batch);
 
-            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_2)
+            if (UltraManager.currentOwner() == UltraManager.DialogOwner.PLAYER_2)
                 p2_faec.draw(gaem.batch);
 
-            if (UltraManager.dialog_owner[UltraManager.textIndex] == UltraManager.DialogOwner.PLAYER_3)
+            if (UltraManager.currentOwner() == UltraManager.DialogOwner.PLAYER_3)
                 p3_faec.draw(gaem.batch);
 
             //Tecst
@@ -338,7 +351,7 @@ public class PlayScreen implements Screen {
 
     private void createAltarPoints()
     {
-        float alpha = MathUtils.PI / 2.0f;
+        float alpha = MathUtils.PI / 2.0f - MathUtils.PI2 / 10.0f;
         for (int i = 0; i < numAltarPoints; ++i)
         {
             float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
