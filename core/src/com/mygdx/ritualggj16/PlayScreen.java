@@ -239,7 +239,7 @@ public class PlayScreen implements Screen {
                             gaem.batch,
                             "[RED]SIGUE PULSANDO PARA SALTAR EL DIALOGO[]",
                             -Constants.RES_X*0.45f,
-                            Constants.RES_Y*0.45f);
+                            -Constants.RES_Y*0.20f);
                 }
             }
             if (timer_saltar_dialogs > 3.0f)
