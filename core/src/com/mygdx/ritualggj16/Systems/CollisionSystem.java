@@ -18,6 +18,7 @@ import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
+import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Mappers;
@@ -122,6 +123,11 @@ public class CollisionSystem extends IteratingSystem
                 {
                     PositionComponent pos = Mappers.position.get(entity);
 
+                    if (pos.x < -Constants.RES_X * 0.5f || pos.x > Constants.RES_X * 0.5f ||
+                            pos.y < -Constants.RES_Y * 0.5f || pos.y > Constants.RES_Y * 0.5f)
+                    {
+                        return;
+                    }
                     AudioManager.hit.play();
                     Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
                     FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage, 1);
