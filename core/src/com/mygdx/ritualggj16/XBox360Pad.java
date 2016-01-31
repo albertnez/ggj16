@@ -4,6 +4,8 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 
+import java.awt.Button;
+
 /**
  * Created by ThrepwooD on 29/01/2016.
  */
@@ -47,7 +49,35 @@ public class XBox360Pad
     public static final int AXIS_RIGHT_Y = 2; //-1 is up | +1 is down
     public static final int AXIS_RIGHT_TRIGGER = 4; //value 0 to -1f
 
-    public static boolean anyControllerButton(int key)
+    private static final int Buttons[] = new int[] {
+            BUTTON_A,
+            BUTTON_B,
+            BUTTON_X,
+            BUTTON_Y,
+            BUTTON_BACK,
+            BUTTON_START,
+            BUTTON_LB,
+            BUTTON_RB,
+    };
+
+    private static final boolean buttonPressed[] = new boolean[8];
+
+    public static void buttonPressed(int buttonIndex)
+    {
+        buttonPressed[buttonIndex] = true;
+    }
+    public static void update()
+    {
+        for (int i = 0; i < buttonPressed.length; ++i)
+        {
+            buttonPressed[i] = false;
+        }
+    }
+    public static boolean anyControllerButtonPressed(int key)
+    {
+        return key < buttonPressed.length && buttonPressed[key];
+    }
+    public static boolean anyControllerButtonDown(int key)
     {
         for (int i = 0; i < Controllers.getControllers().size; ++i)
         {

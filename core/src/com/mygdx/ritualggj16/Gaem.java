@@ -6,6 +6,9 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerAdapter;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,6 +47,8 @@ public class Gaem extends Game {
 
         Gdx.graphics.setContinuousRendering(true);
         setScreen(new PlayScreen(this));
+
+        setupControllers();
 	}
 
 	@Override
@@ -52,5 +57,22 @@ public class Gaem extends Game {
         super.render();
 	}
 
-
+    public void setupControllers()
+    {
+        for (int i = 0; i < Controllers.getControllers().size; ++i)
+        {
+            Controller controller = Controllers.getControllers().get(i);
+            if (controller != null)
+            {
+                controller.addListener(new ControllerAdapter() {
+                    @Override
+                    public boolean buttonDown(Controller controller, int buttonIndex)
+                    {
+                        XBox360Pad.buttonPressed(buttonIndex);
+                        return false;
+                    }
+                });
+            }
+        }
+    }
 }
