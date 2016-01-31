@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.mygdx.ritualggj16.AudioManager;
 import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
@@ -37,6 +38,7 @@ public class LifeSystem extends IteratingSystem
                 UltraManager.setState(UltraManager.State.GameOverDialog);
                 return;
             }
+            AudioManager.kill.play();
             PositionComponent pos = Mappers.position.get(entity);
             FXFactory.makeDissapearEnemy(
                     pos.x, pos.y,
