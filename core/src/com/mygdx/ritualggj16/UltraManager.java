@@ -174,6 +174,16 @@ public class UltraManager
             isGaemActive = true;
         }
     }
+    public static State gotoNextState()
+    {
+        switch (currentState)
+        {
+            case IntroDialog: setState(State.Game); break;
+            case Game: setState(State.GameOverDialog); break;
+            case GameOverDialog: setState(State.IntroDialog); break;
+        }
+        return currentState;
+    }
     public static DialogOwner currentOwner()
     {
         return currentDialogOwners[textIndex];

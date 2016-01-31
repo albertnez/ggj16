@@ -178,12 +178,17 @@ public class RenderSystem extends SortedIteratingSystem
             int l2 = Mappers.render_comp.get(e2).layer;
             if (l1 == l2)
             {
-                if (Mappers.position.has(e1) && Mappers.position.has(e2) &&
-                        Mappers.collision.has(e1) && Mappers.collision.has(e2))
+                float pos1 = Mappers.position.get(e1).y;
+                if (Mappers.collision.has(e1))
                 {
-                    return (int)Math.signum((Mappers.position.get(e2).y - Mappers.collision.get(e2).sizeY*0.5f) -
-                                            (Mappers.position.get(e1).y - Mappers.collision.get(e1).sizeY*0.5f));
+                    pos1 -= Mappers.collision.get(e1).sizeY * 0.5f;
                 }
+                float pos2 = Mappers.position.get(e2).y;
+                if (Mappers.collision.has(e2))
+                {
+                    pos2 -= Mappers.collision.get(e2).sizeY * 0.5f;
+                }
+                return (int)Math.signum(pos2 - pos1);
             }
 
             System.out.println(l1 +" --" +l2);

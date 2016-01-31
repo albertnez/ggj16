@@ -26,6 +26,7 @@ public class ItemSpawnSystem extends IntervalSystem
     {
         super(interval);
         this.engine = engine;
+        reset();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ItemSpawnSystem extends IntervalSystem
         }
         float offset = 20.0f;
         float posX = MathUtils.random(-Constants.RES_X*0.5f + offset, Constants.RES_X *0.5f- offset);
-        float posY = MathUtils.random(-Constants.RES_Y*0.5f + offset, Constants.RES_Y *0.5f- offset);
+        float posY = MathUtils.random(-Constants.RES_Y*0.5f + offset, Constants.RES_Y * 0.5f - offset);
         ItemFactory.spawnAltarEnabler(posX, posY, ids.get(MathUtils.random(ids.size()-1)));
         altarItemActive = true;
     }
@@ -64,5 +65,11 @@ public class ItemSpawnSystem extends IntervalSystem
     public static int numRound()
     {
         return numAltarPointsActivated;
+    }
+
+    public static void reset()
+    {
+        altarItemActive = false;
+        numAltarPointsActivated = 0;
     }
 }

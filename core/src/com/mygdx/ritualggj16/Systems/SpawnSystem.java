@@ -15,16 +15,18 @@ public class SpawnSystem extends IntervalSystem
 {
     public Engine engine;
     private static float interval;
-    public SpawnSystem (float interval, Engine engine){
-        super(interval);
-        this.interval = interval;
-    }
     private static final float incrInitProbPeriod = 5.0f;  // Time for a single initial probability incremental.
     private static float incrInitProbTime = 5.0f;
-    private float currentProbability = 0.5f;
+    private static float currentProbability = 0.5f;
     public static boolean spawnInCircle = true;
     public static int currRound = 0;
     public static float accumInitProb = 0.0f;
+
+    public SpawnSystem (float interval, Engine engine){
+        super(interval);
+        this.interval = interval;
+        reset();
+    }
 
     private static class RoundStats {
         public float initChance;  // The initial chance.
@@ -54,10 +56,6 @@ public class SpawnSystem extends IntervalSystem
             new RoundStats(0.60f, 1.5f, 0.10f, 5, 15, 4),
     };
 
-    private static float currProb()
-    {
-        return roundStats[ItemSpawnSystem.numAltarPointsActivated].initChance;
-    }
     private static float initProb()
     {
         return roundStats[ItemSpawnSystem.numRound()].initChance;
@@ -168,5 +166,14 @@ public class SpawnSystem extends IntervalSystem
     private void spawnNear(float x, float y, int num)
     {
         spawnNear(x, y, num, 200.0f);
+    }
+
+    public static void reset()
+    {
+        incrInitProbTime = 5.0f;
+        currentProbability = 0.5f;
+        spawnInCircle = true;
+        currRound = 0;
+        accumInitProb = 0.0f;
     }
 }

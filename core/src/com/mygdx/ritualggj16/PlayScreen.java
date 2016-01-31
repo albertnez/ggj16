@@ -72,10 +72,6 @@ public class PlayScreen implements Screen {
     public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
 
-        bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
-        bg_floor.setX(-Constants.RES_X / 2.0f - 20.0f);
-        bg_floor.setY(-Constants.RES_Y / 2.0f - 20.0f);
-
         gaem.engine.addSystem(new InputSystem(gaem.engine));
         gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
         gaem.engine.addSystem(new ItemSpawnSystem(70.0f, gaem.engine));
@@ -92,88 +88,7 @@ public class PlayScreen implements Screen {
         ItemFactory.gaem = this.gaem;
         CameraManager.cam = this.gaem.cam;
 
-        players = new Entity[numPlayers];
-        float bboxX = 0.9f;
-        float bboxY = 0.8f;
-        spr = new Sprite(Utils.dumbSprite(10*4, 16*4));
-        Controller controller = (Controllers.getControllers().size > 0) ?
-                Controllers.getControllers().get(0) : null;
-        players[0] = gaem.engine.createEntity()
-                .add(new PositionComponent(-200, 0))
-                .add(new VelocityComponent(0, 0))
-                .add(new TypeComponent(TypeComponent.EntityType.Player))
-                .add(new OwnerComponent(OwnerComponent.Owner.Player1))
-                .add(new RenderComponent(spr, RenderComponent.Layer.Player))
-                .add(new CollisionComponent(10*4*bboxX, 16*4*bboxY))
-                .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player1)))
-                .add(new InputComponent(controller));
-        gaem.engine.addEntity(players[0]);
-
-        if (numPlayers > 1) {
-            controller = (Controllers.getControllers().size > 1) ?
-                    Controllers.getControllers().get(1) : null;
-
-            players[1] = gaem.engine.createEntity()
-                    .add(new PositionComponent(200, 0))
-                    .add(new VelocityComponent(0, 0))
-                    .add(new TypeComponent(TypeComponent.EntityType.Player))
-                    .add(new OwnerComponent(OwnerComponent.Owner.Player2))
-                    .add(new RenderComponent(Utils.dumbSprite(10*4, 16*4), RenderComponent.Layer.Player))
-                    .add(new CollisionComponent(10*4*bboxX, 16*4*bboxY))
-                    .add(new AnimationComponent(AnimationFactory.playerLeft(OwnerComponent.Owner.Player2)))
-                    .add(new InputComponent(controller));
-
-            gaem.engine.addEntity(players[1]);
-        }
-
-        //Altar
-        altar = ItemFactory.spawnAltar();
-        altarLifeBack = new Sprite(TextureManager.getTexture("altar_life_skelet.png"));
-        altarLifeFront = new Sprite(TextureManager.getTexture("altar_life_bar.png"));
-        altarLifeBack.setOrigin(0.0f, 32.0f);
-        altarLifeBack.setScale(1.5f, 1.2f);
-//        altarLifeBack.scale(1.1f)?;
-        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
-        altarLifeFront.setOrigin(0.0f, 32.0f);
-        altarLifeFront.setScale(1.5f, 1.2f);
-        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
-
-        // Dumb control points.
-        createAltarPoints();
-
-        //EnemyFactory.spawnWalker(120, 100);
-
-        blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
-        blackzor.setColor(Color.BLACK);
-        blackzor.setX(-Constants.RES_X / 2);
-        blackzor.setY(-Constants.RES_Y / 2);
-
-        p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
-        p1_faec.setX(-Constants.RES_X / 2 + 100);
-        p1_faec.setY(-Constants.RES_Y / 2 + 100);
-        p1_faec.scale(10);
-
-
-        p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
-        p2_faec.setX(-Constants.RES_X / 2 + 100);
-        p2_faec.setY(-Constants.RES_Y / 2 + 100);
-        p2_faec.scale(10);
-
-        p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
-        p3_faec.setX(-Constants.RES_X / 2 + 100);
-        p3_faec.setY(-Constants.RES_Y / 2 + 100);
-        p3_faec.scale(10);
-
-        pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
-        pinxo.setX(Constants.RES_X / 2 - 100);
-        pinxo.setY(-Constants.RES_Y / 2 + 100);
-        pinxo.scale(3);
-
-        UltraManager.setState(UltraManager.State.IntroDialog);
-
-        gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
-        gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
-        gameOverFade.setCenter(0.0f, 0.0f);
+        reset();
     }
 
     float le_timer = 0.0f;
@@ -242,9 +157,10 @@ public class PlayScreen implements Screen {
                             -Constants.RES_Y*0.20f);
                 }
             }
+            UltraManager.State newState = null;
             if (timer_saltar_dialogs > 3.0f)
             {
-                UltraManager.setState(UltraManager.State.Game);
+                newState = UltraManager.gotoNextState();
             }
             if (UltraManager.getState() == UltraManager.State.GameOverDialog)
             {
@@ -283,7 +199,7 @@ public class PlayScreen implements Screen {
                 {
                     if (!UltraManager.nextText())
                     {
-                        UltraManager.isGaemActive = true;
+                        newState = UltraManager.gotoNextState();
                     }
                 }
 
@@ -298,6 +214,11 @@ public class PlayScreen implements Screen {
             }
 
             gaem.batch.end();
+            if (newState == UltraManager.State.IntroDialog)
+            {
+                reset();
+                return;
+            }
         }
 
 
@@ -399,5 +320,102 @@ public class PlayScreen implements Screen {
             );
             alpha += MathUtils.PI2 / 5.0f;
         }
+    }
+
+    private void reset()
+    {
+        // CLEAR ENTITIES
+        gaem.engine.removeAllEntities();
+        gaem.engine.clearPools();
+        // SYSTEMS RESET
+        ItemSpawnSystem.reset();
+        SpawnSystem.reset();
+
+        bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
+        bg_floor.setX(-Constants.RES_X / 2.0f - 20.0f);
+        bg_floor.setY(-Constants.RES_Y / 2.0f - 20.0f);
+
+
+        players = new Entity[numPlayers];
+        float bboxX = 0.9f;
+        float bboxY = 0.8f;
+        spr = new Sprite(Utils.dumbSprite(10*4, 16*4));
+        Controller controller = (Controllers.getControllers().size > 0) ?
+                Controllers.getControllers().get(0) : null;
+        players[0] = gaem.engine.createEntity()
+                .add(new PositionComponent(-200, 0))
+                .add(new VelocityComponent(0, 0))
+                .add(new TypeComponent(TypeComponent.EntityType.Player))
+                .add(new OwnerComponent(OwnerComponent.Owner.Player1))
+                .add(new RenderComponent(spr, RenderComponent.Layer.Player))
+                .add(new CollisionComponent(10*4*bboxX, 16*4*bboxY))
+                .add(new AnimationComponent(AnimationFactory.playerRight(OwnerComponent.Owner.Player1)))
+                .add(new InputComponent(controller));
+        gaem.engine.addEntity(players[0]);
+
+        if (numPlayers > 1) {
+            controller = (Controllers.getControllers().size > 1) ?
+                    Controllers.getControllers().get(1) : null;
+
+            players[1] = gaem.engine.createEntity()
+                    .add(new PositionComponent(200, 0))
+                    .add(new VelocityComponent(0, 0))
+                    .add(new TypeComponent(TypeComponent.EntityType.Player))
+                    .add(new OwnerComponent(OwnerComponent.Owner.Player2))
+                    .add(new RenderComponent(Utils.dumbSprite(10*4, 16*4), RenderComponent.Layer.Player))
+                    .add(new CollisionComponent(10*4*bboxX, 16*4*bboxY))
+                    .add(new AnimationComponent(AnimationFactory.playerLeft(OwnerComponent.Owner.Player2)))
+                    .add(new InputComponent(controller));
+
+            gaem.engine.addEntity(players[1]);
+        }
+
+        //Altar
+        altar = ItemFactory.spawnAltar();
+        altarLifeBack = new Sprite(TextureManager.getTexture("altar_life_skelet.png"));
+        altarLifeFront = new Sprite(TextureManager.getTexture("altar_life_bar.png"));
+        altarLifeBack.setOrigin(0.0f, 32.0f);
+        altarLifeBack.setScale(1.5f, 1.2f);
+//        altarLifeBack.scale(1.1f)?;
+        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
+        altarLifeFront.setOrigin(0.0f, 32.0f);
+        altarLifeFront.setScale(1.5f, 1.2f);
+        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
+
+        // Dumb control points.
+        createAltarPoints();
+
+        //EnemyFactory.spawnWalker(120, 100);
+        blackzor = Utils.dumbSprite((int)Constants.RES_X, (int)(Constants.RES_Y*0.25f));
+        blackzor.setColor(Color.BLACK);
+        blackzor.setX(-Constants.RES_X / 2);
+        blackzor.setY(-Constants.RES_Y / 2);
+
+        p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
+        p1_faec.setX(-Constants.RES_X / 2 + 100);
+        p1_faec.setY(-Constants.RES_Y / 2 + 100);
+        p1_faec.scale(10);
+
+
+        p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
+        p2_faec.setX(-Constants.RES_X / 2 + 100);
+        p2_faec.setY(-Constants.RES_Y / 2 + 100);
+        p2_faec.scale(10);
+
+        p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
+        p3_faec.setX(-Constants.RES_X / 2 + 100);
+        p3_faec.setY(-Constants.RES_Y / 2 + 100);
+        p3_faec.scale(10);
+
+        pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
+        pinxo.setX(Constants.RES_X / 2 - 100);
+        pinxo.setY(-Constants.RES_Y / 2 + 100);
+        pinxo.scale(3);
+
+        UltraManager.setState(UltraManager.State.IntroDialog);
+
+        gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
+        gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
+        gameOverFade.setCenter(0.0f, 0.0f);
     }
 }
