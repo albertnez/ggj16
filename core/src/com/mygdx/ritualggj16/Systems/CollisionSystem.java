@@ -124,6 +124,7 @@ public class CollisionSystem extends IteratingSystem
                                     FXFactory.ExplosionType.BONES :
                                     FXFactory.ExplosionType.PURPLE
                     );
+                    CameraManager.shake(0.3f, 3.0f);
                     engine.removeEntity(entity);
 
                     //UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;

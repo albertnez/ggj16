@@ -1,6 +1,8 @@
 package com.mygdx.ritualggj16;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
@@ -301,8 +304,34 @@ public class PlayScreen implements Screen {
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
         XBox360Pad.update();
+
+
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F12)) drawDebug = !drawDebug;
+
+        if (drawDebug)
+        {
+            Family debug_family = Family.all(CollisionComponent.class, PositionComponent.class, RenderComponent.class).get();
+            ImmutableArray<Entity> debug_entities = gaem.engine.getEntitiesFor(debug_family);
+            for (Entity e : debug_entities)
+            {
+                PositionComponent pos = Mappers.position.get(e);
+                CollisionComponent col = Mappers.collision.get(e);
+
+                gaem.shapeRenderer.setProjectionMatrix(gaem.cam.combined);
+                gaem.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+                gaem.shapeRenderer.rect(pos.x - col.sizeX*0.5f,
+                        pos.y - col.sizeY*0.5f,
+                        col.sizeX,
+                        col.sizeY);
+                gaem.shapeRenderer.end();
+            }
+        }
+
+
     }
 
+    boolean drawDebug = false;
 
     @Override
     public void show() {
