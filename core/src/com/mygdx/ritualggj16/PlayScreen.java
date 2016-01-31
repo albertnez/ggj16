@@ -38,6 +38,8 @@ import com.mygdx.ritualggj16.Systems.MovementSystem;
 import com.mygdx.ritualggj16.Systems.RenderSystem;
 import com.mygdx.ritualggj16.Systems.SpawnSystem;
 
+import java.util.logging.FileHandler;
+
 
 /**
  * Created by ThrepwooD on 29/01/2016.
@@ -68,6 +70,10 @@ public class PlayScreen implements Screen {
     Sprite altarLifeFront;
 
     Sprite gameOverFade;
+
+    private final float fillBarTime = 1.5f;
+    private float currFillTime = 0.0f;
+    private boolean isStarting;
 
     public PlayScreen(Gaem gaem) {
         this.gaem = gaem;
@@ -114,28 +120,30 @@ public class PlayScreen implements Screen {
         gaem.batch.end();
 
         // Draw Altar life
-        gaem.batch.begin();
-        altarLifeBack.draw(gaem.batch);
-        int width = Math.round(512 * (float) Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
-        altarLifeFront.setRegion(0, 0, width, 32);
-        altarLifeFront.setSize(width, 32);
-        altarLifeFront.draw(gaem.batch);
-        gaem.batch.end();
+        if (UltraManager.getState() != UltraManager.State.IntroDialog)
+        {
 
-        /*
-        gaem.batch.begin();
-        UltraManager.lasthit_p1_spr.setRegion(UltraManager.lasthit_p1_anim.getKeyFrame(le_timer));
-        UltraManager.lasthit_p1_spr.setX(-Constants.RES_X/2 + Constants.RES_X*0.05f);
-        UltraManager.lasthit_p1_spr.setY((Constants.RES_Y/2) -(Constants.RES_Y/2)*0.25f );
-        UltraManager. lasthit_p1_spr.draw(gaem.batch);
-        gaem.batch.end();
-        */
+            int width = Math.round(512 * (float) Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
+            if (isStarting)
+            {
+                width = Math.round(512 * (currFillTime * currFillTime)  / (fillBarTime * fillBarTime));
+                currFillTime += delta;
+                if (currFillTime >= fillBarTime)
+                {
+                    isStarting = false;
+                }
+            }
+            gaem.batch.begin();
+            altarLifeBack.draw(gaem.batch);
+            altarLifeFront.setRegion(0, 0, width, 32);
+            altarLifeFront.setSize(width, 32);
+            altarLifeFront.draw(gaem.batch);
+            gaem.batch.end();
+        }
+
 
         if (!UltraManager.isGaemActive)
         {
-
-
-
             if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) ||
                     XBox360Pad.anyControllerButtonDown(XBox360Pad.BUTTON_START))
             {
@@ -410,6 +418,9 @@ public class PlayScreen implements Screen {
         pinxo.scale(3);
 
         UltraManager.setState(UltraManager.State.IntroDialog);
+
+        currFillTime = 0.0f;
+        isStarting = true;
 
         gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
         gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
