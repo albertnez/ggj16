@@ -27,13 +27,12 @@ public class EnemyComponent implements Component {
 
     public boolean shooting = false;
 
-    public EnemyComponent(EnemyType type, boolean spawnsWithEnemy)
+    public EnemyComponent(EnemyType type)
     {
         this.type = type;
         this.shakeTime = 0.0f;
         this.shakeY = MathUtils.randomBoolean();
         this.attackCooldown = 0.0f;
-        this.containsAltarItem = spawnsWithEnemy;
         switch (type)
         {
             case Walker:
@@ -55,9 +54,5 @@ public class EnemyComponent implements Component {
                 this.attackPeriod = 5.0f;
                 break;
         }
-    }
-    public EnemyComponent(EnemyType type)
-    {
-        this(type, false);
     }
 }
