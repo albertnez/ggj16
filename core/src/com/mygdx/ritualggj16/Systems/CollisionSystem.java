@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.ritualggj16.AltarCandles;
 import com.mygdx.ritualggj16.AudioManager;
 import com.mygdx.ritualggj16.CameraManager;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
@@ -181,6 +182,8 @@ public class CollisionSystem extends IteratingSystem
                 // TODO: Maybe replace this by some animation.
                 Sprite spr = new Sprite(TextureManager.getTexture("images/losetas.png"), 16, 16*id, 16, 16);
                 Mappers.render_comp.get(entity).spr = spr;
+                ItemSpawnSystem.setEnabled(id);
+                AltarCandles.update(id);
                 return;
             }
         }

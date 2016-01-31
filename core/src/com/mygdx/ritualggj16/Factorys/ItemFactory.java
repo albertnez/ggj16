@@ -50,18 +50,19 @@ public class ItemFactory
         );
     }
 
-    public static void spawnCandle(float x, float y)
+    public static Entity spawnCandle(float x, float y)
     {
         RenderComponent renderComponent = new RenderComponent(Utils.dumbSprite(16, 32), RenderComponent.Layer.Ground);
 
         renderComponent.invert = MathUtils.randomBoolean();
 
-        gaem.engine.addEntity(gaem.engine.createEntity()
+        Sprite spr_candle = new Sprite(TextureManager.getTexture("images/items.png"), 0, 16, 8, 16);
+        Entity entity = gaem.engine.createEntity();
+        gaem.engine.addEntity(entity
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.Decoration))
-                        .add(renderComponent)
-                        .add(new AnimationComponent(AnimationFactory.candle()))
+                        .add(new RenderComponent(spr_candle, RenderComponent.Layer.Ground, 1.5f))
         );
-
+        return entity;
     }
 }
