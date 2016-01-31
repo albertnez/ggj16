@@ -24,7 +24,7 @@ public class ItemFactory
 
     public static Entity spawnAltar()
     {
-        Sprite spr_altar = new Sprite(TextureManager.getTexture("altar.png"), 20, 32);
+        Sprite spr_altar = new Sprite(TextureManager.getTexture("images/altar.png"), 20, 32);
         Entity altar = gaem.engine.createEntity()
                 .add(new PositionComponent(0, 0))
                 .add(new VelocityComponent(0, 0))

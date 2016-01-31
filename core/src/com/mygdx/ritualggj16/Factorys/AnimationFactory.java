@@ -17,7 +17,7 @@ public class AnimationFactory
     public static Animation playerLeft(OwnerComponent.Owner owner)
     {
         Texture tex = TextureManager.getTexture(
-                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+                owner == OwnerComponent.Owner.Player1 ? "images/player_sheet.png" : "images/player2_sheet.png"
         );
 
         Animation anim = new Animation(0.5f/3,
@@ -32,7 +32,7 @@ public class AnimationFactory
     public static Animation playerRight(OwnerComponent.Owner owner)
     {
         Texture tex = TextureManager.getTexture(
-                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+                owner == OwnerComponent.Owner.Player1 ? "images/player_sheet.png" : "images/player2_sheet.png"
         );
 
         Animation anim = new Animation(0.5f/3,
@@ -47,7 +47,7 @@ public class AnimationFactory
     public static Animation playerDown(OwnerComponent.Owner owner)
     {
         Texture tex = TextureManager.getTexture(
-                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+                owner == OwnerComponent.Owner.Player1 ? "images/player_sheet.png" : "images/player2_sheet.png"
         );
 
         Animation anim = new Animation(0.5f/3,
@@ -63,7 +63,7 @@ public class AnimationFactory
     public static Animation playerUp(OwnerComponent.Owner owner)
     {
         Texture tex = TextureManager.getTexture(
-                owner == OwnerComponent.Owner.Player1 ? "player_sheet.png" : "player2_sheet.png"
+                owner == OwnerComponent.Owner.Player1 ? "images/player_sheet.png" : "images/player2_sheet.png"
         );
 
         Animation anim = new Animation(0.5f/3,
@@ -79,7 +79,7 @@ public class AnimationFactory
 
     public static Animation blob()
     {
-        Texture tex = TextureManager.getTexture("blob.png");
+        Texture tex = TextureManager.getTexture("images/blob.png");
 
         Animation anim = new Animation(1.5f/4,
                 new TextureRegion(tex, 0,  0, 10 ,8),
@@ -93,7 +93,7 @@ public class AnimationFactory
     }
     public static Animation blobDie()
     {
-        Texture tex = TextureManager.getTexture("blob.png");
+        Texture tex = TextureManager.getTexture("images/blob.png");
 
         Animation anim = new Animation(0.1f/4,
                 new TextureRegion(tex, 20,  0, 10 ,8),
@@ -108,7 +108,7 @@ public class AnimationFactory
 
     public static Animation blobWarrior()
     {
-        Texture tex = TextureManager.getTexture("blob_warrior.png");
+        Texture tex = TextureManager.getTexture("images/blob_warrior.png");
 
         Animation anim = new Animation(1.5f/4,
                 new TextureRegion(tex, 0,  0, 10 ,8),
@@ -122,7 +122,7 @@ public class AnimationFactory
     }
     public static Animation blobWarriorDie()
     {
-        Texture tex = TextureManager.getTexture("blob_warrior.png");
+        Texture tex = TextureManager.getTexture("images/blob_warrior.png");
 
         Animation anim = new Animation(1.5f/4,
                 new TextureRegion(tex, 0,  0, 10 ,8),
@@ -137,7 +137,7 @@ public class AnimationFactory
 
     public static Animation candle()
     {
-        Texture tex = TextureManager.getTexture("items.png");
+        Texture tex = TextureManager.getTexture("images/items.png");
 
         Animation anim = new Animation(0.5f/4,
                 new TextureRegion(tex, 0,  0, 8 ,16),
@@ -152,7 +152,7 @@ public class AnimationFactory
 
     public static Animation altarItem(int id)
     {
-        Texture tex = TextureManager.getTexture("losetas.png");
+        Texture tex = TextureManager.getTexture("images/losetas.png");
         Animation anim = new Animation(0.5f/2.0f,
                 new TextureRegion(tex, 32, 16*id, 16, 16),
                 new TextureRegion(tex, 48, 16*id, 16, 16)
@@ -163,7 +163,7 @@ public class AnimationFactory
 
     public static Animation altarGirl()
     {
-        Texture tex = TextureManager.getTexture("altar.png");
+        Texture tex = TextureManager.getTexture("images/altar.png");
         Animation anim = new Animation(1.0f/4.0f,
                 new TextureRegion(tex, 0, 0, 20, 32),
                 new TextureRegion(tex, 20, 0, 20, 32),
@@ -176,7 +176,7 @@ public class AnimationFactory
 
     public static Animation bullet()
     {
-        Texture tex = TextureManager.getTexture("bullets.png");
+        Texture tex = TextureManager.getTexture("images/bullets.png");
         Animation anim = new Animation(0.25f/3.0f,
                 new TextureRegion(tex, 0, 0, 16, 16),
                 new TextureRegion(tex, 0, 16, 16, 16),

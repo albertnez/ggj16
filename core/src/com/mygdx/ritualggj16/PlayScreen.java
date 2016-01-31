@@ -288,7 +288,7 @@ public class PlayScreen implements Screen {
 
     private void createAltarPoint(float x, float y, int id)
     {
-        Sprite sprite = new Sprite(TextureManager.getTexture("losetas.png"), 0, 16*id, 16, 16);
+        Sprite sprite = new Sprite(TextureManager.getTexture("images/losetas.png"), 0, 16*id, 16, 16);
         gaem.engine.addEntity(
                 gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
@@ -333,7 +333,7 @@ public class PlayScreen implements Screen {
         ItemSpawnSystem.reset();
         SpawnSystem.reset();
 
-        bg_floor = new Sprite(TextureManager.getTexture("bg_floor.png"));
+        bg_floor = new Sprite(TextureManager.getTexture("images/bg_floor.png"));
         bg_floor.setX(-Constants.RES_X / 2.0f - 20.0f);
         bg_floor.setY(-Constants.RES_Y / 2.0f - 20.0f);
 
@@ -374,8 +374,8 @@ public class PlayScreen implements Screen {
 
         //Altar
         altar = ItemFactory.spawnAltar();
-        altarLifeBack = new Sprite(TextureManager.getTexture("altar_life_skelet.png"));
-        altarLifeFront = new Sprite(TextureManager.getTexture("altar_life_bar.png"));
+        altarLifeBack = new Sprite(TextureManager.getTexture("images/altar_life_skelet.png"));
+        altarLifeFront = new Sprite(TextureManager.getTexture("images/altar_life_bar.png"));
         altarLifeBack.setOrigin(0.0f, 32.0f);
         altarLifeBack.setScale(1.5f, 1.2f);
 //        altarLifeBack.scale(1.1f)?;
@@ -393,23 +393,23 @@ public class PlayScreen implements Screen {
         blackzor.setX(-Constants.RES_X / 2);
         blackzor.setY(-Constants.RES_Y / 2);
 
-        p1_faec = new Sprite(TextureManager.getTexture("p1_faec.png"));
+        p1_faec = new Sprite(TextureManager.getTexture("images/p1_faec.png"));
         p1_faec.setX(-Constants.RES_X / 2 + 100);
         p1_faec.setY(-Constants.RES_Y / 2 + 100);
         p1_faec.scale(10);
 
 
-        p2_faec = new Sprite(TextureManager.getTexture("p2_faec.png"));
+        p2_faec = new Sprite(TextureManager.getTexture("images/p2_faec.png"));
         p2_faec.setX(-Constants.RES_X / 2 + 100);
         p2_faec.setY(-Constants.RES_Y / 2 + 100);
         p2_faec.scale(10);
 
-        p3_faec = new Sprite(TextureManager.getTexture("p3_faec.png"));
+        p3_faec = new Sprite(TextureManager.getTexture("images/p3_faec.png"));
         p3_faec.setX(-Constants.RES_X / 2 + 100);
         p3_faec.setY(-Constants.RES_Y / 2 + 100);
         p3_faec.scale(10);
 
-        pinxo = new Sprite(TextureManager.getTexture("pinxo.png"));
+        pinxo = new Sprite(TextureManager.getTexture("images/pinxo.png"));
         pinxo.setX(Constants.RES_X / 2 - 100);
         pinxo.setY(-Constants.RES_Y / 2 + 100);
         pinxo.scale(3);

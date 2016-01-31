@@ -176,7 +176,7 @@ public class CollisionSystem extends IteratingSystem
             {
                 Mappers.altarPoint.get(entity).state = AltarPointComponent.State.Active;
                 // TODO: Maybe replace this by some animation.
-                Sprite spr = new Sprite(TextureManager.getTexture("losetas.png"), 16, 16*id, 16, 16);
+                Sprite spr = new Sprite(TextureManager.getTexture("images/losetas.png"), 16, 16*id, 16, 16);
                 Mappers.render_comp.get(entity).spr = spr;
                 return;
             }

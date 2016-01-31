@@ -144,7 +144,7 @@ public class RenderSystem extends SortedIteratingSystem
 
     private void drawLife(Entity entity)
     {
-        Sprite background = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 0, 16, 5);
+        Sprite background = new Sprite(TextureManager.getTexture("images/lifebar.png"), 0, 0, 16, 5);
         background.setOrigin(0.0f, 0.0f);
         background.scale(3.0f);
         background.setPosition(
@@ -152,7 +152,7 @@ public class RenderSystem extends SortedIteratingSystem
                 Mappers.position.get(entity).y + Mappers.collision.get(entity).sizeY + 4
         );
         int width = Math.round(16 * (float)Mappers.life.get(entity).life/Mappers.life.get(entity).maxLife);
-        Sprite foreground = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 5, width, 5);
+        Sprite foreground = new Sprite(TextureManager.getTexture("images/lifebar.png"), 0, 5, width, 5);
         foreground.setOrigin(0.0f, 0.0f);
         foreground.scale(3.0f);
         foreground.setPosition(

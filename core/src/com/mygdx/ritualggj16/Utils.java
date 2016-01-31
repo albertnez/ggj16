@@ -10,7 +10,7 @@ public class Utils
 {
     static public Sprite dumbSprite(int w, int h)
     {
-        return new Sprite(TextureManager.getTexture("teh_pixel.png"), w, h);
+        return new Sprite(TextureManager.getTexture("images/teh_pixel.png"), w, h);
     }
 
     /* Returns the angle from 8 direction angles closest to the given alpha.

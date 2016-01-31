@@ -88,8 +88,8 @@ public class FXFactory
     {
         Texture tex = TextureManager.getTexture(
                 type == ExplosionType.BONES?
-                    "bones.png":
-                    "bullets.png"
+                    "images/bones.png":
+                    "images/bullets.png"
         );
         Animation anim = new Animation(0.25f/5,
                 new TextureRegion(tex, 16, 0, 16 ,16),
