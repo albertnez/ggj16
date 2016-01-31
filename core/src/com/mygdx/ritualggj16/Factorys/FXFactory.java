@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.AudioManager;
 import com.mygdx.ritualggj16.CameraManager;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
@@ -119,6 +120,7 @@ public class FXFactory
 
     public static void losetaCatch(float x, float y, int id)
     {
+        AudioManager.land.play();
         Sprite spr = new Sprite(TextureManager.getTexture("images/losetas.png"), 16, 16*id, 16, 16);
 
         Entity entity = gaem.engine.createEntity();
