@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.ritualggj16.AltarCandles;
 import com.mygdx.ritualggj16.AudioManager;
@@ -192,7 +193,7 @@ public class CollisionSystem extends IteratingSystem
                         EnemyComponent ec = Mappers.enemy.get(entity);
                         if (ec.attackCooldown <= 0.0f)
                         {
-                            ec.attackCooldown = ec.attackPeriod;
+                            ec.attackCooldown = ec.attackPeriod * MathUtils.random(0.80f, 1.20f);
 
                             entity.add(new RenderEffectComponent(0.3f, 2.0f, 1.0f, 1.0f, 1.0f, false));
 

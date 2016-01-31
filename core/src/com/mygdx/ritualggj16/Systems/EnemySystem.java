@@ -132,7 +132,7 @@ public class EnemySystem extends IteratingSystem {
             enemy.shakeTime -= deltaTime;
             if (enemy.shakeTime < -0.0f)
             {
-                enemy.shakeTime = 2.0f;
+                enemy.shakeTime = enemy.attackPeriod;
                 vel.x *= -1.0f;
                 vel.y *= -1.0f;
 
