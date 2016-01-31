@@ -277,7 +277,8 @@ public class PlayScreen implements Screen {
                 if (TimeUtils.millis()%500  < 250)
                     pinxo.draw(gaem.batch);
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
+                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_A))
                 {
                     if (!UltraManager.nextText())
                     {
@@ -289,7 +290,7 @@ public class PlayScreen implements Screen {
             else
             {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
-                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_X))
+                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_A))
                 {
                     UltraManager.textTimer = UltraManager.textDuration;
                 }
