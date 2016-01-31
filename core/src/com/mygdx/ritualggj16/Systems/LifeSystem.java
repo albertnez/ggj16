@@ -9,6 +9,7 @@ import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
+import com.mygdx.ritualggj16.Factorys.ItemFactory;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.UltraManager;
 
@@ -37,6 +38,18 @@ public class LifeSystem extends IteratingSystem
             {
                 UltraManager.setState(UltraManager.State.GameOverDialog);
                 return;
+            }
+            if (Mappers.enemy.has(entity))
+            {
+                if (--SpawnSystem.aliveEnemies == 0 && SpawnSystem.lastRound)
+                {
+
+                    ItemFactory.spawnAltarEnabler(
+                            Mappers.position.get(entity).x,
+                            Mappers.position.get(entity).y,
+                            ItemSpawnSystem.getAltarEnablerId()
+                    );
+                }
             }
             AudioManager.kill.play();
             PositionComponent pos = Mappers.position.get(entity);

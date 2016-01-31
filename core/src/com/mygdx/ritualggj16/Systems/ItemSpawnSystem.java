@@ -21,7 +21,7 @@ public class ItemSpawnSystem extends IntervalSystem
 {
     public static boolean altarItemActive = false;
     public static int numAltarPointsActivated = 0;
-    public Engine engine;
+    public static Engine engine;
     private static boolean whichEnabled[] = new boolean[5];
     public ItemSpawnSystem(float interval, Engine engine)
     {
@@ -58,6 +58,23 @@ public class ItemSpawnSystem extends IntervalSystem
         altarItemActive = true;
     }
 
+    public static int getAltarEnablerId()
+    {
+        ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(AltarPointComponent.class).get());
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (Entity entity : entities)
+        {
+            if (Mappers.altarPoint.get(entity).state == AltarPointComponent.State.Inactive)
+            {
+                ids.add(Mappers.altarPoint.get(entity).id);
+            }
+        }
+        if (ids.isEmpty())
+        {
+            return -1;
+        }
+        return ids.get(MathUtils.random(ids.size()-1));
+    }
     public static void altarPointEnabled()
     {
         numAltarPointsActivated++;

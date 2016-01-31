@@ -40,6 +40,10 @@ public class ItemFactory
 
     public static void spawnAltarEnabler(float x, float y, int id)
     {
+        if (id == -1)
+        {
+            return;
+        }
         gaem.engine.addEntity(gaem.engine.createEntity()
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.AltarItem))
