@@ -216,8 +216,7 @@ public class PlayScreen implements Screen {
 
         if (!UltraManager.isGaemActive)
         {
-            if (Gdx.input.isKeyPressed(Input.Keys.ENTER) ||
-                    XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_START))
+            if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
             {
                 timer_saltar_dialogs += delta;
             }
@@ -226,9 +225,7 @@ public class PlayScreen implements Screen {
                 timer_saltar_dialogs = 0.0f;
             }
 
-
             gaem.batch.begin();
-
 
             if (timer_saltar_dialogs > 0.75f)
             {
@@ -273,12 +270,10 @@ public class PlayScreen implements Screen {
             //Pinxo?
             if (UltraManager.isTextTimerFinished())
             {
-
                 if (TimeUtils.millis()%500  < 250)
                     pinxo.draw(gaem.batch);
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
-                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_A))
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
                 {
                     if (!UltraManager.nextText())
                     {

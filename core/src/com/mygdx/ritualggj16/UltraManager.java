@@ -49,7 +49,7 @@ public class UltraManager
                     "ES NECESARIO PARA EL PROCESO",
         "OTIA FALE\nPOH ME LA SACO YA",
             "NO TAN RAPIDO!",
-            "RECUERDA QUE \n ANTES DE PROCEDER AL [RED]SACRIFICIO[]\n" +
+            "RECUERDA QUE \nANTES DE PROCEDER AL [RED]SACRIFICIO[]\n" +
             "TENEMOS QUE ACTIVAR \nTODAS LAS [ORANGE]RUNAS[]",
         "A SIIIII!!!!!!1111\nEMOS DE PIYAR LOS [ORANGE]SIMBOLACOS[]\n" +
                 "KE ACTIVAN LOS PIEDROLOS",
@@ -58,11 +58,11 @@ public class UltraManager
             "NO VA A QUERER COMPARTIR \nSU PODER POR LA CARA",
             "NOS ENVIARA A SUS FIELES [BLUE]LACAYOS[]\n" +
                     "CON INTENCIONES DE ROMPER\n" +
-                    "EL SELLO DE [PINK]VIRGINIDAD[]\n DEL SUJETO SACRIFICADO",
+                    "EL SELLO DE [PINK]VIRGINIDAD[]\nDEL SUJETO SACRIFICADO",
 
                             "SOIS UNOS [RED]PUTOS GILIPOLLAS[]",
 
-            "PERO PERO TIO...\n AMOS HA BER UNA KOSIYA...\n",
+            "EEESTO PERO PISHA...\nAMOS HA BER UNA KOSIYA...\n",
             "LESTAMOS REGALANDO AL \n[BLACK]GRAN DIOS OSCURO[]\n" +
             "UNA JAMELGA DEL GRATIX\n",
 
@@ -127,11 +127,11 @@ public class UltraManager
 
     private static String gameOverDialogs[] = {
             "[RED]AAAAAAAAAAAARGGGHH!!!!![]",
-            "TIIIOOOOO\nSOLO TENIAS QUE PROTEGER A LA TIA",
+            "WAAA\nOI NOS KEDAMOS A DOS BELAS OTRA VEH",
     };
     private static DialogOwner gameOverOwners[] = {
             DialogOwner.PLAYER_3,
-            DialogOwner.PLAYER_2,
+            DialogOwner.PLAYER_1,
     };
 
     private static String currentDialogs[];
