@@ -11,7 +11,8 @@ public class EnemyComponent implements Component {
 
     public enum EnemyType {
         Walker,
-        Warrior
+        Warrior,
+        Big
     }
 
     public EnemyType type;
@@ -23,7 +24,7 @@ public class EnemyComponent implements Component {
     public float attackPeriod;
     public float attackCooldown;
 
-    public boolean shooting;
+    public boolean shooting = false;
 
     public EnemyComponent(EnemyType type)
     {
@@ -38,11 +39,19 @@ public class EnemyComponent implements Component {
                 this.damage = 1;
                 this.shakePeriod = 0.2f;
                 this.attackPeriod = 3.0f;
+                break;
             case Warrior:
                 this.speed = Wikipedia.Speed(type);
                 this.damage = 2;
                 this.shakePeriod = 0.2f;
                 this.attackPeriod = 2.0f;
+                break;
+            case Big:
+                this.speed = Wikipedia.Speed(type);
+                this.damage = 4;
+                this.shakePeriod = 0.2f;
+                this.attackPeriod = 5.0f;
+                break;
         }
     }
 }

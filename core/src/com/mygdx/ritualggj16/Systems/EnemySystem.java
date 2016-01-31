@@ -44,11 +44,11 @@ public class EnemySystem extends IteratingSystem {
             case Warrior:
                 updateWarrior(entity, deltaTime);
                 break;
+
+            case Big:
+                updateWalker(entity, deltaTime);
         }
 
-        if (enemy.type == EnemyComponent.EnemyType.Warrior) {
-
-        }
     }
 
 
@@ -106,7 +106,6 @@ public class EnemySystem extends IteratingSystem {
         // Walker enemy just goes to the center for now.
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
-
 
         if (Vector2.Zero.dst(pos.x, pos.y) < 300.0f)
         {

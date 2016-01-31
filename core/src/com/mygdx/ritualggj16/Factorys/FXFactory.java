@@ -74,6 +74,15 @@ public class FXFactory
             anim.setPlayMode(Animation.PlayMode.LOOP);
             enemy.add(new AnimationComponent(anim));
         }
+        else if (monster.type == EnemyComponent.EnemyType.Big)
+        {
+            RenderComponent rc = new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player);
+            rc.invert = inver;
+            enemy.add(rc);
+            Animation anim = AnimationFactory.blobWarriorDie();
+            anim.setPlayMode(Animation.PlayMode.LOOP);
+            enemy.add(new AnimationComponent(anim));
+        }
 
         enemy.add(new PositionComponent(x, y));
         enemy.add(new RenderEffectComponent(0.3f, 1.0f, 3.0f, 0.9f, 0.1f, true));

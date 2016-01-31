@@ -25,7 +25,7 @@ public class EnemyFactory {
                 .add(new VelocityComponent(0, 0))
                 .add(new EnemyComponent(EnemyComponent.EnemyType.Walker))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
-                .add(new LifeComponent(2))
+                .add(new LifeComponent(4))
                 .add(new AnimationComponent(AnimationFactory.blob()))
                 .add(new CollisionComponent(10*4, 8*4))
                 .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player));
@@ -40,11 +40,25 @@ public class EnemyFactory {
                 .add(new VelocityComponent(0, 0))
         .add(new EnemyComponent(EnemyComponent.EnemyType.Warrior))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
-                .add(new LifeComponent(1))
+                .add(new LifeComponent(3))
                 .add(new AnimationComponent(AnimationFactory.blobWarrior()))
                 .add(new CollisionComponent(10*4, 8*4))
                 .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player));
 
+        gaem.engine.addEntity(enemy);
+    }
+
+    public static void spawnBigBlob(float x, float y)
+    {
+        Entity enemy = gaem.engine.createEntity()
+                .add(new PositionComponent(x, y))
+                .add(new VelocityComponent(0, 0))
+                .add(new EnemyComponent(EnemyComponent.EnemyType.Big))
+                .add(new TypeComponent(TypeComponent.EntityType.Enemy))
+                .add(new LifeComponent(8))
+                .add(new AnimationComponent(AnimationFactory.blobBig()))
+                .add(new CollisionComponent(10*4, 8*4))
+                .add(new RenderComponent(Utils.dumbSprite(10*16, 8*16), RenderComponent.Layer.Player));
         gaem.engine.addEntity(enemy);
     }
 
@@ -56,6 +70,8 @@ public class EnemyFactory {
                 spawnWalker(x, y); break;
             case 1:
                 spawnWarrior(x, y); break;
+            case 2:
+                spawnBigBlob(x, y); break;
             default:
                 spawnWalker(x, y); break;
         }

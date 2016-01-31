@@ -181,7 +181,7 @@ public class CollisionSystem extends IteratingSystem
 
                 // ENEMY vs ALTAR
                 if (et.type == TypeComponent.EntityType.Enemy &&
-                        Mappers.enemy.get(entity).type == EnemyComponent.EnemyType.Walker &&
+                        Mappers.enemy.get(entity).type != EnemyComponent.EnemyType.Warrior &&
                         ot.type == TypeComponent.EntityType.Altar)
                 {
 

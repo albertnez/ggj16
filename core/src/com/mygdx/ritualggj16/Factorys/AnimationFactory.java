@@ -124,6 +124,22 @@ public class AnimationFactory
     {
         Texture tex = TextureManager.getTexture("images/blob_warrior.png");
 
+        Animation anim = new Animation(0.1f/4,
+                new TextureRegion(tex, 20,  0, 10 ,8),
+                new TextureRegion(tex, 30, 0, 10 ,8),
+                new TextureRegion(tex, 20,  8, 10 ,8),
+                new TextureRegion(tex, 30, 8, 10 ,8)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+
+        return anim;
+    }
+
+    public static Animation blobBig()
+    {
+        Texture tex = TextureManager.getTexture("images/blob_big.png");
+
         Animation anim = new Animation(1.5f/4,
                 new TextureRegion(tex, 0,  0, 10 ,8),
                 new TextureRegion(tex, 10, 0, 10 ,8),
@@ -134,6 +150,22 @@ public class AnimationFactory
 
         return anim;
     }
+    public static Animation blobBigDie()
+    {
+        Texture tex = TextureManager.getTexture("images/blob_big.png");
+
+        Animation anim = new Animation(0.1f/4,
+                new TextureRegion(tex, 20,  0, 10 ,8),
+                new TextureRegion(tex, 30, 0, 10 ,8),
+                new TextureRegion(tex, 20,  8, 10 ,8),
+                new TextureRegion(tex, 30, 8, 10 ,8)
+        );
+        anim.setPlayMode(Animation.PlayMode.LOOP);
+
+        return anim;
+    }
+
+
 
     public static Animation candle()
     {

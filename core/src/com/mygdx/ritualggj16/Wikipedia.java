@@ -15,7 +15,10 @@ public class Wikipedia
     }
     public static float Speed(EnemyComponent.EnemyType type)
     {
-        return 50.0f;
+
+        if (type == EnemyComponent.EnemyType.Big) return 25.0f;
+
+        return 45.0f;
     }
 
 }
