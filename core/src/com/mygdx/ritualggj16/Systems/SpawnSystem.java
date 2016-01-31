@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.EnemyFactory;
 import com.mygdx.ritualggj16.UltraManager;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 /**
  * Created by anon on 1/30/16.

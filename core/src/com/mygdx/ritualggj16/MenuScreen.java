@@ -1,21 +1,16 @@
 package com.mygdx.ritualggj16;
 
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 
 /**
@@ -28,7 +23,7 @@ public class MenuScreen implements Screen
     BitmapFont menu_font;
 
     Stage stage;
-    
+
     private static final String title = "TEH RITUAL";
     private static int numShadows = 8;
     private static float titleX = 180.0f;

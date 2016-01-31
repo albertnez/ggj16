@@ -4,8 +4,6 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 
-import java.awt.Button;
-
 /**
  * Created by ThrepwooD on 29/01/2016.
  */

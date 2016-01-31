@@ -18,12 +18,10 @@ import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
-import com.mygdx.ritualggj16.PlayScreen;
 import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 import com.mygdx.ritualggj16.Wikipedia;
 import com.mygdx.ritualggj16.XBox360Pad;
-import com.sun.org.apache.xerces.internal.impl.xs.models.XSCMBinOp;
 
 /**
  * Created by anon on 1/30/16.

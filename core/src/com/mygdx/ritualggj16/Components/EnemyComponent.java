@@ -4,9 +4,6 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.MathUtils;
 import com.mygdx.ritualggj16.Wikipedia;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by anon on 1/30/16.
  */
