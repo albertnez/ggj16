@@ -156,6 +156,7 @@ public class CollisionSystem extends IteratingSystem
                         {
                             ec.attackCooldown = ec.attackPeriod;
 
+                            AudioManager.scream.play();
                             Mappers.life.get(other).damage(Mappers.enemy.get(entity).damage);
                             CameraManager.smallShake();
                         }

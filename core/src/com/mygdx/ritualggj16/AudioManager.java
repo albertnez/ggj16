@@ -16,6 +16,7 @@ public class AudioManager
     public static Sound pickup;
     public static Sound hit;
     public static Sound kill;
+    public static Sound scream;
 
     public static void init()
     {
@@ -27,6 +28,7 @@ public class AudioManager
         pickup = loadSound("audio/pickup.mp3");
         hit = loadSound("audio/hit.mp3");
         kill = loadSound("audio/kill.mp3");
+        scream = loadSound("audio/scream.wav");
     }
 
     public static void stopAll()
