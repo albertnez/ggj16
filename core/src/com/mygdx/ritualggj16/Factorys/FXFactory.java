@@ -77,17 +77,26 @@ public class FXFactory
 
     }
 
-    public static void makeExplosion(float x, float y)
+    public enum ExplosionType
     {
+        PURPLE,
+        BONES
+    }
 
-        Texture tex = TextureManager.getTexture("explosions.png");
-        Animation anim = new Animation(0.3f/6,
-                new TextureRegion(tex, 640, 58, 16 ,16),
-                new TextureRegion(tex, 660, 58, 16 ,16),
-                new TextureRegion(tex, 680, 58, 16 ,16),
-                new TextureRegion(tex, 700, 58, 16 ,16),
-                new TextureRegion(tex, 720, 58, 16 ,16),
-                new TextureRegion(tex, 740, 58, 16 ,16)
+
+    public static void makeExplosion(float x, float y, ExplosionType type)
+    {
+        Texture tex = TextureManager.getTexture(
+                type == ExplosionType.BONES?
+                    "bones.png":
+                    "bullets.png"
+        );
+        Animation anim = new Animation(0.25f/5,
+                new TextureRegion(tex, 16, 0, 16 ,16),
+                new TextureRegion(tex, 16, 16, 16 ,16),
+                new TextureRegion(tex, 16, 16, 16 ,16),
+                new TextureRegion(tex, 16, 32, 16 ,16),
+                new TextureRegion(tex, 16, 32, 16 ,16)
         );
         anim.setPlayMode(Animation.PlayMode.NORMAL);
 
@@ -95,12 +104,16 @@ public class FXFactory
         entity.add(new PositionComponent(x, y));
         entity.add(new AnimationComponent(anim));
         entity.add(new RenderComponent(
-                new Sprite(new TextureRegion(tex, 640, 58, 16 ,16)),
+                new Sprite(new TextureRegion(tex, 16, 0, 16 ,16)),
                 RenderComponent.Layer.Explosion,
                 1.0f));
-        entity.add(new RenderEffectComponent(0.25f, 1.0f, 1.0f, 1.0f, 0.25f, false));
+        entity.add(new RenderEffectComponent(
+                0.25f,
+                1.0f, 5.0f,
+                1.0f, 0.6f,
+                false,
+                type == ExplosionType.BONES, false));
         gaem.engine.addEntity(entity);
-
     }
 
 }

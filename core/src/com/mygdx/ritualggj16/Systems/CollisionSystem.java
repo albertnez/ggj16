@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
+import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
@@ -122,7 +123,11 @@ public class CollisionSystem extends IteratingSystem
 
                     Mappers.life.get(other).life -= Mappers.bullet.get(entity).damage;
                     FXFactory.MakeHitText(pos.x, pos.y);
-                    FXFactory.makeExplosion(pos.x, pos.y);
+                    FXFactory.makeExplosion(pos.x, pos.y,
+                            (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2)?
+                                    FXFactory.ExplosionType.BONES :
+                                    FXFactory.ExplosionType.PURPLE
+                    );
                     engine.removeEntity(entity);
 
                     //UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;

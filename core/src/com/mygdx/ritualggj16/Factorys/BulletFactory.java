@@ -13,6 +13,7 @@ import com.mygdx.ritualggj16.Components.LifeComponent;
 import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
+import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Gaem;
@@ -29,8 +30,13 @@ public class BulletFactory
     {
         Entity bullet = gaem.engine.createEntity();
 
-        Texture tex = TextureManager.getTexture("bullets.png");
-        RenderComponent rc = new RenderComponent(new Sprite(new TextureRegion(tex, 0, 0, 16, 16)), RenderComponent.Layer.Bullet);
+        Texture tex = TextureManager.getTexture(
+                owner == OwnerComponent.Owner.Player1 ?
+                "bullets.png":"bones.png"
+        );
+        RenderComponent rc = new RenderComponent(
+                new Sprite(new TextureRegion(tex, 0, 0, 16, 16)),
+                RenderComponent.Layer.Bullet);
         rc.rotation = angle-90;
         rc.scale = 2.0f;
         bullet.add(rc);
@@ -45,9 +51,14 @@ public class BulletFactory
         bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
         bullet.add(new OwnerComponent(owner));
 
-        bullet.add(new AnimationComponent(AnimationFactory.bullet()));
-
-
+        if (owner == OwnerComponent.Owner.Player1)
+        {
+            bullet.add(new AnimationComponent(AnimationFactory.bullet()));
+        }
+        else
+        {
+            bullet.add(new RenderEffectComponent(999.0f, 2.0f, 2.0f, 1.0f, 1.0f, false, true, true));
+        }
         BulletComponent bc = new BulletComponent();
         bc.lifeTime = 3.0f;
         bullet.add(bc);

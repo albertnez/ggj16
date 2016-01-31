@@ -40,6 +40,8 @@ public class Gaem extends Game {
 
         FontManager.generateAll();
 
+
+
         Gdx.graphics.setContinuousRendering(true);
         setScreen(new PlayScreen(this));
 	}

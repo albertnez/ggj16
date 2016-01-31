@@ -6,12 +6,15 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderComponent;
@@ -105,8 +108,15 @@ public class RenderSystem extends SortedIteratingSystem
                 );
                 rc.spr.setAlpha(a);
 
-                if (effect.timer > effect.timer_total)
+                if (effect.rotating)
                 {
+                    rc.rotation += Gdx.graphics.getDeltaTime()*360.0f*2.0f;
+                }
+
+
+                if (effect.timer > effect.timer_total && !effect.loop)
+                {
+
                     e.remove(RenderEffectComponent.class);
                     if (effect.single_use)
                     {

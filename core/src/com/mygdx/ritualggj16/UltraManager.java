@@ -11,14 +11,13 @@ public class UltraManager
 {
     public static boolean isGaemActive = false;
 
-
     /** TEXTAQUENS **/
-    enum DialogOwner {
+    enum DialogOwner
+    {
         PLAYER_1,
         PLAYER_2,
         PLAYER_3
     };
-
 
     public static String dialogs[] = {
         "EEHHEHEHEHEHEEHEHE",
@@ -70,7 +69,7 @@ public class UltraManager
 
                 "SILENCIO MERLUZO\nA CALLAR YA, COJONES\nQUE ME ESTOY CALENTANDO",
 
-                "VAMOS A EMPEZAR EL [RED]RITUAL[]",
+                "VAMOS A EMPEZAR \nEL [RED]RITUAL[]",
 
             "RECUERDA USAR EL STICK DERECHO\nPARA CONTROLAR TU [PURPLE]PODER[]"
     };
