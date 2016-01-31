@@ -4,13 +4,22 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 
+import java.awt.Dialog;
+
 /**
  * Created by ThrepwooD on 30/01/2016.
  */
 public class UltraManager
 {
     public static boolean isGaemActive = false;
+    public static State currentState = State.IntroDialog;
 
+
+    public enum State {
+        IntroDialog,
+        Game,
+        GameOverDialog,
+    }
 
     /** TEXTAQUENS **/
     enum DialogOwner {
@@ -114,21 +123,68 @@ public class UltraManager
 
     };
 
+    private static String gameOverDialogs[] = {
+            "[RED]AAAAAAAAAAAARGGGHH!!!!![]",
+            "TIIIOOOOO\nSOLO TENIAS QUE PROTEGER A LA TIA",
+    };
+    private static DialogOwner gameOverOwners[] = {
+            DialogOwner.PLAYER_3,
+            DialogOwner.PLAYER_2,
+    };
+
+    private static String currentDialogs[];
+    private static DialogOwner currentDialogOwners[];
+
+
     public static float textTimer = 0.0f;
     public static int textIndex = 0;
     public static float textDuration = 2.0f;
 
+    public static boolean isGameActive()
+    {
+        return isGaemActive;
+    }
+    public static State getState()
+    {
+        return currentState;
+    }
+    public static void setState(State state)
+    {
+        textIndex = 0;
+        textTimer = 0.0f;
+        currentState = state;
+        if (state == State.IntroDialog)
+        {
+            currentDialogs = dialogs;
+            currentDialogOwners = dialog_owner;
+            isGaemActive = false;
+        }
+        else if (state == State.GameOverDialog)
+        {
+            currentDialogs = gameOverDialogs;
+            currentDialogOwners = gameOverOwners;
+            isGaemActive = false;
+        }
+        else   // Game
+        {
+            isGaemActive = true;
+        }
+    }
+    public static DialogOwner currentOwner()
+    {
+        return currentDialogOwners[textIndex];
+    }
     public static boolean nextText()
     {
         textTimer = 0.0f;
         textIndex++;
 
-        return (textIndex != dialogs.length);
+        return (textIndex != currentDialogs.length);
     }
 
     public static String getText()
     {
-        String txt = dialogs[textIndex];
+        String txt = currentDialogs[textIndex];
 
         String sub = txt.substring(0,
             Math.min(
@@ -136,10 +192,10 @@ public class UltraManager
                 txt.length()
             )
         );
-
+        
         if (sub.lastIndexOf("[") > sub.lastIndexOf("]"))
         {
-            sub = sub.substring(0, sub.lastIndexOf("[")-1);
+            sub = sub.substring(0, Math.max(0, sub.lastIndexOf("[")-1));
         }
 
         return sub;
