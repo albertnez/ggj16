@@ -64,6 +64,10 @@ public class XBox360Pad
 
     public static void buttonPressed(int buttonIndex)
     {
+        if (buttonIndex >= Buttons.length)
+        {
+            return;
+        }
         buttonPressed[buttonIndex] = true;
     }
     public static void update()
