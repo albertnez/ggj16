@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -18,21 +20,35 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  */
 public class MenuScreen implements Screen
 {
+    private static class LabelActor extends Group
+    {
+        LabelActor(Label label)
+        {
+            this.addActor(label);
+        }
+    }
+
     Gaem game;
     BitmapFont menu_font_big;
     BitmapFont menu_font;
 
     Stage stage;
 
+    private LabelActor la;
     private static final String title = "TEH RITUAL";
     private static int numShadows = 8;
     private static float titleX = 180.0f;
     private static float titleY = 500.0f;
-    private static float shadowX = 10.0f;
-    private static float shadowY = 10.0f;
+    private static final float originShadowX = 10.0f;
+    private static final float originShadowY = 10.0f;
+    private static float shadowX = 4.0f;
+    private static float shadowY = 4.0f;
     private static float wavePeriod = 2.0f;
     private static float waveTime = 0.0f;
-    Label shadowLabels[];
+    private static float rotPeriod = 10.0f;
+    private static float rotTime = 0.0f;
+    private static float totalTime = 0.0f;
+    LabelActor shadowLabels[];
 
     public MenuScreen(Gaem game)
     {
@@ -57,20 +73,28 @@ public class MenuScreen implements Screen
         FreeTypeFontGenerator.FreeTypeFontParameter parameter_big_title = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter_big_title.size = 80;
         parameter_big_title.color = Color.WHITE;
-        parameter_big_title.borderWidth = 2;
+        parameter_big_title.borderWidth = 5;
         parameter_big_title.borderColor = Color.BLACK;
         menu_font_big = generator.generateFont(parameter_big_title);
         menu_font_big.getData().markupEnabled = true;
 
-        shadowLabels = new Label[numShadows];
+//        shadowLabels = new Label[numShadows];
+        shadowLabels = new LabelActor[numShadows];
         for (int i = 0; i < numShadows; ++i)
         {
-            shadowLabels[i] = new Label(title, new Label.LabelStyle(menu_font_big, Color.WHITE));
-            shadowLabels[i].setAlignment(Align.center);
-            shadowLabels[i].setPosition(titleX, titleY);
-            shadowLabels[i].setFontScale(0.5f + 0.1f*i);
+            Color c = new Color(Color.RED);
+            c.a = (float)(i+1)/numShadows;
+            Label label = new Label(title, new Label.LabelStyle(menu_font_big, c));
+            label.setAlignment(Align.center);
+          //  label.setPosition(titleX, titleY);
+            //label.setFontScale(0.5f + 0.1f * i);
+            shadowLabels[i] = new LabelActor(label);
+            shadowLabels[i].setOrigin(200f, 0.0f);
             stage.addActor(shadowLabels[i]);
         }
+
+        la = new LabelActor(new Label(title, new Label.LabelStyle(menu_font_big, Color.WHITE)));
+        stage.addActor(la);
 
         Label.LabelStyle style_intro = new Label.LabelStyle(menu_font, Color.WHITE);
         Label label_intro = new Label("PRESS [YELLOW]START[] AND/OR [GREEN]A[] TO FUN", style_intro);
@@ -89,15 +113,27 @@ public class MenuScreen implements Screen
     public void render(float delta) {
 
         waveTime += delta;
-        if (waveTime > wavePeriod)
+        rotTime += delta;
+        totalTime += delta;
+        if (waveTime >= wavePeriod)
         {
-            waveTime = 0.0f;
+            waveTime -= wavePeriod;
+        }
+        if (rotTime >= rotPeriod)
+        {
+            rotTime -= rotPeriod;
         }
         float alpha = MathUtils.PI2 * (waveTime / wavePeriod);
+        float rot = MathUtils.PI2 * (rotTime / rotPeriod);
+
+        shadowX = originShadowX + 1.0f * MathUtils.sin(totalTime);
+        shadowY = originShadowY + 1.0f * MathUtils.sin(totalTime);
         for (int i = 0; i < numShadows; ++i)
         {
-            shadowLabels[i].setX(titleX + shadowX * MathUtils.cos(alpha) * i);
-            shadowLabels[i].setY(titleY + shadowY * MathUtils.sin(alpha) * i);
+            shadowLabels[i].setX(titleX + shadowX * MathUtils.cos(alpha + 0.4f*i) * i);
+            shadowLabels[i].setY(titleY + shadowY * MathUtils.sin(alpha + 0.4f * i) * i);
+            shadowLabels[i].setScale(0.1f + 0.13f * i);
+            shadowLabels[i].setRotation(MathUtils.sin(rot) * 20.0f);
         }
 
         if (XBox360Pad.anyControllerButtonPressed(XBox360Pad.BUTTON_START) ||
