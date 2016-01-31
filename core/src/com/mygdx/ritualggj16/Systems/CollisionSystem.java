@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.ritualggj16.CameraManager;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
@@ -154,6 +155,7 @@ public class CollisionSystem extends IteratingSystem
                             ec.attackCooldown = ec.attackPeriod;
 
                             Mappers.life.get(other).damage(Mappers.enemy.get(entity).damage);
+                            CameraManager.smallShake();
                         }
                     }
                 }
