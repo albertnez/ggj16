@@ -216,7 +216,8 @@ public class PlayScreen implements Screen {
 
         if (!UltraManager.isGaemActive)
         {
-            if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
+            if (Gdx.input.isKeyPressed(Input.Keys.ENTER) ||
+                    XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_START))
             {
                 timer_saltar_dialogs += delta;
             }
@@ -287,7 +288,8 @@ public class PlayScreen implements Screen {
             }
             else
             {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
+                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_X))
                 {
                     UltraManager.textTimer = UltraManager.textDuration;
                 }

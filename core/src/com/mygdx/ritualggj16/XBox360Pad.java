@@ -1,5 +1,7 @@
 package com.mygdx.ritualggj16;
 
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 
 /**
@@ -44,5 +46,18 @@ public class XBox360Pad
     public static final int AXIS_RIGHT_X = 3; //-1 is left | +1 is right
     public static final int AXIS_RIGHT_Y = 2; //-1 is up | +1 is down
     public static final int AXIS_RIGHT_TRIGGER = 4; //value 0 to -1f
+
+    public static boolean anyControllerButton(int key)
+    {
+        for (int i = 0; i < Controllers.getControllers().size; ++i)
+        {
+            Controller controller = Controllers.getControllers().get(i);
+            if (controller != null && controller.getButton(key))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
