@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.ritualggj16.AudioManager;
 import com.mygdx.ritualggj16.CameraManager;
 import com.mygdx.ritualggj16.Components.AltarPointComponent;
 import com.mygdx.ritualggj16.Components.CollisionComponent;
@@ -120,7 +121,7 @@ public class CollisionSystem extends IteratingSystem
                     Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
                     FXFactory.MakeHitText(pos.x, pos.y);
                     FXFactory.makeExplosion(pos.x, pos.y,
-                            (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2)?
+                            (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2) ?
                                     FXFactory.ExplosionType.BONES :
                                     FXFactory.ExplosionType.PURPLE
                     );
@@ -165,6 +166,7 @@ public class CollisionSystem extends IteratingSystem
 
     private void enableAltarPoint(int id)
     {
+        AudioManager.pickup.play();
         ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(AltarPointComponent.class).get());
         for (Entity entity : entities)
         {

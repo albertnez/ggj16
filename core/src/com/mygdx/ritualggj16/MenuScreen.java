@@ -37,7 +37,7 @@ public class MenuScreen implements Screen
     public MenuScreen(Gaem game)
     {
         AudioManager.stopAll();
-        AudioManager.menuMusic.play();
+        AudioManager.menu.play();
 
         this.game = game;
 

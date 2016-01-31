@@ -9,29 +9,41 @@ import com.badlogic.gdx.audio.Sound;
  */
 public class AudioManager
 {
-    public static Music menuMusic;
-    public static Music gameMusic;
+    public static Music menu;
+    public static Music game;
 
-    public static Sound playerShoot;
+    public static Sound player;
+    public static Sound pickup;
 
     public static void init()
     {
-        menuMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/haran.mp3"));
-        gameMusic = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));
-        gameMusic.setLooping(true);
+        menu = loadMusic("audio/haran.mp3"));
+        game = loadMusic("audio/neocrey.mp3"));
+        game.setLooping(true);
 
-        playerShoot = Gdx.audio.newSound((Gdx.files.internal("audio/player1shoot.mp3")));
+        player = loadSound("audio/player1shoot.mp3")));
+        player = loadSound("audio/player1shoot.mp3")));
     }
 
     public static void stopAll()
     {
-        if (menuMusic.isPlaying())
+        if (menu.isPlaying())
         {
-            menuMusic.stop();
+            menu.stop();
         }
-        if (gameMusic.isPlaying())
+        if (game.isPlaying())
         {
-            gameMusic.stop();
+            game.stop();
         }
+    }
+
+    private static Music loadMusic(String filename)
+    {
+        return Gdx.audio.newMusic(Gdx.files.internal(filename));
+    }
+
+    private static Sound loadSound(String filename)
+    {
+        return Gdx.audio.newSound(Gdx.files.internal(filename));
     }
 }

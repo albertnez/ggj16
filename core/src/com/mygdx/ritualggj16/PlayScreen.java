@@ -325,7 +325,7 @@ public class PlayScreen implements Screen {
     private void reset()
     {
         AudioManager.stopAll();
-        AudioManager.gameMusic.play();
+        AudioManager.game.play();
         // CLEAR ENTITIES
         gaem.engine.removeAllEntities();
         gaem.engine.clearPools();

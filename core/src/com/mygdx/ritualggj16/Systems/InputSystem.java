@@ -124,7 +124,7 @@ public class InputSystem extends IteratingSystem
                             MathUtils.radDeg * alpha,
                             Mappers.owner.get(entity).owner
                     );
-                    AudioManager.playerShoot.play();
+                    AudioManager.player.play();
                 }
 
 
