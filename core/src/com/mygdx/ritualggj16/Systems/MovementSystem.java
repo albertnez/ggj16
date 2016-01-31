@@ -54,7 +54,7 @@ public class MovementSystem extends IteratingSystem
         pos.x += vel.x*deltaTime;
         pos.y += vel.y*deltaTime;
 
-        if (Mappers.type.get(entity).type == TypeComponent.EntityType.Player)
+        if (Mappers.type.has(entity) && Mappers.type.get(entity).type == TypeComponent.EntityType.Player)
         {
             CollisionComponent col = Mappers.collision.get(entity);
             float width = col.sizeX * 0.5f;
