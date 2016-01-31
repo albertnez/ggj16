@@ -51,8 +51,8 @@ public class UltraManager
                     "ES NECESARIO PARA EL PROCESO",
         "OTIA FALE\nPOH ME LA SACO YA",
             "NO TAN RAPIDO!",
-            "RECUERDA QUE \nANTES DE PROCEDER AL [RED]SACRIFICIO[]\n" +
-            "TENEMOS QUE ACTIVAR \nTODAS LAS [ORANGE]RUNAS[]",
+            "RECUERDA QUE PARA EJECUTAR \nEL [RED]SACRIFICIO[] SATISFACTORIAMENTE\n" +
+            "PRIMERO TENEMOS QUE ACTIVAR \nTODAS LAS [ORANGE]RUNAS[]",
         "A SIIIII!!!!!!1111\nEMOS DE PIYAR LOS [ORANGE]SIMBOLACOS[]\n" +
                 "KE ACTIVAN LOS PIEDROLOS",
 
@@ -172,7 +172,9 @@ public class UltraManager
         else   // Game
         {
             isGaemActive = true;
+            AudioManager.game.setVolume(0.6f);
             AudioManager.game.play();
+
         }
     }
     public static State gotoNextState()

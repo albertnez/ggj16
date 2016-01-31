@@ -184,6 +184,12 @@ public class CollisionSystem extends IteratingSystem
                 Mappers.render_comp.get(entity).spr = spr;
                 ItemSpawnSystem.setEnabled(id);
                 AltarCandles.update(id);
+
+                FXFactory.losetaCatch(
+                        Mappers.position.get(entity).x,
+                        Mappers.position.get(entity).y,
+                        id);
+
                 return;
             }
         }

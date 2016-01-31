@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.CameraManager;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.BulletComponent;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
@@ -114,6 +115,26 @@ public class FXFactory
                 false,
                 type == ExplosionType.BONES, false));
         gaem.engine.addEntity(entity);
+    }
+
+    public static void losetaCatch(float x, float y, int id)
+    {
+        Sprite spr = new Sprite(TextureManager.getTexture("images/losetas.png"), 16, 16*id, 16, 16);
+
+        Entity entity = gaem.engine.createEntity();
+        entity.add(new PositionComponent(x,y));
+        entity.add(new RenderComponent(spr,
+                RenderComponent.Layer.Text,
+                1.0f));
+        entity.add(new RenderEffectComponent(
+                0.8f,
+                100.0f, 1.0f,
+                0.1f, 0.8f,
+                true));
+        gaem.engine.addEntity(entity);
+
+        CameraManager.shake(1.2f, 15.0f);
+
     }
 
 }

@@ -73,7 +73,7 @@ public class PlayScreen implements Screen {
         this.gaem = gaem;
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
-        gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
+        gaem.engine.addSystem(new SpawnSystem(5.0f, gaem.engine));
         gaem.engine.addSystem(new ItemSpawnSystem(10.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
@@ -340,7 +340,7 @@ public class PlayScreen implements Screen {
         Controller controller = (Controllers.getControllers().size > 0) ?
                 Controllers.getControllers().get(0) : null;
         players[0] = gaem.engine.createEntity()
-                .add(new PositionComponent(-200, 0))
+                .add(new PositionComponent(-160, -35))
                 .add(new VelocityComponent(0, 0))
                 .add(new TypeComponent(TypeComponent.EntityType.Player))
                 .add(new OwnerComponent(OwnerComponent.Owner.Player1))
@@ -355,7 +355,7 @@ public class PlayScreen implements Screen {
                     Controllers.getControllers().get(1) : null;
 
             players[1] = gaem.engine.createEntity()
-                    .add(new PositionComponent(200, 0))
+                    .add(new PositionComponent(160, -35))
                     .add(new VelocityComponent(0, 0))
                     .add(new TypeComponent(TypeComponent.EntityType.Player))
                     .add(new OwnerComponent(OwnerComponent.Owner.Player2))
