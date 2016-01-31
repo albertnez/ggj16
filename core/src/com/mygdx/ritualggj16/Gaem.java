@@ -46,7 +46,8 @@ public class Gaem extends Game {
 
 
         Gdx.graphics.setContinuousRendering(true);
-        setScreen(new PlayScreen(this));
+       // setScreen(new PlayScreen(this));
+        setScreen(new MenuScreen(this));
 
         setupControllers();
 	}
