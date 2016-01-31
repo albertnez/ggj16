@@ -3,7 +3,6 @@ package com.mygdx.ritualggj16;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Factorys.AnimationFactory;
 import com.mygdx.ritualggj16.Factorys.ItemFactory;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 public class AltarCandles
 {
     public static final int numPoints = 5;
-    public static final int numCandles = 8;
+    public static final int numCandles = 10;
     public static Entity candles[][][] = new Entity[numPoints][numPoints][numCandles];
 
     public void reset()
@@ -36,7 +35,6 @@ public class AltarCandles
 
     public static void update(int id)
     {
-        System.out.println("Updated: " + id);
         for (int j = 0; j < numPoints; ++j)
         {
             if (j == id || !ItemSpawnSystem.isEnabled(j))
@@ -48,6 +46,7 @@ public class AltarCandles
             for (int k = 0; k < numCandles; ++k)
             {
                 candles[from][to][k].add(new AnimationComponent(AnimationFactory.candle()));
+                Mappers.render_comp.get(candles[from][to][k]).spr.setSize(8*2, 16*2);
             }
         }
     }
