@@ -424,8 +424,11 @@ public class PlayScreen implements Screen {
         gameOverFade.setCenter(0.0f, 0.0f);
 
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));
+        if (music == null)
+        {
+            music = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));
+        }
+        music.stop();
         music.play();
-
     }
 }

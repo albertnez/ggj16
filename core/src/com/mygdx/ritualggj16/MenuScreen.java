@@ -3,6 +3,7 @@ package com.mygdx.ritualggj16;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -26,6 +27,8 @@ public class MenuScreen implements Screen
     BitmapFont menu_font;
 
     Stage stage;
+
+    private Music music;
 
     private static final String title = "TEH RITUAL";
     private static int numShadows = 8;
@@ -82,6 +85,8 @@ public class MenuScreen implements Screen
         label_intro.setY(Constants.RES_Y / 2);
         stage.addActor(label_intro);
 
+        music = Gdx.audio.newMusic(Gdx.files.internal("audio/haran.mp3"));
+        music.play();
     }
 
     @Override
@@ -107,6 +112,8 @@ public class MenuScreen implements Screen
                 XBox360Pad.anyControllerButtonPressed(XBox360Pad.BUTTON_A))
         {
             stage.dispose();
+            music.stop();
+            music.dispose();
             game.setScreen(new PlayScreen(game));
             return;
         }
@@ -138,6 +145,9 @@ public class MenuScreen implements Screen
 
     @Override
     public void dispose() {
+        music.stop();
+        music.dispose();
+        System.out.println("Stopped");
         stage.dispose();
     }
 }
