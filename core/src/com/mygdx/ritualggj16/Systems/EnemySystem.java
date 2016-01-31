@@ -28,45 +28,106 @@ public class EnemySystem extends IteratingSystem {
 
     public void processEntity(Entity entity, float deltaTime) {
         EnemyComponent enemy = Mappers.enemy.get(entity);
-        enemy.attackCooldown -= deltaTime;
-        if (enemy.type == EnemyComponent.EnemyType.Walker ||
-                enemy.type == EnemyComponent.EnemyType.Warrior) {
-            // Walker enemy just goes to the center for now.
-            PositionComponent pos = Mappers.position.get(entity);
-            VelocityComponent vel = Mappers.velocity.get(entity);
 
-            if (pos.x >= -centerOffsetX && pos.x <= centerOffsetX &&
-                pos.y >= -centerOffsetY && pos.y <= centerOffsetY)
-            {
-                if (vel.x != 0.0f && vel.y != 0.0)
-                {
-                    if (enemy.shakeY)
-                    {
-                        vel.x = 0.0f;
-                        vel.y = enemy.speed;
-                    }
-                    else
-                    {
-                        vel.y = 0.0f;
-                        vel.x = enemy.speed;
-                    }
-                }
-                enemy.shakeTime -= deltaTime;
-                if (enemy.shakeTime < -0.0f)
-                {
-                    enemy.shakeTime = enemy.shakePeriod;
-                    vel.x *= -1.0f;
-                    vel.y *= -1.0f;
-                }
-                return;
-            }
-            float targetX = -pos.x;
-            float targetY = -pos.y;
-            float alpha = MathUtils.atan2(targetY, targetX);
-            vel.x = enemy.speed * MathUtils.cos(alpha);
-            vel.y = enemy.speed * MathUtils.sin(alpha);
+        switch (enemy.type)
+        {
+            case Walker:
+                updateWalker(entity, deltaTime);
+                break;
 
-            Mappers.render_comp.get(entity).invert = (vel.x < 0)? true : false;
+            case Warrior:
+                updateWarrior(entity, deltaTime);
+                break;
         }
+
+        if (enemy.type == EnemyComponent.EnemyType.Warrior) {
+
+        }
+    }
+
+    void updateWalker(Entity entity, float deltaTime)
+    {
+        EnemyComponent enemy = Mappers.enemy.get(entity);
+        enemy.attackCooldown -= deltaTime;
+
+        // Walker enemy just goes to the center for now.
+        PositionComponent pos = Mappers.position.get(entity);
+        VelocityComponent vel = Mappers.velocity.get(entity);
+
+        if (pos.x >= -centerOffsetX && pos.x <= centerOffsetX &&
+                pos.y >= -centerOffsetY && pos.y <= centerOffsetY)
+        {
+            if (vel.x != 0.0f && vel.y != 0.0)
+            {
+                if (enemy.shakeY)
+                {
+                    vel.x = 0.0f;
+                    vel.y = enemy.speed;
+                }
+                else
+                {
+                    vel.y = 0.0f;
+                    vel.x = enemy.speed;
+                }
+            }
+            enemy.shakeTime -= deltaTime;
+            if (enemy.shakeTime < -0.0f)
+            {
+                enemy.shakeTime = enemy.shakePeriod;
+                vel.x *= -1.0f;
+                vel.y *= -1.0f;
+            }
+            return;
+        }
+        float targetX = -pos.x;
+        float targetY = -pos.y;
+        float alpha = MathUtils.atan2(targetY, targetX);
+        vel.x = enemy.speed * MathUtils.cos(alpha);
+        vel.y = enemy.speed * MathUtils.sin(alpha);
+
+        Mappers.render_comp.get(entity).invert = (vel.x < 0)? true : false;
+    }
+
+    void updateWarrior(Entity entity, float deltaTime)
+    {
+        EnemyComponent enemy = Mappers.enemy.get(entity);
+        enemy.attackCooldown -= deltaTime;
+
+        // Walker enemy just goes to the center for now.
+        PositionComponent pos = Mappers.position.get(entity);
+        VelocityComponent vel = Mappers.velocity.get(entity);
+
+        if (pos.x >= -centerOffsetX && pos.x <= centerOffsetX &&
+                pos.y >= -centerOffsetY && pos.y <= centerOffsetY)
+        {
+            if (vel.x != 0.0f && vel.y != 0.0)
+            {
+                if (enemy.shakeY)
+                {
+                    vel.x = 0.0f;
+                    vel.y = enemy.speed;
+                }
+                else
+                {
+                    vel.y = 0.0f;
+                    vel.x = enemy.speed;
+                }
+            }
+            enemy.shakeTime -= deltaTime;
+            if (enemy.shakeTime < -0.0f)
+            {
+                enemy.shakeTime = enemy.shakePeriod;
+                vel.x *= -1.0f;
+                vel.y *= -1.0f;
+            }
+            return;
+        }
+        float targetX = -pos.x;
+        float targetY = -pos.y;
+        float alpha = MathUtils.atan2(targetY, targetX);
+        vel.x = enemy.speed * MathUtils.cos(alpha);
+        vel.y = enemy.speed * MathUtils.sin(alpha);
+
+        Mappers.render_comp.get(entity).invert = (vel.x < 0)? true : false;
     }
 }
