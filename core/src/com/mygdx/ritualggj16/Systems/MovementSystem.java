@@ -12,8 +12,6 @@ import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Constants;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.UltraManager;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
-
 /**
  * Created by threpwood on 20/12/2015.
  */
