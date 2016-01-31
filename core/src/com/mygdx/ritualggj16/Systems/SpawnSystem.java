@@ -14,12 +14,13 @@ public class SpawnSystem extends IntervalSystem
 {
     public Engine engine;
     private static float interval;
-    private static final float incrInitProbPeriod = 5.0f;  // Time for a single initial probability incremental.
-    private static float incrInitProbTime = 5.0f;
     private static float currentProbability = 0.5f;
     public static boolean spawnInCircle = true;
     public static int currRound = 0;
     public static float accumInitProb = 0.0f;
+    public static float currRoundTime = 0.0f;
+    public static int aliveEnemies = 0;
+    public static boolean lastRound = false;
 
     public SpawnSystem (float interval, Engine engine){
         super(interval);
@@ -31,37 +32,39 @@ public class SpawnSystem extends IntervalSystem
         public float initChance;  // The initial chance.
         public float failedChanceMultiplier;  // The chance multiplier when there was no spawn.
         public float chanceIncremental;  // How much the initChance is incremented during the round.
-        public int minNumEnemies;
-        public int maxNumEnemies;
+        public int minNumEnemies;  // Number of enemies that will spawn each time.
+        public int extraNumEnemies;  // Number of extra enemies that can spawn.
         public int maxLevelEnemy;
+        public float roundDuration;
+        public int numEnemiesFinal;
+
         public RoundStats(float initChance, float failedChanceMultiplier, float chanceIncremental,
-                          int minNumEnemies, int maxNumEnemies, int maxLevelEnemy)
+                          int minNumEnemies, int maxNumEnemies, int maxLevelEnemy,
+                          float roundDuration, int numEnemiesFinal)
         {
             this.initChance = initChance;
             this.failedChanceMultiplier = failedChanceMultiplier;
             this.chanceIncremental = chanceIncremental;
             this.minNumEnemies = minNumEnemies;
-            this.maxNumEnemies = maxNumEnemies;
+            this.extraNumEnemies = maxNumEnemies;
             this.maxLevelEnemy = maxLevelEnemy;
+            this.roundDuration = roundDuration;
+            this.numEnemiesFinal = numEnemiesFinal;
         }
     }
 
     public static RoundStats[] roundStats = new RoundStats[] {
-            new RoundStats(0.10f, 1.01f, 0.01f, 1, 4, 1),
-            new RoundStats(0.15f, 1.02f, 0.10f, 1, 6, 1),
-            new RoundStats(0.20f, 1.03f, 0.10f, 2, 7, 2),
-            new RoundStats(0.25f, 1.04f, 0.10f, 2, 9, 2),
-            new RoundStats(0.30f, 1.05f, 0.10f, 3, 10, 3),
-            new RoundStats(0.60f, 1.06f, 0.10f, 5, 15, 4),
+            new RoundStats(0.10f, 1.01f, 0.01f, 1, 2, 1, 25.0f, 4),
+            new RoundStats(0.15f, 1.02f, 0.10f, 1, 3, 1, 35.0f, 4),
+            new RoundStats(0.20f, 1.03f, 0.10f, 2, 7, 2, 35.0f, 5),
+            new RoundStats(0.25f, 1.04f, 0.10f, 2, 9, 2, 45.0f, 6),
+            new RoundStats(0.30f, 1.05f, 0.10f, 3, 10, 3, 45.0f, 7),
+            new RoundStats(0.60f, 1.06f, 0.10f, 5, 15, 4, 45.0f, 8),
     };
 
     private static float initProb()
     {
         return roundStats[ItemSpawnSystem.numRound()].initChance;
-    }
-    private static float failedMult()
-    {
-        return roundStats[ItemSpawnSystem.numRound()].failedChanceMultiplier;
     }
     private static float incrProb()
     {
@@ -71,48 +74,53 @@ public class SpawnSystem extends IntervalSystem
     {
         return roundStats[ItemSpawnSystem.numRound()].minNumEnemies;
     }
-    private static int maxEnemies()
+    private static int extraEnemies()
     {
-        return roundStats[ItemSpawnSystem.numRound()].maxNumEnemies;
+        return roundStats[ItemSpawnSystem.numRound()].extraNumEnemies;
     }
     private static int enemyLevel()
     {
         return roundStats[ItemSpawnSystem.numRound()].maxLevelEnemy;
     }
-
+    private static float roundTime()
+    {
+        return roundStats[ItemSpawnSystem.numRound()].roundDuration;
+    }
+    private static void advanceRound()
+    {
+        currRound = ItemSpawnSystem.numRound();
+        currentProbability = initProb();
+        accumInitProb = 0.0f;
+        currRoundTime = 0.0f;
+        lastRound = false;
+    }
     @Override
     protected void updateInterval()
     {
         if (!UltraManager.isGaemActive) return;
+
         if (currRound != ItemSpawnSystem.numRound())
         {
-            incrInitProbTime = incrInitProbPeriod;
-            currRound = ItemSpawnSystem.numRound();
-            currentProbability = initProb();
-            accumInitProb = 0.0f;
+            advanceRound();
         }
-
-        // START
-        incrInitProbTime -= interval;
-        if (incrInitProbTime <= 0)
+        if (currRoundTime >= roundTime())
         {
-            incrInitProbTime = incrInitProbTime;
-            accumInitProb += incrProb();
-        }
-        if (!MathUtils.randomBoolean(currentProbability))
-        {
-            currentProbability *= failedMult();
             return;
         }
-        else
+        currRoundTime += interval;
+        accumInitProb += incrProb();
+        int numToSpawn = minEnemies();
+        if (MathUtils.randomBoolean(currentProbability))
         {
-            currentProbability = initProb() + accumInitProb;
+            numToSpawn += MathUtils.random(extraEnemies());
         }
-
-        int numToSpawn = MathUtils.random(minEnemies(), maxEnemies());
         if (spawnInCircle)
         {
             spawnInCircle(numToSpawn);
+            if (currRoundTime >= roundTime())
+            {
+                lastRound = true;
+            }
         }
         else
         {
@@ -136,6 +144,7 @@ public class SpawnSystem extends IntervalSystem
     private void spawnInCircle(int num, float dist)
     {
         // TODO: Now they are spawning equidistant in the circle. Maybe add randomness?
+        aliveEnemies += num;
         float alpha = MathUtils.random(0.0f, MathUtils.PI2);
         for (int i = 0; i < num; ++i)
         {
@@ -144,6 +153,7 @@ public class SpawnSystem extends IntervalSystem
                     MathUtils.sin(alpha) * dist,
                     MathUtils.random(enemyLevel())
             );
+            // Check if it's last round, to drop the item.
             alpha += MathUtils.PI2 / (float)num;
         }
     }
@@ -169,10 +179,11 @@ public class SpawnSystem extends IntervalSystem
 
     public static void reset()
     {
-        incrInitProbTime = 5.0f;
         currentProbability = 0.5f;
         spawnInCircle = true;
         currRound = 0;
         accumInitProb = 0.0f;
+        currRoundTime = 0.0f;
+        lastRound = false;
     }
 }
