@@ -6,6 +6,9 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.MusicLoader;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
@@ -49,6 +52,8 @@ public class PlayScreen implements Screen {
     private float altarPointDistToCenter = 350.0f;
 
     Gaem gaem;
+
+    Music music;
 
     Sprite spr;
     Sprite bg_floor;
@@ -417,5 +422,10 @@ public class PlayScreen implements Screen {
         gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
         gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
         gameOverFade.setCenter(0.0f, 0.0f);
+
+
+        music = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));
+        music.play();
+
     }
 }
