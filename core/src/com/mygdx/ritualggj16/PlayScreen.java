@@ -128,14 +128,15 @@ public class PlayScreen implements Screen {
 
         //Altar
         altar = ItemFactory.spawnAltar();
-        altarLifeBack = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 0, 16, 5);
-        altarLifeFront = new Sprite(TextureManager.getTexture("lifebar.png"), 0, 5, 16, 5);
-        altarLifeBack.setOrigin(0.0f, 0.0f);
-        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 20.0f);
-        altarLifeBack.setScale(20.0f, 3.0f);
-        altarLifeFront.setOrigin(0.0f, 0.0f);
-        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 20.0f);
-        altarLifeFront.setScale(20.0f, 3.0f);
+        altarLifeBack = new Sprite(TextureManager.getTexture("altar_life_skelet.png"));
+        altarLifeFront = new Sprite(TextureManager.getTexture("altar_life_bar.png"));
+        altarLifeBack.setOrigin(0.0f, 32.0f);
+        altarLifeBack.setScale(1.5f, 1.2f);
+//        altarLifeBack.scale(1.1f)?;
+        altarLifeBack.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
+        altarLifeFront.setOrigin(0.0f, 32.0f);
+        altarLifeFront.setScale(1.5f, 1.2f);
+        altarLifeFront.setPosition(-Constants.RES_X * 0.5f + 20.0f, Constants.RES_Y * 0.5f - 40.0f);
 
         // Dumb control points.
         createAltarPoints();
@@ -200,9 +201,9 @@ public class PlayScreen implements Screen {
         // Draw Altar life
         gaem.batch.begin();
         altarLifeBack.draw(gaem.batch);
-        int width = Math.round(16 * (float) Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
-        altarLifeFront.setRegion(0, 5, width, 5);
-        altarLifeFront.setSize(width, 5);
+        int width = Math.round(512 * (float) Mappers.life.get(altar).life / Mappers.life.get(altar).maxLife);
+        altarLifeFront.setRegion(0, 0, width, 32);
+        altarLifeFront.setSize(width, 32);
         altarLifeFront.draw(gaem.batch);
         gaem.batch.end();
 
