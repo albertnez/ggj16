@@ -330,6 +330,8 @@ public class PlayScreen implements Screen {
     {
         AudioManager.stopAll();
 
+        UltraManager.losetas = 0;
+
         // CLEAR ENTITIES
         gaem.engine.removeAllEntities();
         gaem.engine.clearPools();

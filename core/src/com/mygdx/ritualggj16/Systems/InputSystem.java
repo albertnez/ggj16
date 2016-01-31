@@ -109,7 +109,7 @@ public class InputSystem extends IteratingSystem
                 Math.abs(controller.getAxis(XBox360Pad.AXIS_RIGHT_Y)) > 0.4)
             {
 
-                if (input.bulletCooldown < 0)
+                if (input.bulletCooldown < 0 + UltraManager.losetas*0.1f)
                 {
                     float alpha = Utils.angleTo8Dir(MathUtils.atan2(
                             -controller.getAxis(XBox360Pad.AXIS_RIGHT_Y),

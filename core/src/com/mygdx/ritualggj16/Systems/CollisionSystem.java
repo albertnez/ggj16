@@ -24,7 +24,7 @@ import com.mygdx.ritualggj16.Factorys.FXFactory;
 import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.TextureManager;
-
+import com.mygdx.ritualggj16.UltraManager;
 
 
 /**
@@ -115,6 +115,31 @@ public class CollisionSystem extends IteratingSystem
                         }
                     }
                 }
+
+                //BULLET vs BULLET ENEMY
+                else if (Mappers.bullet.has(entity) &&
+                            Mappers.owner.get(entity).owner != OwnerComponent.Owner.Enemy &&
+                            Mappers.bullet.has(other) &&
+                        Mappers.owner.get(entity).owner == OwnerComponent.Owner.Enemy)
+                {
+                    AudioManager.hit.play();
+                    CameraManager.shake(0.3f, 3.0f);
+
+                    PositionComponent pos1 = Mappers.position.get(entity);
+                    PositionComponent pos2 = Mappers.position.get(other);
+
+                    FXFactory.makeExplosion(pos1.x, pos1.y,
+                            Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player1 ?
+                                FXFactory.ExplosionType.PURPLE :
+                                FXFactory.ExplosionType.BONES
+                    );
+                    FXFactory.makeExplosion(pos2.x, pos2.y, FXFactory.ExplosionType.RED);
+
+                    engine.removeEntity(entity);
+                    engine.removeEntity(other);
+
+                }
+
 
                 //BULLET vs ENEMY
                 else if (Mappers.bullet.has(entity) &&
@@ -234,6 +259,8 @@ public class CollisionSystem extends IteratingSystem
                         Mappers.position.get(entity).x,
                         Mappers.position.get(entity).y,
                         id);
+
+                UltraManager.losetas++;
 
                 return;
             }
