@@ -192,7 +192,7 @@ public class UltraManager
                 txt.length()
             )
         );
-        
+
         if (sub.lastIndexOf("[") > sub.lastIndexOf("]"))
         {
             sub = sub.substring(0, Math.max(0, sub.lastIndexOf("[")-1));

@@ -351,7 +351,7 @@ public class PlayScreen implements Screen {
 
     private void createAltarPoints()
     {
-        float alpha = MathUtils.PI / 2.0f;
+        float alpha = MathUtils.PI / 2.0f - MathUtils.PI2 / 10.0f;
         for (int i = 0; i < numAltarPoints; ++i)
         {
             float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
