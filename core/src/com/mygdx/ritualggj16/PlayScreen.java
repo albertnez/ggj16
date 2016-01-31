@@ -3,6 +3,7 @@ package com.mygdx.ritualggj16;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -52,9 +53,6 @@ public class PlayScreen implements Screen {
     private float altarPointDistToCenter = 350.0f;
 
     Gaem gaem;
-
-    Music music;
-    public static Sound player1shoot;
 
     Sprite spr;
     Sprite bg_floor;
@@ -330,6 +328,8 @@ public class PlayScreen implements Screen {
 
     private void reset()
     {
+        AudioManager.stopAll();
+        AudioManager.gameMusic.play();
         // CLEAR ENTITIES
         gaem.engine.removeAllEntities();
         gaem.engine.clearPools();
@@ -423,16 +423,5 @@ public class PlayScreen implements Screen {
         gameOverFade = Utils.dumbSprite((int)Constants.RES_X, (int)Constants.RES_Y);
         gameOverFade.setColor(0.2f, 0.0f, 0.0f, 0.7f);
         gameOverFade.setCenter(0.0f, 0.0f);
-
-        if (player1shoot == null)
-        {
-            player1shoot = Gdx.audio.newSound(Gdx.files.internal("audio/player1shoot.mp3"));
-        }
-        if (music == null)
-        {
-            music = Gdx.audio.newMusic(Gdx.files.internal("audio/neocrey.mp3"));
-        }
-        music.stop();
-        music.play();
     }
 }

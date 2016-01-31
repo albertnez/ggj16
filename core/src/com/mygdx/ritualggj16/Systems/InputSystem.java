@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.math.MathUtils;
+import com.mygdx.ritualggj16.AudioManager;
 import com.mygdx.ritualggj16.Components.AnimationComponent;
 import com.mygdx.ritualggj16.Components.InputComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
@@ -125,7 +126,7 @@ public class InputSystem extends IteratingSystem
                             MathUtils.radDeg * alpha,
                             Mappers.owner.get(entity).owner
                     );
-                    PlayScreen.player1shoot.play();
+                    AudioManager.playerShoot.play();
                 }
 
 

@@ -42,6 +42,7 @@ public class Gaem extends Game {
         viewport = new FitViewport(Constants.RES_X/2, Constants.RES_Y/2, cam);
 
         FontManager.generateAll();
+        AudioManager.init();
 
 
 
