@@ -216,7 +216,9 @@ public class PlayScreen implements Screen {
 
         if (!UltraManager.isGaemActive)
         {
-            if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
+
+            if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) ||
+                    XBox360Pad.anyControllerButtonDown(XBox360Pad.BUTTON_START))
             {
                 timer_saltar_dialogs += delta;
             }
@@ -227,7 +229,7 @@ public class PlayScreen implements Screen {
 
             gaem.batch.begin();
 
-            if (timer_saltar_dialogs > 0.75f)
+            if (timer_saltar_dialogs > 0.1f)
             {
                 {
                     FontManager.dialog.draw(
@@ -273,7 +275,9 @@ public class PlayScreen implements Screen {
                 if (TimeUtils.millis()%500  < 250)
                     pinxo.draw(gaem.batch);
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER))
+
+                if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
+                        XBox360Pad.anyControllerButtonPressed(XBox360Pad.BUTTON_A))
                 {
                     if (!UltraManager.nextText())
                     {
@@ -285,7 +289,7 @@ public class PlayScreen implements Screen {
             else
             {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) ||
-                        XBox360Pad.anyControllerButton(XBox360Pad.BUTTON_A))
+                        XBox360Pad.anyControllerButtonPressed(XBox360Pad.BUTTON_A))
                 {
                     UltraManager.textTimer = UltraManager.textDuration;
                 }
@@ -298,6 +302,7 @@ public class PlayScreen implements Screen {
 
 
         Gdx.graphics.setTitle("RITUAL: TEH GAEM | FPS: " + Gdx.graphics.getFramesPerSecond());
+        XBox360Pad.update();
     }
 
 

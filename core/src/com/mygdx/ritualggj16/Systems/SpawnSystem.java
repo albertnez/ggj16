@@ -26,6 +26,10 @@ public class SpawnSystem extends IntervalSystem
     {
         if (!UltraManager.isGaemActive) return;
 
+
+
+
+
         if (!MathUtils.randomBoolean(currentProbability))
         {
             currentProbability *= 1.1f;
