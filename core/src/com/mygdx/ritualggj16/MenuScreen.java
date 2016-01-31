@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -25,10 +26,6 @@ public class MenuScreen implements Screen
     BitmapFont menu_font;
 
     Stage stage;
-
-    String text_menu_title;
-
-    Label label_title;
 
     private static final String title = "TEH RITUAL";
     private static int numShadows = 8;
@@ -84,6 +81,7 @@ public class MenuScreen implements Screen
         label_intro.setX(100.0f);
         label_intro.setY(Constants.RES_Y / 2);
         stage.addActor(label_intro);
+
     }
 
     @Override
