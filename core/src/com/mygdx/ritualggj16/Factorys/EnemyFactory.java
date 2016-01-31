@@ -10,6 +10,7 @@ import com.mygdx.ritualggj16.Components.RenderComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
 import com.mygdx.ritualggj16.Gaem;
+import com.mygdx.ritualggj16.UltraManager;
 import com.mygdx.ritualggj16.Utils;
 
 /**
@@ -25,7 +26,7 @@ public class EnemyFactory {
                 .add(new VelocityComponent(0, 0))
                 .add(new EnemyComponent(EnemyComponent.EnemyType.Walker))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
-                .add(new LifeComponent(4))
+                .add(new LifeComponent(5))
                 .add(new AnimationComponent(AnimationFactory.blob()))
                 .add(new CollisionComponent(10*4, 8*4))
                 .add(new RenderComponent(Utils.dumbSprite(10*4, 8*4), RenderComponent.Layer.Player));
@@ -55,7 +56,7 @@ public class EnemyFactory {
                 .add(new VelocityComponent(0, 0))
                 .add(new EnemyComponent(EnemyComponent.EnemyType.Big))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
-                .add(new LifeComponent(8))
+                .add(new LifeComponent(10 + UltraManager.losetas*5))
                 .add(new AnimationComponent(AnimationFactory.blobBig()))
                 .add(new CollisionComponent(10*10, 8*10))
                 .add(new RenderComponent(Utils.dumbSprite(10*12, 8*12), RenderComponent.Layer.Player));

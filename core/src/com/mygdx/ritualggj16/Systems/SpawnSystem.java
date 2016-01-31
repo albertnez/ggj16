@@ -56,10 +56,10 @@ public class SpawnSystem extends IntervalSystem
     public static RoundStats[] roundStats = new RoundStats[] {
             new RoundStats(0.10f, 1.01f, 0.01f, 1, 3, 1, 30.0f, 9),
             new RoundStats(0.20f, 1.02f, 0.10f, 1, 5, 1, 40.0f, 12),
-            new RoundStats(0.30f, 1.03f, 0.10f, 2, 7, 3, 50.0f, 15),
-            new RoundStats(0.40f, 1.04f, 0.10f, 2, 9, 3, 60.0f, 20),
-            new RoundStats(0.50f, 1.05f, 0.10f, 4, 10, 3, 70.0f, 25),
-            new RoundStats(0.60f, 1.06f, 0.10f, 5, 15, 4, 90.0f, 32),
+            new RoundStats(0.30f, 1.03f, 0.10f, 1, 6, 3, 50.0f, 15),
+            new RoundStats(0.40f, 1.04f, 0.10f, 2, 4, 3, 60.0f, 18),
+            new RoundStats(0.50f, 1.05f, 0.10f, 2, 5, 3, 70.0f, 21),
+            new RoundStats(0.60f, 1.06f, 0.10f, 3, 6, 4, 90.0f, 24),
     };
 
     private static float initProb()
