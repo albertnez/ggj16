@@ -159,7 +159,7 @@ public class CollisionSystem extends IteratingSystem
                     }
                     AudioManager.hit.play();
                     Mappers.life.get(other).damage(dmgRoll);
-                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage, 1);
+                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage, dmgRoll);
                     FXFactory.makeExplosion(pos.x, pos.y,
                             (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2) ?
                                     FXFactory.ExplosionType.BONES :
