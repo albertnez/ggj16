@@ -65,7 +65,7 @@ public class ItemFactory
         gaem.engine.addEntity(entity
                         .add(new PositionComponent(x, y))
                         .add(new TypeComponent(TypeComponent.EntityType.Decoration))
-                        .add(new RenderComponent(spr_candle, RenderComponent.Layer.Ground))
+                        .add(new RenderComponent(spr_candle, RenderComponent.Layer.Candle))
         );
         return entity;
     }

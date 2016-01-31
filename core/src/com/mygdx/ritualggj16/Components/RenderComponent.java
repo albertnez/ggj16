@@ -11,6 +11,7 @@ public class RenderComponent implements Component
 {
     public enum Layer {
         Ground,
+        Candle,
         Explosion,
         Player,
         Bullet,

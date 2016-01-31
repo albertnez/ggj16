@@ -119,7 +119,6 @@ public class PlayScreen implements Screen {
         gaem.batch.begin();
         gaem.engine.update(delta);
         gaem.batch.end();
-
         // Draw Altar life
         if (UltraManager.getState() != UltraManager.State.IntroDialog)
         {
