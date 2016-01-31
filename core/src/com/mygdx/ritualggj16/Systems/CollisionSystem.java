@@ -118,6 +118,7 @@ public class CollisionSystem extends IteratingSystem
                 {
                     PositionComponent pos = Mappers.position.get(entity);
 
+                    AudioManager.hit.play();
                     Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
                     FXFactory.MakeHitText(pos.x, pos.y);
                     FXFactory.makeExplosion(pos.x, pos.y,

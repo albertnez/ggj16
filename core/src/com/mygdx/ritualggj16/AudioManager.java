@@ -14,15 +14,17 @@ public class AudioManager
 
     public static Sound player;
     public static Sound pickup;
+    public static Sound hit;
 
     public static void init()
     {
-        menu = loadMusic("audio/haran.mp3"));
-        game = loadMusic("audio/neocrey.mp3"));
+        menu = loadMusic("audio/haran.mp3");
+        game = loadMusic("audio/neocrey.mp3");
         game.setLooping(true);
 
-        player = loadSound("audio/player1shoot.mp3")));
-        player = loadSound("audio/player1shoot.mp3")));
+        player = loadSound("audio/player1shoot.mp3");
+        pickup = loadSound("audio/pickup.mp3");
+        hit = loadSound("audio/hit.mp3");
     }
 
     public static void stopAll()
