@@ -38,7 +38,7 @@ public class EnemyFactory {
         Entity enemy = gaem.engine.createEntity()
                 .add(new PositionComponent(x, y))
                 .add(new VelocityComponent(0, 0))
-        .add(new EnemyComponent(EnemyComponent.EnemyType.Warrior))
+                .add(new EnemyComponent(EnemyComponent.EnemyType.Warrior))
                 .add(new TypeComponent(TypeComponent.EntityType.Enemy))
                 .add(new LifeComponent(3))
                 .add(new AnimationComponent(AnimationFactory.blobWarrior()))

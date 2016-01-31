@@ -107,7 +107,7 @@ public class EnemySystem extends IteratingSystem {
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
 
-        if (Vector2.Zero.dst(pos.x, pos.y) < 300.0f)
+        if (Vector2.Zero.dst(pos.x, pos.y) < Mappers.enemy.get(entity).shootingDist)
         {
             enemy.shooting = true;
             vel.x = 0;

@@ -26,6 +26,7 @@ public class EnemyComponent implements Component {
     public boolean containsAltarItem;
 
     public boolean shooting = false;
+    public float shootingDist = 300.0f;
 
     public EnemyComponent(EnemyType type)
     {
@@ -46,6 +47,7 @@ public class EnemyComponent implements Component {
                 this.damage = 1;
                 this.shakePeriod = 0.2f;
                 this.attackPeriod = 4.0f;
+                this.shootingDist = MathUtils.random(225.0f, 285.0f);
                 break;
             case Big:
                 this.speed = Wikipedia.Speed(type);

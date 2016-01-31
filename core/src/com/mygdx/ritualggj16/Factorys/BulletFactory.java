@@ -47,7 +47,7 @@ public class BulletFactory
                         600* MathUtils.sinDeg(angle ))
         );
         bullet.add(new LifeComponent(1));
-        bullet.add(new CollisionComponent(16, 16));
+        bullet.add(new CollisionComponent(20, 20));
         bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
         bullet.add(new OwnerComponent(owner));
 
@@ -86,7 +86,7 @@ public class BulletFactory
                         300* MathUtils.sinDeg(angle ))
         );
         bullet.add(new LifeComponent(1));
-        bullet.add(new CollisionComponent(16, 16));
+        bullet.add(new CollisionComponent(24, 24));
         bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
         bullet.add(new OwnerComponent(OwnerComponent.Owner.Enemy));
 
