@@ -3,6 +3,7 @@ package com.mygdx.ritualggj16.Factorys;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -22,6 +23,7 @@ import com.mygdx.ritualggj16.Gaem;
 import com.mygdx.ritualggj16.TextureManager;
 import com.mygdx.ritualggj16.Utils;
 
+import java.awt.Font;
 import java.util.Random;
 
 import javax.rmi.CORBA.Util;
@@ -33,11 +35,11 @@ public class FXFactory
 {
     public static Gaem gaem;
 
-    public static void MakeHitText(float x, float y)
+    public static void MakeHitText(float x, float y,  BitmapFont font, int dmg)
     {
         Entity text = gaem.engine.createEntity();
 
-        text.add(new RenderTextComponent(FontManager.damage, "1"))
+        text.add(new RenderTextComponent(font, ""+dmg))
             .add(new PositionComponent(x, y))
             .add(new RenderComponent(Utils.dumbSprite(0, 0), RenderComponent.Layer.Text))
             .add(new VelocityComponent(
@@ -82,17 +84,30 @@ public class FXFactory
     public enum ExplosionType
     {
         PURPLE,
+        RED,
         BONES
     }
 
 
     public static void makeExplosion(float x, float y, ExplosionType type)
     {
-        Texture tex = TextureManager.getTexture(
-                type == ExplosionType.BONES?
-                    "images/bones.png":
-                    "images/bullets.png"
-        );
+
+
+        Texture tex;
+
+        if (type == ExplosionType.BONES)
+        {
+            tex = TextureManager.getTexture("images/bones.png");
+        }
+        else if (type == ExplosionType.RED)
+        {
+            tex = TextureManager.getTexture("images/bullets_red.png");
+        }
+        else
+        {
+            tex = TextureManager.getTexture("images/bullets.png");
+        }
+
         Animation anim = new Animation(0.25f/5,
                 new TextureRegion(tex, 16, 0, 16 ,16),
                 new TextureRegion(tex, 16, 16, 16 ,16),

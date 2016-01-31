@@ -47,7 +47,6 @@ public class AltarCandles
             int to = Math.max(id, j);
             for (int k = 0; k < numCandles; ++k)
             {
-                System.out.println("Added animation");
                 candles[from][to][k].add(new AnimationComponent(AnimationFactory.candle()));
             }
         }

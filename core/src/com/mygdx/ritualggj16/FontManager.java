@@ -13,6 +13,7 @@ public class FontManager
 
     public static BitmapFont damage;
 
+    public static BitmapFont damage_altar;
     public static BitmapFont dialog;
 
     public static void generateAll()
@@ -27,6 +28,15 @@ public class FontManager
         parameter.borderColor = Color.BLACK;
         damage = generator.generateFont(parameter);
         damage.getData().markupEnabled = true;
+
+        damage_altar = new BitmapFont();
+        parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 16;
+        parameter.color = Color.YELLOW;
+        parameter.borderWidth = 2;
+        parameter.borderColor = Color.RED;
+        damage_altar = generator.generateFont(parameter);
+        damage_altar.getData().markupEnabled = true;
 
         dialog = new BitmapFont();
         parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();

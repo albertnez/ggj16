@@ -156,7 +156,7 @@ public class SpawnSystem extends IntervalSystem
     {
         for (int i = 0; i < num; ++i)
         {
-            EnemyFactory.spawnWalker(
+            EnemyFactory.spawnWarrior(
                     x + MathUtils.random(-maxDist, maxDist),
                     y + MathUtils.random(-maxDist, maxDist)
             );

@@ -65,4 +65,39 @@ public class BulletFactory
 
         gaem.engine.addEntity(bullet);
     }
+
+    public static void shootBulletEnemy(float x, float y, float angle)
+    {
+        Entity bullet = gaem.engine.createEntity();
+
+        Texture tex = TextureManager.getTexture(
+            "images/bullets_red.png"
+        );
+        RenderComponent rc = new RenderComponent(
+                new Sprite(new TextureRegion(tex, 0, 0, 16, 16)),
+                RenderComponent.Layer.Bullet);
+        rc.rotation = angle-90;
+        rc.scale = 2.0f;
+        bullet.add(rc);
+
+        bullet.add(new PositionComponent(x, y));
+        bullet.add(new VelocityComponent(
+                        600* MathUtils.cosDeg(angle ),
+                        600* MathUtils.sinDeg(angle ))
+        );
+        bullet.add(new LifeComponent(1));
+        bullet.add(new CollisionComponent(8, 8));
+        bullet.add(new TypeComponent(TypeComponent.EntityType.Bullet));
+        bullet.add(new OwnerComponent(OwnerComponent.Owner.Enemy));
+
+
+        BulletComponent bc = new BulletComponent();
+        bc.lifeTime = 3.0f;
+        bc.damage = 2;
+        bullet.add(bc);
+
+        gaem.engine.addEntity(bullet);
+
+    }
+
 }

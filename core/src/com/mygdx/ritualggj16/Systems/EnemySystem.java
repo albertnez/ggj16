@@ -5,9 +5,12 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.ritualggj16.Components.EnemyComponent;
+import com.mygdx.ritualggj16.Components.OwnerComponent;
 import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.VelocityComponent;
+import com.mygdx.ritualggj16.Factorys.BulletFactory;
 import com.mygdx.ritualggj16.Mappers;
 
 /**
@@ -18,6 +21,9 @@ public class EnemySystem extends IteratingSystem {
 
     static private float centerOffsetX = 12.0f;
     static private float centerOffsetY = 30.0f;
+
+    static private float centerOffsetX_warrior = 12.0f;
+    static private float centerOffsetY_warrior = 30.0f;
 
     public EnemySystem(Engine engine) {
         super(Family
@@ -44,6 +50,8 @@ public class EnemySystem extends IteratingSystem {
 
         }
     }
+
+
 
     void updateWalker(Entity entity, float deltaTime)
     {
@@ -88,6 +96,8 @@ public class EnemySystem extends IteratingSystem {
         Mappers.render_comp.get(entity).invert = (vel.x < 0)? true : false;
     }
 
+
+
     void updateWarrior(Entity entity, float deltaTime)
     {
         EnemyComponent enemy = Mappers.enemy.get(entity);
@@ -97,8 +107,15 @@ public class EnemySystem extends IteratingSystem {
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
 
-        if (pos.x >= -centerOffsetX && pos.x <= centerOffsetX &&
-                pos.y >= -centerOffsetY && pos.y <= centerOffsetY)
+
+        if (Vector2.Zero.dst(pos.x, pos.y) < 300.0f)
+        {
+            enemy.shooting = true;
+            vel.x = 0;
+            vel.y = 0;
+        }
+
+        if (enemy.shooting)
         {
             if (vel.x != 0.0f && vel.y != 0.0)
             {
@@ -116,9 +133,15 @@ public class EnemySystem extends IteratingSystem {
             enemy.shakeTime -= deltaTime;
             if (enemy.shakeTime < -0.0f)
             {
-                enemy.shakeTime = enemy.shakePeriod;
+                enemy.shakeTime = 2.0f;
                 vel.x *= -1.0f;
                 vel.y *= -1.0f;
+
+                BulletFactory.shootBulletEnemy(
+                        pos.x, pos.y,
+                        (float)Math.atan2(-pos.y, -pos.x)*MathUtils.radDeg
+                );
+
             }
             return;
         }

@@ -19,6 +19,7 @@ import com.mygdx.ritualggj16.Components.PositionComponent;
 import com.mygdx.ritualggj16.Components.RenderEffectComponent;
 import com.mygdx.ritualggj16.Components.TypeComponent;
 import com.mygdx.ritualggj16.Factorys.FXFactory;
+import com.mygdx.ritualggj16.FontManager;
 import com.mygdx.ritualggj16.Mappers;
 import com.mygdx.ritualggj16.TextureManager;
 
@@ -115,6 +116,7 @@ public class CollisionSystem extends IteratingSystem
 
                 //BULLET vs ENEMY
                 else if (Mappers.bullet.has(entity) &&
+                        Mappers.owner.get(entity).owner != OwnerComponent.Owner.Enemy &&
                         ot.type == TypeComponent.EntityType.Enemy &&
                         Mappers.life.get(other).life > 0)
                 {
@@ -122,7 +124,7 @@ public class CollisionSystem extends IteratingSystem
 
                     AudioManager.hit.play();
                     Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
-                    FXFactory.MakeHitText(pos.x, pos.y);
+                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage, 1);
                     FXFactory.makeExplosion(pos.x, pos.y,
                             (Mappers.owner.get(entity).owner == OwnerComponent.Owner.Player2) ?
                                     FXFactory.ExplosionType.BONES :
@@ -132,6 +134,37 @@ public class CollisionSystem extends IteratingSystem
                     engine.removeEntity(entity);
 
                     //UltraManager.lasthit_p1_anim = Mappers.animation.get(other).animation;
+
+                    return;
+                }
+
+                //BULLET ENEMY vs ALTAR
+                else if (Mappers.bullet.has(entity) &&
+                        Mappers.owner.get(entity).owner == OwnerComponent.Owner.Enemy &&
+                        ot.type == TypeComponent.EntityType.Altar)
+                {
+                    PositionComponent pos = Mappers.position.get(entity);
+
+                    AudioManager.hit.play();
+                    Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
+                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage_altar, 2);
+                    FXFactory.makeExplosion(pos.x, pos.y,
+                                    FXFactory.ExplosionType.RED
+                    );
+                    CameraManager.shake(0.3f, 3.0f);
+
+
+
+                    LifeComponent lc = Mappers.life.get(other);
+                    if (Mappers.life.get(other).life > 0)
+                    {
+                        AudioManager.scream.play();
+                        Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
+                        CameraManager.smallShake();
+
+                    }
+
+                    engine.removeEntity(entity);
 
                     return;
                 }
@@ -148,8 +181,11 @@ public class CollisionSystem extends IteratingSystem
 
                 // ENEMY vs ALTAR
                 if (et.type == TypeComponent.EntityType.Enemy &&
+                        Mappers.enemy.get(entity).type == EnemyComponent.EnemyType.Walker &&
                         ot.type == TypeComponent.EntityType.Altar)
                 {
+
+
                     LifeComponent lc = Mappers.life.get(other);
                     if (Mappers.life.get(other).life > 0)
                     {

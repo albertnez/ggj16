@@ -36,6 +36,13 @@ public class MovementSystem extends IteratingSystem
         {
             return;
         }
+
+        if (Mappers.enemy.has(entity) &&
+        Mappers.enemy.get(entity).shooting)
+        {
+            return;
+        }
+
         PositionComponent pos = Mappers.position.get(entity);
         VelocityComponent vel = Mappers.velocity.get(entity);
 

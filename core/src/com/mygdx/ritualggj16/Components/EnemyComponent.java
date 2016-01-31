@@ -23,6 +23,8 @@ public class EnemyComponent implements Component {
     public float attackPeriod;
     public float attackCooldown;
 
+    public boolean shooting;
+
     public EnemyComponent(EnemyType type)
     {
         this.type = type;

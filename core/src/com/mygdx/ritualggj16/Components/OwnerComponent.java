@@ -12,6 +12,7 @@ public class OwnerComponent implements Component {
         None,
         Player1,
         Player2,
+        Enemy
     }
 
     public Owner owner;
