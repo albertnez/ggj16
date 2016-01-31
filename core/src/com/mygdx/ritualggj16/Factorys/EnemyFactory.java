@@ -47,4 +47,17 @@ public class EnemyFactory {
 
         gaem.engine.addEntity(enemy);
     }
+
+    public static void spawnLevelEnemy(float x, float y, int level)
+    {
+        switch (level)
+        {
+            case 0:
+                spawnWalker(x, y); break;
+            case 1:
+                spawnWarrior(x, y); break;
+            default:
+                spawnWalker(x, y); break;
+        }
+    }
 }
