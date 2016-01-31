@@ -144,11 +144,13 @@ public class CollisionSystem extends IteratingSystem
                         Mappers.owner.get(entity).owner == OwnerComponent.Owner.Enemy &&
                         ot.type == TypeComponent.EntityType.Altar)
                 {
+                    int dmgRoll = Mappers.bullet.get(entity).damage;
+
                     PositionComponent pos = Mappers.position.get(entity);
 
                     AudioManager.hit.play();
                     Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
-                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage_altar, 2);
+                    FXFactory.MakeHitText(pos.x, pos.y, FontManager.damage_altar, dmgRoll);
                     FXFactory.makeExplosion(pos.x, pos.y,
                                     FXFactory.ExplosionType.RED
                     );
@@ -160,7 +162,7 @@ public class CollisionSystem extends IteratingSystem
                     if (Mappers.life.get(other).life > 0)
                     {
                         AudioManager.scream.play();
-                        Mappers.life.get(other).damage(Mappers.bullet.get(entity).damage);
+                        Mappers.life.get(other).damage(dmgRoll);
                         CameraManager.smallShake();
 
                     }
