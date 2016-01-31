@@ -22,6 +22,7 @@ public class ItemSpawnSystem extends IntervalSystem
     public static boolean altarItemActive = false;
     public static int numAltarPointsActivated = 0;
     public Engine engine;
+    private static boolean whichEnabled[] = new boolean[5];
     public ItemSpawnSystem(float interval, Engine engine)
     {
         super(interval);
@@ -66,10 +67,21 @@ public class ItemSpawnSystem extends IntervalSystem
     {
         return numAltarPointsActivated;
     }
-
+    public static void setEnabled(int id)
+    {
+        whichEnabled[id] = true;
+    }
+    public static boolean isEnabled(int id)
+    {
+        return whichEnabled[id];
+    }
     public static void reset()
     {
         altarItemActive = false;
         numAltarPointsActivated = 0;
+        for (int i = 0; i < 5; ++i)
+        {
+            whichEnabled[i] = false;
+        }
     }
 }

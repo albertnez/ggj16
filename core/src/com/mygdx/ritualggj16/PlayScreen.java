@@ -46,7 +46,7 @@ public class PlayScreen implements Screen {
 
     private int numPlayers = 2;
     private int numAltarPoints = 5;
-    private float altarPointDistToCenter = 350.0f;
+    public static float altarPointDistToCenter = 350.0f;
 
     Gaem gaem;
 
@@ -74,7 +74,7 @@ public class PlayScreen implements Screen {
 
         gaem.engine.addSystem(new InputSystem(gaem.engine));
         gaem.engine.addSystem(new SpawnSystem(1.0f, gaem.engine));
-        gaem.engine.addSystem(new ItemSpawnSystem(70.0f, gaem.engine));
+        gaem.engine.addSystem(new ItemSpawnSystem(10.0f, gaem.engine));
         gaem.engine.addSystem(new MovementSystem(gaem.engine));
         gaem.engine.addSystem(new BulletSystem(gaem.engine));
         gaem.engine.addSystem(new EnemySystem(gaem.engine));
@@ -303,17 +303,18 @@ public class PlayScreen implements Screen {
             float posX = MathUtils.cos(alpha) * altarPointDistToCenter;
             float posY = MathUtils.sin(alpha) * altarPointDistToCenter;
             createAltarPoint(posX, posY, i);
-            ItemFactory.spawnCandle(
-                    MathUtils.cos(alpha) * altarPointDistToCenter * 0.3f,
-                    MathUtils.sin(alpha) * altarPointDistToCenter * 0.3f
-            );
-            float calpha = alpha + MathUtils.PI2 / 10.0f;
-            ItemFactory.spawnCandle(
-                    MathUtils.cos(calpha) * altarPointDistToCenter,
-                    MathUtils.sin(calpha) * altarPointDistToCenter
-            );
+//            ItemFactory.spawnCandle(
+//                    MathUtils.cos(alpha) * altarPointDistToCenter * 0.3f,
+//                    MathUtils.sin(alpha) * altarPointDistToCenter * 0.3f
+//            );
+//            float calpha = alpha + MathUtils.PI2 / 10.0f;
+//            ItemFactory.spawnCandle(
+//                    MathUtils.cos(calpha) * altarPointDistToCenter,
+//                    MathUtils.sin(calpha) * altarPointDistToCenter
+//            );
             alpha += MathUtils.PI2 / 5.0f;
         }
+        AltarCandles.spawn(gaem.engine);
     }
 
     private void reset()
